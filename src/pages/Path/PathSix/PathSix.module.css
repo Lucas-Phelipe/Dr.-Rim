@@ -1,0 +1,84 @@
+.pathSix {
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.pageBackground {
+    background-image: url('../../../assets/elements.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center; 
+    min-height: 100vh; 
+}
+
+.imageContainer {
+    width: 100%;
+    height: 300px;
+    background-image: url('../../../assets/doctorWoman.svg'); /* Caminho atualizado */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-top: 5px;
+}
+
+.textContainer{
+    text-align: center;
+    color: white;
+    padding: 10px;
+}
+
+.textContainer h1{
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 0px;
+}
+
+.textContainer input {
+    color: black;
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 11px 16px 25px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow: 11px 16px 25px 0px rgba(0,0,0,0.6);
+    box-shadow: 11px 16px 25px 0px rgba(0,0,0,0.6);
+    opacity: 0.9; 
+    width: 150px;
+}
+
+.textContainer ol{
+    text-align: left;
+}
+
+.textContainer li {
+    font-size: 16px;
+    padding: 4px;
+}
+
+.loadContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    bottom: 20px;
+}
+
+
+@media (min-width: 768px) {
+    .pageBackground {
+        background-image: none; /* Remove a imagem de fundo */
+    }
+    .textContainer li{
+        text-align: left;
+    }
+    .textContainer ol{
+        text-align: center;
+        margin: 0 auto; /* Centraliza horizontalmente */
+        display: inline-block; /* Permite que o conteúdo seja centralizado */
+    }
+}

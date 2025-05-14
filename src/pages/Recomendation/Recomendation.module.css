@@ -1,0 +1,45 @@
+.container {
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+ height: 100vh;
+ background-color: #e53935;
+}
+
+.content {
+ font-family: "Poppins", sans-serif;
+ background-color: white;
+ padding: 2rem;
+ border-radius: 18px;
+ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ margin: 20px;
+}
+
+.title {
+ font-size: 1rem;
+ font-weight: bold;
+ margin-bottom: 1rem;
+}
+
+.list {
+ list-style-type: none;
+ padding: 0;
+}
+
+.item {
+ margin-bottom: 0.5rem;
+}
+
+.imageContainer {
+ margin-top: 1rem;
+ display: flex;
+ justify-content: center;
+ width: 100%;
+}
+
+.image {
+ max-width: 100%;
+ max-height: 100%;
+ object-fit: contain;
+ margin-bottom: 60px;
+}

@@ -1,0 +1,70 @@
+.pathThree {
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+    text-align: center;
+    color: white;
+    
+
+}
+
+.pageBackground {
+    background-image: url('../../../assets/elements.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center; 
+    min-height: 100vh; 
+}
+
+@media (min-width: 768px) {
+    .pageBackground {
+        background-image: none; /* Remove a imagem de fundo */
+    }
+}
+
+.dataContainer{
+    text-align: center;
+}
+
+.fieldContainer {
+    font-size: 16px;
+    padding: 15px;
+    margin-bottom: 0;
+}
+
+.fieldContainer h2 {
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+.fieldContainer input {
+    color: black;
+    opacity: 0.9; 
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 11px 16px 25px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow: 11px 16px 25px 0px rgba(0,0,0,0.6);
+    box-shadow: 11px 16px 25px 0px rgba(0,0,0,0.6);
+    width: 150px;
+}
+
+.loadContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.loader span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    color: #6a26d6;
+}
+
+.loader span:first-child {
+    color: #ffffff; /* Primeira bolinha com cor diferente */
+}

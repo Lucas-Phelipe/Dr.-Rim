@@ -1,0 +1,294 @@
+/* Container principal */
+.communityContainer {
+  background-color: #f8f8f8;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+/* Cabeçalho */
+.header {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 0;
+  background-color: #e74c3c;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  align-items: center;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+/* Container de postagens */
+.postsContainer {
+  margin-top: 20px;
+}
+
+.post {
+  background-color: white;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;  /* Alterando para coluna */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.postContent {
+  margin-bottom: 10px;
+}
+
+.postContent h3 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.postContent h4 {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555;
+}
+
+.postContent p {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Imagem da postagem */
+.postImage {
+  width: 100%;  /* Faz a imagem ocupar toda a largura do post */
+  height: auto;  /* Mantém a proporção */
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+/* Criar postagem */
+.createPost {
+  background-color: white;
+  padding: 40px;
+  margin-top: 20px;
+  margin-bottom: 33px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.textInput, .textArea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.fileInput {
+  margin-bottom: 10px;
+}
+
+.publishButton {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.publishButton:hover {
+  background-color: #c0392b;
+}
+
+.communityContainer {
+  background-color: #f4f7fb;
+  height: 100vh;
+  overflow-y: auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.header {
+  background-color: #e74c3c;
+  padding-left: 10px ;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Container de postagens */
+.postsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.post {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.post:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.postImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.postContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.postContent h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.postContent h4 {
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.postContent p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+/* Criar postagem */
+.createPost {
+  background-color: white;
+  padding: 30px;
+  margin: 40px auto;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.textInput,
+.textArea,
+.fileInput {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.textInput {
+  font-weight: bold;
+}
+
+.textArea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.fileInput {
+  margin-bottom: 20px;
+}
+
+.publishButton {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.publishButton:hover {
+  background-color: #c0392b;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .postsContainer {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .createPost {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    width: 100%;
+  }
+
+  .textInput,
+  .textArea,
+  .fileInput {
+    font-size: 14px;
+  }
+
+  .publishButton {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* Melhorias para Desktop (sem afetar o estilo mobile) */
+@media (min-width: 769px) {
+  .postsContainer {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+  }
+
+  .createPost {
+    padding: 30px;
+    margin-top: 40px;
+    max-width: 900px;
+  }
+
+  .textInput,
+  .textArea,
+  .fileInput {
+    font-size: 16px;
+  }
+
+  .publishButton {
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+}
+

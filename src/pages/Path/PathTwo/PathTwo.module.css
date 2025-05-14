@@ -1,0 +1,61 @@
+.pathTwo {
+    font-family: 'Poppins', sans-serif;
+    font-size: medium;
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.pageBackground {
+    background-image: url('../../../assets/elements.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center; 
+    min-height: 100vh; 
+}
+
+@media (min-width: 768px) {
+    .pageBackground {
+        background-image: none; /* Remove a imagem de fundo */
+    }
+}
+
+.imageContainer {
+    width: 100%;
+    height: 620px;
+    background-image: url('../../../assets/dulpaTurmaBloodinho.svg'); /* Caminho atualizado */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-top: 5px;
+}
+
+.textContainer p{
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+
+
+
+.loadContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.loader span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    color: #6a26d6;
+}
+
+.loader span:first-child {
+    color: #ffffff; /* Primeira bolinha com cor diferente */
+}

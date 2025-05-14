@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #7D0B0B;
+    color: white;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border: 2px solid #7D0B0B;
+    border-radius: 100px;
+  }
+  
+  .details h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .details p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  
+  .testimonial {
+    padding: 15px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .testimonial strong {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .score, .donors {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .details h3 {
+      font-size: 16px;
+    }
+  
+    .details p {
+      font-size: 16px;
+      color: white;
+    }
+  
+    .testimonial {
+      font-size: 12px;
+    }
+  }
+  
+  /* Desktop styles */
+  @media (min-width: 769px) {
+    .container {
+      padding: 40px;
+    }
+  
+    .card {
+      width: 500px;
+      margin: auto;
+    }
+  }
+  

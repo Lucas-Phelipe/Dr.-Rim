@@ -1,0 +1,137 @@
+/* Estilos principais */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Garante que ocupa toda a altura da viewport */
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 30vw;
+  margin-bottom: 20px;
+}
+
+/* Caixa branca ao redor do formulário */
+.formContainer {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.error {}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.button {
+  width: 100%;
+  padding: 10px;
+  background-color: #C0392B;
+  color: #FFFFFF;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #A93226;
+}
+
+.signupText {
+  margin-top: 20px;
+  color: #C0392B;
+  font-size: 14px;
+  text-align: center;
+}
+
+.signupLink {
+  color: #C0392B;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para dispositivos móveis */
+@media (max-width: 768px) {
+  .image {
+    width: auto;
+    height: 350px;
+    margin-bottom: 0px;
+  }
+
+  .formContainer {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+  }
+
+  .input,
+  .button {
+    font-size: 14px;
+  }
+
+  .signupText {
+    font-size: 14px;
+  }
+}
+
+/* Estilos para Desktop */
+@media (min-width: 769px) {
+  .container {
+    display: flex;
+    flex-direction: row; /* Conteúdo em uma coluna */
+    align-items: center;    /* Alinha horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    gap: 100px;
+    height: 100vh; /* Garante que ocupa toda a altura da tela */
+  }
+
+  .header {
+    margin-bottom: 20px; /* Espaçamento entre o título e o formulário */
+  }
+
+  .formContainer {
+    margin: 0; /* Remove margens extras */
+  }
+
+  .input,
+  .button {
+    font-size: 18px;
+  }
+
+  .signupText {
+    font-size: 16px;
+  }
+}

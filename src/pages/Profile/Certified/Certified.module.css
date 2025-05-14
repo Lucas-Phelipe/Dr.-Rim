@@ -1,0 +1,56 @@
+/* Container principal */
+.donationCertificate {
+  font-family: 'Poppins', 'sans-serif';
+  background-color: #f2f2f2;
+}
+
+/* Header */
+.header {
+  background-color: #c62828;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Seções */
+.section {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Itens de informação */
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.infoItemLabel {
+  font-weight: bold;
+}
+
+/* Itens de doação */
+.donationItem {
+  margin-bottom: 20px;
+}
+
+/* Imagem de validação */
+.validationImage {
+  display: block;
+  margin: 0 auto;
+  max-width: 200px;
+}
+
+/* Títulos */
+.sectionTitle {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.donationTitle {
+  font-size: 1.2rem;
+  color: #c62828;
+  margin-bottom: 10px;
+}

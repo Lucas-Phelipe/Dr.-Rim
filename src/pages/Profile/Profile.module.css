@@ -1,0 +1,77 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f44336;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+  }
+  
+  .backButton,
+  .menuButton {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .profilePicture {
+    margin-top: 40px;
+  }
+  
+  .profilePicture img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 30px;
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 170px;
+    width: 100%;
+  }
+  
+  .option {
+    background-color: #e53935;
+    border: none;
+    color: #fff;
+    padding: 16px 24px;
+    text-align: left;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .option i {
+    margin-right: 16px;
+    font-size: 20px;
+  }
+  
+  h1, h2 {
+    font-weight: bold;
+    margin: 0px;
+  }
+
+  .nameUser{
+    font-size: 24px;
+  }
