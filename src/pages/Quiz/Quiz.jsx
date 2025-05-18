@@ -8,7 +8,7 @@ import BloodComemoration from "../../assets/BloodComemoration.svg"
 
 // Questões do quiz
 const questions = [
-  { question: 'Por onde o sangue se transporta pelo corpo?', options: ['Intestino', 'Artérias', 'Cérebro', 'Sistema Cardiorrespiratório'], correctAnswer: 'Artérias' },
+  { question: 'Qual das seguintes afirmações sobre a hemodiálise é um mito?', options: ['A hemodiálise ajuda a remover toxinas e excesso de líquidos do sangue', 'É possível viver muitos anos fazendo hemodiálise, com boa qualidade de vida', 'Quem faz hemodiálise nunca mais pode viajar', 'Sistema A hemodiálise é indicada para pessoas com insuficiência renal grave'], correctAnswer: 'Quem faz hemodiálise nunca mais pode viajar' },
   { question: 'Qual é o maior órgão do corpo humano?', options: ['Pulmão', 'Fígado', 'Coração', 'Pele'], correctAnswer: 'Pele' },
   { question: 'Qual é o nome do osso mais longo do corpo?', options: ['Fêmur', 'Tíbia', 'Úmero', 'Rádio'], correctAnswer: 'Fêmur' },
   { question: 'Quantos dentes permanentes tem um ser humano adulto?', options: ['28', '30', '32', '34'], correctAnswer: '32' },
@@ -63,23 +63,24 @@ const Quiz = () => {
         <Link to="/quizBloodinho">
           <i className="bi bi-arrow-left-short pointer" style={{ fontSize: '36px', cursor: 'pointer', color: 'white' }} />
         </Link>
-        <div className={styles.progress}>
-          <div
-            className={styles.progressBar}
-            style={{
-              width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%`,
-            }}
-          ></div>
-        </div>
+
+        <h2>Quiz</h2>
       </div>
+
+      
 
       {/* Círculo com o número da questão */}
       
 
       {/* Pergunta */}
       <div className={styles.content}>
-        <div className={styles.circle}>
-          <span>{currentQuestionIndex + 1}</span>
+        <div className={styles.progress} style={{ margin: "20px 0" }}>
+          <div
+            className={styles.progressBar}
+            style={{
+              width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%`,
+            }}
+          ></div>
         </div>
         <div className={styles.question}>
           <span>Questão {currentQuestionIndex + 1} de {totalQuestions}</span>
@@ -118,7 +119,7 @@ const Quiz = () => {
                 <IoIosCheckmarkCircle size={28} style={{ color: 'white', marginRight: "5px"}}  />
                 <p className={styles.correctMessage}>Resposta correta!</p>
               </div>
-              <img src={BloodComemoration} alt="Bloodinho" />
+              {/*<img src={BloodComemoration} alt="Bloodinho" />*/}
               <button className={styles.verifyButton} onClick={handleContinue}>
                 Continuar
               </button>

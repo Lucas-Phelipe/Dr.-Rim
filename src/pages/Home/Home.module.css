@@ -1,422 +1,184 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-  .header {
+.pageBackground {
+  background-image: url('../../assets/fundo_tela.svg'); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center; 
+  
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: 80px; /* ajuste conforme a altura da Homebar */
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  }
+  justify-content: space-between;
+  padding: 20px;
+  width: 100%;
+}
 
-  .profilePic {
+.profilePic {
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  border: 2px solid #ff4d4d;
-  }
+}
 
-  .profileName {
+.profileName {
   font-size: 1.2rem;
   font-weight: bold;
   color: #a60000;
   text-align: left;
-  }
+}
 
-  .pointsSection {
-  background-color: #7D0B0B;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 20px;
+.introductionSection {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 32px 24px 24px 24px;
+  max-width: 350px;
+  margin: 32px auto 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  }
+}
 
-  .points {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #ff4d4d;
-  }
-
-  .pointsDesc {
-  font-size: 0.9rem;
-  margin-top: -10px;
-  color: #a60000;
-  }
-
-  .donationSection {
-  background: url(../../assets/containerDonation.svg);
-  background-repeat: no-repeat;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  }
-
-  .donationText {
-  font-size: 1.25rem;
-  margin-bottom: 0px;
-  color: #a60000;
-  text-align: left;
-  font-weight: bold;
-  }
-
-  .donationButton {
-  background-color: #ff4d4d;
-  color: #fff;
-  display: flex;
-  justify-content: flex-start;
-  border: none;
-  padding: 10px 20px;
-  width: 40%;
-  border-radius: 8px;
-  font-size: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  align-items: center;
-  }
-  
-  .donationButton:hover {
-  background-color: #d93636;
-  }
-
-  .paragraph{
-  display: flex;
-  margin-bottom: 0px;
-  font-size: 12px;
-  color: black;
-  justify-content: flex-start;
-  text-align: left; 
-  padding: 5px;
-  width: 70%;
-  }
-
-  .moreSection {
-  background: url(../../assets/ContainerQuiz.svg);
-
-  width: 100%;
-  height: 100%;
-
-  background-color: #ffe6e6;
-  padding: 55px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  overflow-x: auto;
-  white-space: nowrap;
-  gap: 15px;
+.introTitle {
+  color: #23457a;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 12px;
   text-align: center;
-  }
+}
 
-  .moreImage {
-  width: 200px;
-  height: 120px;
-  border-radius: 8px;
-  object-fit: cover;
-  }
-
-  .moreTitle {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #a60000;
-  margin-bottom: 10px;
-  }
-
-  .hemocenters {
+.introText {
+  color: #222;
+  font-size: 14px;
+  text-align: center;
   margin-bottom: 20px;
-  }
+}
 
-  .hemocenter {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ffcccc;
-  margin-bottom: 10px;
+.introImages {
   display: flex;
-  gap: 10px;
-  align-items: center;
-  }
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+}
 
-  .hemocenter img {
+.introIcon {
   width: 80px;
   height: 80px;
-  border-radius: 8px;
-  object-fit: cover;
-  }
-
-  .hemocenterText {
-  font-size: 0.9rem;
-  color: #a60000;
-  flex-grow: 1;
-  }
-
-  .routesButton {
-  background-color: #ff4d4d;
-  color: #fff;
-  border: none;
-  padding: 5px 15px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  }
-
-  .routesButton:hover {
-  background-color: #d93636;
-  }
-
-
-.expandableContent {
-  background-color: #ffe6e6;
-  border-radius: 12px;
-  margin-top: 15px;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
 }
 
-.rewardItem {
-  background-color: #ffd9d9;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
+.introDoctor {
+  width: 70px;
+  height: 90px;
 }
 
-.rewardButton {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.rewardButton:hover {
-  background-color: #d93636;
-}
-
-.pointsSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  padding: 20px;
-  border-radius: 12px;
-  transition: background-color 0.3s;
-}
-
-.pointsSection:hover {
-  background-color: #e6e6e6;
-}
-
-.points {
-  margin-bottom: 0px;
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-}
-
-.pointsDesc {
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  text-align: left;
-  margin-top: 10px;
-}
-
-.expandableContent {
-  background-color: red;
-  border-radius: 12px;
-  align-items: center;
-  margin-top: 15px;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.cardsContainer {
   width: 100%;
-  transition: max-height 0.3s ease-out;
-}
-
-.rewardItem {
-  background: url("../../assets/containerPoints.svg");
-  padding: 0px;
-  height: 15vh;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.rewardButton {
-  background-color: #ff4d4d;
-  padding: 0px;
-  color: white;
-  margin-top: 35px;
-  border: none;
-  padding-left: 90px;
-  padding-top: 15px;
-  padding-right: 90px;
-  padding-bottom: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.rewardButton:hover {
-  background-color: #d93636;
-}
-
-.containerBene {
+  max-width: 350px;
+  margin: 32px auto 0 auto;
   display: flex;
-  font-size: 8px;
-  flex-direction: row;
-  gap: 10px;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cardQuiz {
+  background: url('../../assets/fundo_rim.svg') center/cover no-repeat, #19C795;
+  border-radius: 24px;
+  min-height: 120px;
+  display: flex;
   align-items: center;
-}
-
-.containerBene > p {
-  font-size: 16px;
-  text-align: left;
-  color: white;
-}
-
-.quizSection {
-  background-color: #ffe6e6;
-  border-radius: 12px;
-  padding: 20px;
   justify-content: center;
-  margin-bottom: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  position: relative;
+}
+
+.quizContent {
+  width: 100%;
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
 .quizTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #a60000;
-  margin-bottom: 10px;
-}
-
-.quizScroll {
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  overflow-x: auto;
-  padding: 10px 0;
-  scroll-behavior: smooth;
-}
-
-.quizScroll::-webkit-scrollbar {
-  height: 8px;
-}
-
-.quizScroll::-webkit-scrollbar-thumb {
-  background-color: #ff4d4d;
-  border-radius: 8px;
-}
-
-.quizScroll::-webkit-scrollbar-track {
-  background-color: #ffe6e6;
-}
-
-.quizImage {
-  width: 280px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.hemocenters {
-  margin-bottom: 20px;
-}
-
-.hemocenter {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ffcccc;
-  margin-bottom: 10px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.hemocenter img {
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.hemocenterText {
-  font-size: 0.9rem;
-  color: #a60000;
-  text-align: left;
-  margin: 0px;
-  flex-grow: 1;
-}
-
-.routesButton {
-  background-color: #ff4d4d;
   color: #fff;
-  border: none;
-  padding: 5px 15px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 1px 2px 6px rgba(0,0,0,0.18);
 }
 
-.routesButton:hover {
-  background-color: #d93636;
+.cardAgua {
+  background: #2196F3;
+  border-radius: 24px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  color: #fff;
+  position: relative;
 }
 
-@media (min-width: 1024px) {
-  .hemocenters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .hemocenter {
-    flex: 1 1 calc(50% - 10px);
-    padding: 20px;
-  }
-
-  .routesButton {
-    padding: 10px 20px;
-    font-size: 1rem;
-  }
+.cardRemedio {
+  background: #E0E0E0;
+  border-radius: 24px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  color: #fff;
+  position: relative;
 }
 
-@media (max-width: 1024px) {
-  .pointsSection {
-    background: url("../../assets/containerPoints.svg");
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .quizScroll {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    overflow-x: auto;
-    padding: 10px 0;
-    scroll-behavior: smooth;
-  }
-
-  .pointsDesc {
-    font-size: 2rem;
-    margin-left: 30px;
-  }
-
-  .expandableContent {
-    flex-direction: column;
-  }
+.cardIcon {
+  width: 48px;
+  height: 48px;
 }
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 1px 2px 6px rgba(0,0,0,0.18);
+}
+
+.cardRemedio .cardTitle {
+  color: #888;
+}
+
+.cardSubtitle {
+  font-size: 1rem;
+  color: #fff;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+.cardRemedio .cardSubtitle {
+  color: #bdbdbd;
+}
+
+.cardArrow {
+  margin-left: auto;
+  font-size: 2rem;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.cardRemedio .cardArrow {
+  color: #bdbdbd;
+}
+
 
 @media (min-width: 1024px) {
   .pointsSection {
@@ -452,18 +214,7 @@
   }
 }
 
-.container {
-  font-family: 'Poppins', sans-serif;
-  background-color: #fff5f5;
-  color: #ff4d4d;
-  padding: 20px;
-  padding-bottom: 60px;
-  border-radius: 16px;
-  max-width: 360px;
-  margin: 20px auto;
-  text-align: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
+
 
 @media (min-width: 1024px) {
   .container {

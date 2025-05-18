@@ -12,6 +12,7 @@
   transform: scale(1.02); /* Destaque ao passar o mouse */
 }
 
+
 .points {
   margin: 0;
   font-size: 32px;
@@ -78,6 +79,7 @@
   font-size: 12px;
   cursor: pointer;
 }
+
 
 /* Responsividade */
 @media (min-width: 768px) {

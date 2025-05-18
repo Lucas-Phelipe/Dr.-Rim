@@ -7,6 +7,13 @@ import QuizBloodinho from "../../assets/ContainerQuiz.svg"
 import SaibaMais from "../../assets/ContainerSaibaMais.svg"
 import { Link } from 'react-router-dom';
 
+import RimIcon from '../../assets/logo_dr_rim.png';   
+import DoctorIcon from '../../assets/medico_home.png';
+
+import FundoRim from '../../assets/fundo_rim.svg';
+import CopoIcon from '../../assets/copo_icon.svg';      
+import RemedioIcon from '../../assets/remedio_icon.svg';     
+
 function Home() {
 
   const [nome, setNome] = useState("")
@@ -74,82 +81,64 @@ function Home() {
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.pageBackground}>
         <header className={styles.header}>
-          <img
-            className={styles.profilePic}
-            src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"
-            alt="Perfil"
-          />
-          <span className={styles.profileName}>{nome}</span>
+          <h2>Início</h2>
+          <img className={styles.profilePic} src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"alt="Perfil"/>
         </header>
 
-        <div className={styles.pointsSection} onClick={toggleRewards}>
-          <p className={styles.points}>Pontos</p>
-          <div className={styles.containerBene}>
-            <h1 className={styles.pointsDesc}>100</h1>
-            <p>Acumule pontos e troque por benefícios</p>
-          </div>
-          {showRewards && (
-            <div className={styles.expandableContent}>
-              <div className={styles.rewardItem}>
-                <img src="../../assets/company/Woman.svg" alt="" />
-                <p>Desconto em Restaurantes</p>
-                <button className={styles.rewardButton}>Trocar</button>
-              </div>
-              <div className={styles.rewardItem}>
-                <p>Cupom para Loja Parceira</p>
-                <button className={styles.rewardButton}>Trocar</button>
-              </div>
-              <div className={styles.rewardItem}>
-                <p>Brindes Exclusivos</p>
-                <button className={styles.rewardButton}>Trocar</button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className={styles.donationSection}>
-          <p className={styles.donationText}>Você está apto a doar?</p>
-          <p className={styles.paragraph}>
-            Faça parte da comunidade que mais doa sangue no Brasil!
+        <div className={styles.introductionSection}>
+          <h2 className={styles.introTitle}>Bem vindo!</h2>
+          <p className={styles.introText}>
+            Com o <b>Dr. Rim</b> você encontra apoio,<br />
+            informação e conexão para começar seu<br />
+            tratamento com mais confiança.
           </p>
-          <button className={styles.donationButton}>Ir para doação</button>
-        </div>
-
-        <div className={styles.quizSection}>
-          <div className={styles.quizScroll}>
-            <Link to="/quizBloodinho">
-              <img
-                className={styles.quizImage}
-                src={QuizBloodinho}
-                alt="Bloodinho Quiz"
-              />
-            </Link>
-            <Link to="/enterprise">
-              <img
-                className={styles.quizImage}
-                src={SaibaMais}
-                alt="SaibaMais"
-              />
-            </Link>
+          <div className={styles.introImages}>
+            <img
+              src={RimIcon}
+              alt="Rim"
+              className={styles.introIcon}
+            />
+            <img
+              src={DoctorIcon}
+              alt="Médico"
+              className={styles.introDoctor}
+            />
           </div>
         </div>
 
-        <div className={styles.hemocenters}>
-          <div className={styles.hemocenter} onClick={handleRouteBloodCenter}>
-            <p className={styles.hemocenterText}>Hemocentro Unifesp</p>
-            <button className={styles.routesButton}>Rotas</button>
+        <div className={styles.cardsContainer}>
+          {/* Card Quiz */}
+          <div className={styles.cardQuiz}>
+            <div className={styles.quizContent}>
+              <span className={styles.quizTitle}>Quiz</span>
+            </div>
           </div>
-          <div className={styles.hemocenter} onClick={handleRouteBloodCenter}>
-            <p className={styles.hemocenterText}>Hemocentro Campo Limpo</p>
-            <button className={styles.routesButton}>Rotas</button>
+
+          {/* Card Água */}
+          <div className={styles.cardAgua}>
+            <img src={CopoIcon} alt="Copo de água" className={styles.cardIcon} />
+            <div>
+              <span className={styles.cardTitle}>Água</span>
+              <div className={styles.cardSubtitle}>2 / 3 copos</div>
+            </div>
+            <span className={styles.cardArrow}>&#8250;</span>
           </div>
-          <div className={styles.hemocenter} onClick={handleRouteBloodCenter}>
-            <p className={styles.hemocenterText}>Hemocentro Pró-Sangue</p>
-            <button className={styles.routesButton}>Rotas</button>
+
+          {/* Card Remédios */}
+          <div className={styles.cardRemedio}>
+            <img src={RemedioIcon} alt="Remédios" className={styles.cardIcon} />
+            <div>
+              <span className={styles.cardTitle}>Remédios</span>
+              <div className={styles.cardSubtitle}>2 comprimidos<br/>restantes</div>
+            </div>
+            <span className={styles.cardArrow}>&#8250;</span>
           </div>
         </div>
+
+
+
       </div>
       <Homebar />
     </>

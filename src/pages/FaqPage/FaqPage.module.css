@@ -5,7 +5,7 @@
 }
 
 .pageBackground {
-    background-image: url('../../assets/elements.png'); 
+    background-image: url('../../assets/fundo_tela.svg'); 
     background-size: cover; 
     background-repeat: no-repeat;
     background-position: center; 
