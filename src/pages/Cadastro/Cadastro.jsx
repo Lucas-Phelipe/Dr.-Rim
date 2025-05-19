@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Cadastro.module.css';
-import dulpaTurmaBloodinho from "../../assets/dulpaTurmaBloodinho.svg";
+import logo from "../../assets/logo_contornada.png";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
@@ -110,62 +110,67 @@ const Cadastro = () => {
       exit={{ opacity: 0, x: -200 }}
       transition={{ duration: 0.5 }}
     >
-      <div className={styles.header}>
-        <img src={dulpaTurmaBloodinho} alt="Motivational" className={styles.image} />
+      <div className={styles.bgHeader}>
+        <div className={styles.header}>
+          <img src={logo} alt="Motivational" className={styles.image} />
+        </div>
       </div>
-      <div className={styles.formContainer}>
-        <form className={styles.form} onSubmit={CadastroUser}>
-          <input
-            type="text"
-            placeholder="Nome"
-            className={styles.input}
-            value={nome}
-            onChange={(event) => setNome(event.target.value)}
-            // possivelmente aqui possa dar erro, até agora não deu, mas se der, o problema é aqui.
-          />
-          <input
-            type="email"
-            placeholder="E-mail"
-            className={styles.input}
-            value={email}
-            onChange={(event) => setEmail(event.target.value.trimEnd())}
-          />
-          <input
-            type="text"
-            placeholder="CPF"
-            className={styles.input}
-            value={cpf}
-            onChange={(event) => setCpf(event.target.value.trimEnd())}
-          />
+      <div className={styles.bgFormContainer}>
+        <div className={styles.formContainer}>
+          <h1 className={styles.formTitle}>Cadastre-se</h1>
+          <form className={styles.form} onSubmit={CadastroUser}>
+            <input
+              type="text"
+              placeholder="Nome"
+              className={styles.input}
+              value={nome}
+              onChange={(event) => setNome(event.target.value)}
+              // possivelmente aqui possa dar erro, até agora não deu, mas se der, o problema é aqui.
+            />
+            <input
+              type="email"
+              placeholder="E-mail"
+              className={styles.input}
+              value={email}
+              onChange={(event) => setEmail(event.target.value.trimEnd())}
+            />
+            <input
+              type="text"
+              placeholder="CPF"
+              className={styles.input}
+              value={cpf}
+              onChange={(event) => setCpf(event.target.value.trimEnd())}
+            />
 
-          <input
-            type="password"
-            placeholder="Senha"
-            className={styles.input}
-            value={senha}
-            onChange={(event) => setSenha(event.target.value.trimEnd())}
-          />
+            <input
+              type="password"
+              placeholder="Senha"
+              className={styles.input}
+              value={senha}
+              onChange={(event) => setSenha(event.target.value.trimEnd())}
+            />
 
-          <input
-            type="text"
-            placeholder="Telefone"
-            className={styles.input}
-            value={telefone}
-            onChange={(event) => setTelefone(event.target.value.trimEnd())}
-          />
-          {erroCpf && <div style={{ color: 'red' }}>{erroCpf}</div>}
-          {erroSenha && <div style={{ color: 'red' }}>{erroSenha}</div>}
-          {erroTelefone && <div style={{ color: 'red' }}>{erroTelefone}</div>}
+            <input
+              type="text"
+              placeholder="Telefone"
+              className={styles.input}
+              value={telefone}
+              onChange={(event) => setTelefone(event.target.value.trimEnd())}
+            />
+            {erroCpf && <div style={{ color: 'red' }}>{erroCpf}</div>}
+            {erroSenha && <div style={{ color: 'red' }}>{erroSenha}</div>}
+            {erroTelefone && <div style={{ color: 'red' }}>{erroTelefone}</div>}
 
-          <button type="submit" className={styles.button}>
-            Criar conta
-          </button>
+            <button type="submit" className={styles.button}>
+              Criar conta
+            </button>
 
-          <p className={styles.signupText}>
-            Já tem uma conta?{' '}
-            <a href="/login" className={styles.signupLink}>Faça login!</a>
-          </p>
-        </form>
+            <p className={styles.signupText}>
+              Já tem uma conta?{' '}
+              <a href="/login" className={styles.signupLink}>Faça login!</a>
+            </p>
+          </form>
+        </div>
       </div>
     </motion.div>
   );
