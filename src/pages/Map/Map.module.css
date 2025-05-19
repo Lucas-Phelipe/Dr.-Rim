@@ -1,73 +1,80 @@
-.mapContainer {
+.pageBackground {
+  background-image: url('../../assets/fundo_tela.svg'); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center; 
+  
   font-family: 'Poppins', sans-serif;
-  background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+
+  padding-bottom: 80px; /* ajuste conforme a altura da Homebar */
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
-.map {
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
   width: 100%;
-  height: 100%;
-  background-color: #fff;
-  border-radius: 8px;
+}
+.profilePic {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
 
-.searchBox {
-  margin-bottom: 80px;
+.topicSection {
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 20px;
+  margin: 32px auto 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 90%;
 }
 
-.searchInput {
-  padding: 10px;
-  font-size: 16px;
-  margin-top: 20px;
-  width: 250px;
-  border-radius: 8px;
-  border: 2px solid #ff4d4d;
+.topicTitle {
+  color: #23457a;
+  font-size: 20px;
+  font-weight: 900;
+  text-align: left;
 }
 
-.searchButton {
-  padding: 10px 20px;
-  background-color: #ff4d4d;
+.doubt {
+  background-color: #23457a;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 15px 15px 15px 15px;
+  max-width: 100%;
+  margin: 15px auto auto auto;
+  display: flex;
+}
+
+.doubtText{
   color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: left;
+  margin: 0;
 }
 
-.searchButton:hover {
-  background-color: #e04343;
+.line{
+  height: 0.5px;
+  width: 100%;
+  background-color: #23457a;
+  margin: 20px auto 20px auto;
 }
 
-.errorMessage {
-  color: red;
-  margin: 5px;
-}
-
-/* Media Queries */
-@media (max-width: 768px) {
-  .searchInput {
-    width: 200px;
-  }
-  
-  .searchBox {
-    margin-bottom: 80px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .mapContainer {
-    padding: 40px;
-  }
-  
-  .searchInput {
-    width: 300px;
-  }
+h1, h2 {
+  font-weight: bold;
+  margin: 0px;
+  color: white;
 }
