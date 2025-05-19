@@ -21,6 +21,20 @@
   padding: 20px;
   width: 100%;
 }
+
+.header h2 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .header h2 {
+    font-size: 1.4rem;
+  }
+}
+
 .profilePic {
   border-radius: 50%;
   width: 50px;
@@ -31,13 +45,26 @@
   background: #fff;
   border-radius: 25px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-  padding: 20px;
-  margin: 32px auto 0 auto;
+  padding: 20px 10px;
+  margin: 25px auto 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   box-sizing: border-box;
-  width: 90%;
+  width: 50%;
+  min-width: 320px;
+  max-width: 500px;
+}
+
+@media (max-width: 700px) {
+  .topicSection {
+    width: 90%;
+    min-width: unset;
+    max-width: unset;
+    padding: 16px 4vw;
+    margin: 16px auto 0 auto;
+    border-radius: 18px;
+  }
 }
 
 .topicTitle {
@@ -45,36 +72,67 @@
   font-size: 20px;
   font-weight: 900;
   text-align: left;
+  flex: 1;
+  margin: 10px auto 15px 5px;
 }
 
 .doubt {
   background-color: #23457a;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center; /* centraliza verticalmente */
+  justify-content: flex-start;
   border-radius: 20px;
   padding: 15px 15px 15px 15px;
-  max-width: 100%;
-  margin: 15px auto auto auto;
+  width: 100%;
+  margin: 0 0 20px 0;  
   display: flex;
+  position: relative; /* permite posicionar a seta absolutamente */
 }
 
-.doubtText{
+.doubtText {
   color: white;
   font-size: 15px;
   font-weight: 400;
   text-align: left;
   margin: 0;
+  flex: 1;
+}
+
+.doubtArrowButton {
+  background: none;
+  border: none;
+  padding: 0 4px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
 }
 
 .line{
-  height: 0.5px;
+  height: 1px;
   width: 100%;
   background-color: #23457a;
-  margin: 20px auto 20px auto;
 }
 
 h1, h2 {
   font-weight: bold;
   margin: 0px;
   color: white;
+}
+
+.topicTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.arrowButton {
+  background: none;
+  border: none;
+  padding: 0 4px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
