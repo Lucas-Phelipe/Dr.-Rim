@@ -1,13 +1,19 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f44336;
-    font-family: 'Poppins', sans-serif;
-    color: #fff;
-    height: 100vh;
-  }
+.pageBackground {
+  background-image: url('../../assets/fundo_tela.svg'); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center; 
   
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: 80px; /* ajuste conforme a altura da Homebar */
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -36,42 +42,93 @@
     object-fit: cover;
     margin-bottom: 30px;
   }
-  
-  .options {
+
+  .dataSection {
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    padding: 20px;
+    margin: 32px auto 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 40px;
-    margin-bottom: 170px;
+    box-sizing: border-box;
+    width: 90%;
+  }
+  
+  .dataTitle {
+    color: #23457a;
+    font-size: 15px;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .date {
+    background-color: #23447a98;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    padding: 6px 6px 6px 6px;
+    max-width: 200px;
+    margin: 15px auto auto auto;
+    display: flex;
+  }
+
+  .dateText{
+    color: white;
+    font-size: 15px;
+    font-weight: 100;
+    text-align: center;
+    margin: 0;
+  }
+
+  .line{
+    height: 0.5px;
     width: 100%;
+    background-color: #23457a;
+    margin: 20px auto 20px auto;
+  }
+  
+  .options {
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    padding: 20px;
+    margin: 32px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 90%;
   }
   
   .option {
-    background-color: #e53935;
+    background-color: #23457a;
     border: none;
     color: #fff;
-    padding: 16px 24px;
-    text-align: left;
+    padding: 12px 24px;
+    text-align: center;
     text-decoration: none;
     display: flex;
     align-items: center;
     width: 80%;
     margin-bottom: 16px;
-    border-radius: 8px;
+    border-radius: 20px;
     font-size: 16px;
     cursor: pointer;
+    justify-content: center;
   }
   
   .option i {
-    margin-right: 16px;
     font-size: 20px;
   }
   
   h1, h2 {
     font-weight: bold;
     margin: 0px;
+    color: white;
   }
 
   .nameUser{
-    font-size: 24px;
+    font-size: 20px;
   }

@@ -68,7 +68,7 @@ const Profile = () => {
     };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.pageBackground}>
       <div className={styles.header}>
         <button className={styles.backButton}>
           <i className="fas fa-arrow-left"></i>
@@ -88,19 +88,21 @@ const Profile = () => {
 
       <h2 className={styles.nameUser}>{nome || 'Nome do Usuário'}</h2>
 
+      <div className={styles.dataSection}>
+          <h2 className={styles.dataTitle}>Início do Tratamento</h2>
+          <div className={styles.date}><h3 className={styles.dateText}>10 de Abril de 2024</h3></div>
+          <div className={styles.line} />
+          <h2 className={styles.dataTitle}>Acesso Vascular</h2>
+          <div className={styles.date}><h3 className={styles.dateText}>10 de Abril de 2024</h3></div>
+
+      </div>
+
       <div className={styles.options}>
-        <button className={styles.option} onClick={handleCertifiedClick}>
-          <i className="fas fa-certificate"></i>
-          <span>Certificados</span>
-        </button>
         <button className={styles.option} onClick={handleDataClick}>
           <i className="fas fa-info-circle"></i>
           <span>Dados</span>
         </button>
-        <button className={styles.option} onClick={handleFaq}>
-          <i className="fas fa-question-circle"></i>
-          <span>Dúvidas</span>
-        </button>
+
         <button className={styles.option}>
           <i className="fas fa-life-ring"></i>
           <span>Suporte</span>
