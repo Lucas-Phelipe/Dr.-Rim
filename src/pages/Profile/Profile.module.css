@@ -14,121 +14,134 @@
   overflow-y: auto;
 }
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 30px;
-  }
-  
-  .backButton,
-  .menuButton {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .profilePicture {
-    margin-top: 40px;
-  }
-  
-  .profilePicture img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 30px;
-  }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
+}
 
-  .dataSection {
-    background: #fff;
-    border-radius: 25px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-    padding: 20px;
-    margin: 32px auto 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-    width: 90%;
-  }
-  
-  .dataTitle {
-    color: #23457a;
-    font-size: 15px;
-    font-weight: 800;
-    text-align: center;
-  }
+.backButton,
+.menuButton {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
 
-  .date {
-    background-color: #23447a98;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    padding: 6px 6px 6px 6px;
-    max-width: 200px;
-    margin: 15px auto auto auto;
-    display: flex;
-  }
+.profilePicture {
+  margin-top: 40px;
+}
 
-  .dateText{
-    color: white;
-    font-size: 15px;
-    font-weight: 100;
-    text-align: center;
-    margin: 0;
-  }
+.profilePicture img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 30px;
+}
 
-  .line{
-    height: 0.5px;
-    width: 100%;
-    background-color: #23457a;
-    margin: 20px auto 20px auto;
-  }
-  
+.dataSection {
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 20px;
+  margin: 32px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 90%;
+  max-width: 400px; /* Adicionado para limitar largura em desktop */
+}
+
+.dataTitle {
+  color: #23457a;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  margin: 10px auto 0 auto;
+}
+
+.date {
+  background-color: #23447a98;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 6px 6px 6px 6px;
+  max-width: 200px;
+  margin: 15px auto auto auto;
+  display: flex;
+  margin-bottom: 10px
+}
+
+.dateText{
+  color: white;
+  font-size: 15px;
+  font-weight: 100;
+  text-align: center;
+  margin: 0;
+}
+
+.line{
+  height: 0.5px;
+  width: 100%;
+  background-color: #23457a;
+}
+
+.options {
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 20px;
+  margin: 32px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 90%;
+  max-width: 400px; /* Adicionado para limitar largura em desktop */
+}
+
+.option {
+  background-color: #23457a;
+  border: none;
+  color: #fff;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin-bottom: 16px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.option i {
+  font-size: 20px;
+}
+
+h1, h2 {
+  font-weight: bold;
+  margin: 0px;
+  color: white;
+}
+
+.nameUser{
+  font-size: 20px;
+}
+
+/* Responsividade para mobile: mantém largura total */
+@media (max-width: 600px) {
+  .dataSection,
   .options {
-    background: #fff;
-    border-radius: 25px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-    padding: 20px;
-    margin: 32px auto 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
+    max-width: 100%;
     width: 90%;
+    padding: 12px;
   }
-  
-  .option {
-    background-color: #23457a;
-    border: none;
-    color: #fff;
-    padding: 12px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    width: 80%;
-    margin-bottom: 16px;
-    border-radius: 20px;
-    font-size: 16px;
-    cursor: pointer;
-    justify-content: center;
-  }
-  
-  .option i {
-    font-size: 20px;
-  }
-  
-  h1, h2 {
-    font-weight: bold;
-    margin: 0px;
-    color: white;
-  }
-
-  .nameUser{
-    font-size: 20px;
-  }
+}
