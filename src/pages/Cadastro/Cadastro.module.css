@@ -1,41 +1,72 @@
 /* Estilos principais */
+body {
+  background-color: #FFFFFF !important;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  padding: 20px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #ffffff !important;
+  overflow: hidden;
+  width: 100vw;
+}
+
+.bgHeader {
+  width: 100%;
+  background-color: #ffffff;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 20px;
+  background-color: #2F4972;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-bottom-left-radius: 100px;
+  overflow: hidden;
 }
 
 .image {
   width: 30vw;
-  margin-bottom: 20px;
 }
 
 /* Caixa branca ao redor do formulário */
+.bgFormContainer {
+  background-color: #2F4972;
+  width: 100%;
+}
+
 .formContainer {
-  background-color: #FFFFFF;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
   padding: 30px;
   width: 100%;
-  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 100px;
+}
+
+.formTitle {
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
+  max-width: 500px;
 }
 
 .input {
@@ -51,28 +82,29 @@
 .button {
   width: 100%;
   padding: 10px;
-  background-color: #C0392B;
+  background-color: #ff8888;
   color: #FFFFFF;
   font-size: 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .button:hover {
-  background-color: #A93226;
+  background-color: #ffa0a0;
 }
 
 .signupText {
   margin-top: 20px;
-  color: #C0392B;
+  color: #2F4972;
   font-size: 14px;
   text-align: center;
 }
 
 .signupLink {
-  color: #C0392B;
+  color: #2F4972;
   font-weight: bold;
   text-decoration: none;
 }
@@ -91,8 +123,7 @@
 
   .formContainer {
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 20px;
+    height: 100%;
   }
 
   .input,
@@ -107,20 +138,30 @@
 
 /* Estilos para Desktop */
 @media (min-width: 769px) {
+  .bgFormContainer {
+    height: 100vh;
+  }
+
+  .bgHeader {
+    height: 100vh;
+  }
+
   .container {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 100px;
     height: 100vh;
   }
 
   .header {
-    margin-bottom: 20px;
+    border-bottom-left-radius: 0px;
   }
 
   .formContainer {
     margin: 0;
+    height: 100vh;
+    width: 100%;
+    border-top-right-radius: 0px;
   }
 
   .input,
