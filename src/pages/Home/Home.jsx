@@ -110,14 +110,14 @@ function Home() {
 
         <div className={styles.cardsContainer}>
           {/* Card Quiz */}
-          <div className={styles.cardQuiz}>
+          <div className={styles.cardQuiz} style={{ cursor: 'pointer' }} onClick={() => navigate('/quiz')}>
             <div className={styles.quizContent}>
               <span className={styles.quizTitle}>Quiz</span>
             </div>
           </div>
 
           {/* Card Água */}
-          <div className={styles.cardAgua}>
+          <div className={styles.cardAgua} style={{ cursor: 'pointer' }} onClick={() => navigate('/water')}>
             <img src={CopoIcon} alt="Copo de água" className={styles.cardIcon} />
             <div>
               <span className={styles.cardTitle}>Água</span>

@@ -18,8 +18,9 @@ import Certified from "./pages/Profile/Certified/Certified"
 import Login from "./pages/Login/Login"
 import RouteBloodCenter from "./components/RouteBloodCenter/RouteBloodCenter";
 import Enterprise from "./pages/Enterprise/Enterprise";
-import Recomendation from "./pages/Recomendation/Recomendation"
-import QuizBloodinho from "./pages/Quiz/ApresentationQuiz/ApresentationQuiz"
+import Recomendation from "./pages/Recomendation/Recomendation";
+import QuizBloodinho from "./pages/Quiz/ApresentationQuiz/ApresentationQuiz";
+import Water from "./pages/Water/Water";
 
 import PathOne from "./pages/Path/PathOne/PathOne"
 import PathTwo from "./pages/Path/PathTwo/PathTwo"
@@ -46,6 +47,8 @@ function App() {
         <Route path="/hemocentros" element={<RouteBloodCenter />} />
         <Route path="/recomendacoes" element={<Recomendation />} />
         <Route path="/chat" element={<Chat />} />
+
+        <Route path="/water" element={<Water />} />
       </Routes>
       
       <Routes>
