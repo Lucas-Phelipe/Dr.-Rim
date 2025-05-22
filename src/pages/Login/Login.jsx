@@ -5,6 +5,7 @@ import dulpaTurmaBloodinho from "../../assets/dulpaTurmaBloodinho.svg"; // Image
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
+
 const Login = () => {
   function setCookie(nome, valor, dias) {
     const data = new Date();
@@ -12,21 +13,24 @@ const Login = () => {
     const expires = "expires=" + data.toUTCString();
     document.cookie = nome + "=" + valor + ";" + expires + ";path=/"; // Define o cookie com o nome e valor
   }
-  
+ 
   const [userEmail, setUserEmail] = useState("");
   const [userSenha, setUserSenha] = useState("");
   const [erro, setErro] = useState("");  // Mensagem de erro
   const navigate = useNavigate();
 
+
   const handleGoingHome = () => {
     navigate('/home');
   };
 
+
   // Validação de e-mail (considerando caracteres especiais comuns)
   const isEmailValid = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Permite letras, números e caracteres especiais como . _ % + - 
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Permite letras, números e caracteres especiais como . _ % + -
     return emailRegex.test(email);
   };
+
 
   // Validação de senha (considerando caracteres especiais)
   const isPasswordValid = (password) => {
@@ -34,40 +38,45 @@ const Login = () => {
     return passwordRegex.test(password);
   };
 
+
   async function LoginUser(event) {
-    event.preventDefault(); // Previne o recarregamento da página
+  event.preventDefault();
 
-    if (!isEmailValid(userEmail)) {
-      setErro("Por favor, insira um e-mail válido.");
-      return;
-    }
-
-    if (!isPasswordValid(userSenha)) {
-      setErro("A senha deve ter pelo menos 8 caracteres, incluindo letras, números e caracteres especiais.");
-      return;
-    }
-
-    try {
-      const res = await axios.get(`http://localhost:3333/user/${userEmail}`);
-      if (res.data == null) {
-        console.log("Ou o email não foi cadastrado ou deu algo errado!");
-        setErro("E-mail não cadastrado.");
-      } else {
-        // Verifica se a senha está correta
-        if (userSenha !== res.data.senha) {
-          setErro("Senha incorreta!");
-        } else {
-          setErro(""); // Limpa os erros
-          console.log("Login bem-sucedido!");
-          setCookie("Usercookie", userEmail, 12)
-          handleGoingHome();
-        }
-      }
-    } catch (error) {
-      console.error("Erro ao fazer a requisição:", error);
-      setErro("Erro ao acessar o servidor. Tente novamente.");
-    }
+  if (!isEmailValid(userEmail)) {
+    setErro("Por favor, insira um e-mail válido.");
+    return;
   }
+
+  if (!isPasswordValid(userSenha)) {
+    setErro("A senha deve ter pelo menos 8 caracteres, incluindo letras, números e caracteres especiais.");
+    return;
+  }
+
+  try {
+  const response = await axios.post("http://localhost:8080/users/login", {
+    email: userEmail,
+    password: userSenha
+  });
+
+  // Se chegou aqui, login OK, response.data é o UserDTO
+  setErro("");
+  setCookie("Usercookie", userEmail, 12);
+  handleGoingHome();
+
+} catch (error) {
+  if (error.response) {
+    if (error.response.status === 401) {
+      setErro("E-mail ou senha incorretos.");
+    } else {
+      setErro(error.response.data || "Erro no servidor.");
+    }
+  } else {
+    setErro("Erro ao acessar o servidor. Tente novamente.");
+  }
+}
+
+}
+
 
   return (
     <motion.div
@@ -108,5 +117,6 @@ const Login = () => {
     </motion.div>
   );
 };
+
 
 export default Login;

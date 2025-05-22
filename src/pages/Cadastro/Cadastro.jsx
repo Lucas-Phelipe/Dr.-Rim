@@ -5,19 +5,24 @@ import dulpaTurmaBloodinho from "../../assets/dulpaTurmaBloodinho.svg";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
+
 // Função para validar CPF
 function validarCPF(cpf) {
   cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
 
+
   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false; // Verifica se o CPF é válido (11 dígitos e não repetido)
+
 
   let soma = 0;
   let resto;
+
 
   for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
   resto = (soma * 10) % 11;
   if (resto === 10 || resto === 11) resto = 0;
   if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
 
   soma = 0;
   for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
@@ -25,8 +30,10 @@ function validarCPF(cpf) {
   if (resto === 10 || resto === 11) resto = 0;
   if (resto !== parseInt(cpf.substring(10, 11))) return false;
 
+
   return true;
 }
+
 
 // Função para validar telefone (formato com DDD e 9 dígitos)
 function validarTelefone(telefone) {
@@ -34,12 +41,15 @@ function validarTelefone(telefone) {
   return regexTelefone.test(telefone);
 }
 
+
 const Cadastro = () => {
   const navigate = useNavigate();
+
 
   const handleGoingLogin = () => {
     navigate('/login');
   };
+
 
   const [telefone, setTelefone] = useState("");
   const [nome, setNome] = useState("");
@@ -50,14 +60,17 @@ const Cadastro = () => {
   const [erroCpf, setErroCpf] = useState(""); // Estado para o erro de CPF
   const [erroTelefone, setErroTelefone] = useState(""); // Estado para o erro de telefone
 
+
   async function CadastroUser(event) {
     event.preventDefault();
+
 
     // Verifica se todos os campos foram preenchidos
     if (telefone === "" || nome === "" || email === "" || cpf === "" || senha === "") {
       console.log("Complete seus dados!");
       return;
     }
+
 
     // Valida CPF
     if (!validarCPF(cpf)) {
@@ -67,6 +80,7 @@ const Cadastro = () => {
       setErroCpf(""); // Limpa o erro de CPF se for válido
     }
 
+
     // Valida telefone
     if (!validarTelefone(telefone)) {
       setErroTelefone("Telefone inválido. Formato esperado: (XX) 9XXXX-XXXX");
@@ -74,6 +88,7 @@ const Cadastro = () => {
     } else {
       setErroTelefone(""); // Limpa o erro de telefone se for válido
     }
+
 
     // Valida a senha
     const regexSenha = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -84,23 +99,24 @@ const Cadastro = () => {
       setErroSenha(""); // Limpa o erro de senha se for válido
     }
 
+
     const body = {
-      cidade_usuario: null,
-      endereco_usuario: null,
-      telefone_usuario: telefone,
-      nome_usuario: nome,
-      email_usuario: email,
+      telephone: telefone,
+      name: nome,
+      email: email,
       cpf: cpf,
-      senha: senha,
+      password: senha,
     };
 
+
     try {
-      await axios.post("http://localhost:3333/createUser", body);
+      await axios.post("http://localhost:8080/users", body);
       handleGoingLogin(); // Redireciona para o login após cadastro bem-sucedido
     } catch (error) {
       console.error("Erro ao criar o usuário:", error);
     }
   }
+
 
   return (
     <motion.div
@@ -138,6 +154,7 @@ const Cadastro = () => {
             onChange={(event) => setCpf(event.target.value.trimEnd())}
           />
 
+
           <input
             type="password"
             placeholder="Senha"
@@ -145,6 +162,7 @@ const Cadastro = () => {
             value={senha}
             onChange={(event) => setSenha(event.target.value.trimEnd())}
           />
+
 
           <input
             type="text"
@@ -157,9 +175,11 @@ const Cadastro = () => {
           {erroSenha && <div style={{ color: 'red' }}>{erroSenha}</div>}
           {erroTelefone && <div style={{ color: 'red' }}>{erroTelefone}</div>}
 
+
           <button type="submit" className={styles.button}>
             Criar conta
           </button>
+
 
           <p className={styles.signupText}>
             Já tem uma conta?{' '}
@@ -171,5 +191,5 @@ const Cadastro = () => {
   );
 };
 
+
 export default Cadastro;
-  
