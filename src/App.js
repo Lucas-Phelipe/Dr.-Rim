@@ -11,7 +11,9 @@ import Map from "./pages/Map/Map";
 
 import Quiz from './pages/Quiz/Quiz';
 import ResultQuiz from './pages/ResultQuiz/ResultQuiz';
-import Comunity from "./pages/Comunity/Community"
+import Comunity from "./pages/Comunity/Community";
+import Comunidade from "./pages/Comunidade/Comunidade"
+
 import Profile from "./pages/Profile/Profile"
 import Dados from "./pages/Profile/DataUser/DataUser"
 import Certified from "./pages/Profile/Certified/Certified"
@@ -30,6 +32,7 @@ import PathFive from "./pages/Path/PathFive/PathFive"
 import PathSix from "./pages/Path/PathSix/PathSix"
 import Chat from "./pages/Chat/Chat"
 
+
 function App() {
   return (
     <Router>
@@ -43,7 +46,9 @@ function App() {
         
         <Route path="/home" element={<Home />} />
         <Route path="/mapa" element={<Map />} />
-        <Route path="/comunidade" element={<Comunity />} />
+        <Route path="/community" element={<Comunity />} />
+        <Route path="/comunidade" element={<Comunidade />} />
+
         <Route path="/hemocentros" element={<RouteBloodCenter />} />
         <Route path="/recomendacoes" element={<Recomendation />} />
         <Route path="/chat" element={<Chat />} />
