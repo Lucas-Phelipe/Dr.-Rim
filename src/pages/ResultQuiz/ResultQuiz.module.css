@@ -4,18 +4,18 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(135deg, #ffecec, #f9dada);
+  background: linear-gradient(135deg, #2F4972, #2F4972);
   height: 100vh;
   padding: 40px 20px;
   font-family: 'Poppins', sans-serif;
-  color: #BC2C23;
+  color: #2F4972;
 }
 
 .resultScreen h1 {
   font-size: 42px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: #ff5252;
+  color: #ffff;
   text-transform: uppercase;
 }
 
@@ -26,12 +26,12 @@
 
 .highlight {
   font-weight: 700;
-  color: #ff5252;
+  color: #fff;
 }
 
 .totalPoints {
   font-size: 24px;
-  color: #ff5722;
+  color: #fff;
   margin-bottom: 20px;
   font-weight: 600;
 }
@@ -63,21 +63,21 @@
 }
 
 .retryButton {
-  background-color: #BC2C23;
+  background-color: #2F4972;
   cursor: pointer;
   width: 100%;
   font-size: 23px;
-  border-bottom: 10px solid #8A1A12;
+  border-bottom: 10px solid #163971;
   color: white;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .continueButton {
-  background-color: #BC2C23;
+  background-color: #2F4972;
   cursor: pointer;
   width: 100%;
   font-size: 23px;
-  border-bottom: 10px solid #8A1A12;
+  border-bottom: 10px solid #163971;
   color: white;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
 }
@@ -104,7 +104,7 @@
 
   .resultScreen p {
     font-size: 18px;
-    color: #BC2C23;
+    color: #fff;
     font-weight: bold;
   }
 
