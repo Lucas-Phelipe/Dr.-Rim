@@ -87,6 +87,7 @@ h1, h2 {
 }
 
 .cardsContainer {
+  
   width: 100%;
   max-width: 350px;
   margin: 32px auto 0 auto;
@@ -96,7 +97,7 @@ h1, h2 {
 }
 
 .cardPages {
-  background: url('../../assets/fundo_rim.svg') center/cover no-repeat, #bd5c0d;
+  background: url('../../assets/fundo_conquistas.svg');
   border-radius: 24px;
   min-height: 120px;
   display: flex;
@@ -106,11 +107,18 @@ h1, h2 {
   position: relative;
 }
 
-.containerContent {
-  width: 100%;
+.cardPages2 {
+  background: url('../../assets/fundo_forum.svg');
+  border-radius: 24px;
+  min-height: 120px;
   display: flex;
+  align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  position: relative;
 }
+
+
 
 .containerTitle {
   color: #fff;
