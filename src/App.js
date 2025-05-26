@@ -13,6 +13,7 @@ import Quiz from './pages/Quiz/Quiz';
 import ResultQuiz from './pages/ResultQuiz/ResultQuiz';
 import Comunity from "./pages/Comunity/Community";
 import Comunidade from "./pages/Comunidade/Comunidade"
+import Forum from "./pages/Forum/Forum"
 
 import Profile from "./pages/Profile/Profile"
 import Dados from "./pages/Profile/DataUser/DataUser"
@@ -48,6 +49,8 @@ function App() {
         <Route path="/mapa" element={<Map />} />
         <Route path="/community" element={<Comunity />} />
         <Route path="/comunidade" element={<Comunidade />} />
+        <Route path="/forum" element={<Forum />} />
+
 
         <Route path="/hemocentros" element={<RouteBloodCenter />} />
         <Route path="/recomendacoes" element={<Recomendation />} />
