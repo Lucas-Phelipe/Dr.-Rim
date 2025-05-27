@@ -14,6 +14,9 @@ import ResultQuiz from './pages/ResultQuiz/ResultQuiz';
 import Comunity from "./pages/Comunity/Community";
 import Comunidade from "./pages/Comunidade/Comunidade"
 import Forum from "./pages/Forum/Forum"
+import Post from "./pages/Post/Post"
+import Comments from "./pages/Comments/Comments"
+
 
 import Profile from "./pages/Profile/Profile"
 import Dados from "./pages/Profile/DataUser/DataUser"
@@ -50,6 +53,9 @@ function App() {
         <Route path="/community" element={<Comunity />} />
         <Route path="/comunidade" element={<Comunidade />} />
         <Route path="/forum" element={<Forum />} />
+        <Route path="/posts" element={<Post />} />
+        <Route path="/posts/:postId" element={<Comments />} />
+
 
 
         <Route path="/hemocentros" element={<RouteBloodCenter />} />

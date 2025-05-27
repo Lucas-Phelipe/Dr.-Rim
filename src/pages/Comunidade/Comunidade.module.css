@@ -87,7 +87,6 @@ h1, h2 {
 }
 
 .cardsContainer {
-  
   width: 100%;
   max-width: 350px;
   margin: 32px auto 0 auto;
@@ -96,9 +95,20 @@ h1, h2 {
   gap: 24px;
 }
 
+.containerContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+
 .cardPages {
   background: url('../../assets/fundo_conquistas.svg');
-  border-radius: 24px;
+  border-radius: 30px;
   min-height: 120px;
   display: flex;
   align-items: center;
