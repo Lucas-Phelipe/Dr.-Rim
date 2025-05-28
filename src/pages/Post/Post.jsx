@@ -47,14 +47,22 @@ const Post = () => {
         }
       };
 
-      await axios.post('http://localhost:8080/posts', newPost);
+      // Salva o post e obtém o ID criado
+      const postRes = await axios.post('http://localhost:8080/posts', newPost);
+      const createdPost = postRes.data;
+
+      // Atualiza o usuário para adicionar o post ao array de posts do usuário
+      await axios.put(`http://localhost:8080/users/${user.id}/addPost`, {
+        postId: createdPost.id
+      });
+
       setTitle('');
       setBody('');
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
         navigate('/forum');
-      }, 1500); // 1.5 segundos antes de redirecionar
+      }, 1500);
     } catch (err) {
       console.error('Erro ao enviar post:', err);
     }
@@ -69,7 +77,7 @@ const Post = () => {
           aria-label="Voltar"
         >
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-            <path d="M15 19l-7-7 7-7" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M15 19l-7-7 7-7" stroke="#23457a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
         <h2>Novo Post</h2>
