@@ -63,6 +63,15 @@ const Post = () => {
   return (
     <div className={styles.pageBackground}>
       <header className={styles.header}>
+        <button
+          className={styles.backButton}
+          onClick={() => navigate('/forum')}
+          aria-label="Voltar"
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
         <h2>Novo Post</h2>
         <img
           className={styles.profilePic}

@@ -22,10 +22,24 @@
 }
 
 .header h2 {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 900;
   color: #ffffff;
   margin: 0;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  padding: 0 8px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.backButton svg {
+  display: block;
 }
 
 .profilePic {

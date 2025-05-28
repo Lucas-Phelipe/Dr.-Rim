@@ -20,6 +20,15 @@ const Forum = () => {
   return (
     <div className={styles.pageBackground}>
       <header className={styles.header}>
+        <button
+          className={styles.backButton}
+          onClick={() => navigate('/comunidade')}
+          aria-label="Voltar"
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
         <h2>Fórum</h2>
         <img
           className={styles.profilePic}
@@ -68,7 +77,7 @@ const Forum = () => {
       </div>
            <button
   className={styles.fab}
-  onClick={() => navigate('/post')}
+  onClick={() => navigate('/posts')}
   aria-label="Novo post"
 >
   <svg width="70" height="70" viewBox="0 0 70 70" fill="none">

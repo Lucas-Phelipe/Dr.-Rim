@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './Comments.module.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import Homebar from "../../components/Homebar/Homebar";
 
 const Comments = () => {
   const { postId } = useParams();
-    console.log("postId do URL:", postId);
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [text, setText] = useState('');
@@ -51,16 +52,15 @@ const Comments = () => {
     try {
       const user = await fetchUser();
       const newComment = {
-        text,  // campo correto
+        text,
         date: new Date().toISOString(),
         author: {
           id: user.id,
           name: user.name
         }
       };
-      // Atualiza no backend e pega post atualizado com comentários
       const res = await axios.post(`http://localhost:8080/posts/${postId}/comments`, newComment);
-      setComments(res.data.comments);  // atualiza a lista com os dados do backend
+      setComments(res.data.comments);
       setText('');
     } catch (err) {
       console.error('Erro ao enviar comentário:', err);
@@ -72,14 +72,47 @@ const Comments = () => {
 
   return (
     <div className={styles.pageBackground}>
-      <div className={styles.postCard}>
-        <div className={styles.postTitle}>{post.title}</div>
-        <div className={styles.postBody}>{post.body}</div>
-        <div className={styles.postAuthor}>Por @{post.author.name}</div>
+      <header className={styles.header}>
+  <button
+    className={styles.backButton}
+    onClick={() => navigate(-1)}
+    aria-label="Voltar"
+  >
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+      <path d="M15 19l-7-7 7-7" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  </button>
+  <h2 className={styles.headerTitle}>Comentários</h2>
+  <img
+    className={styles.profilePic}
+    src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"
+    alt="Perfil"
+  />
+</header>
+      <div className={styles.cardsContainer}>
+        <div className={styles.forumPosts}>
+          <div className={styles.forumPost}>
+            <div className={styles.forumPostHeader}>
+              <img
+                className={styles.profilePicSmall}
+                src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"
+                alt="Perfil"
+              />
+              <span className={styles.forumPostUser}>@{post.author.name}</span>
+            </div>
+            <div className={styles.forumPostTitle}>{post.title}</div>
+            <div className={styles.forumPostBody}>{post.body}</div>
+            <div className={styles.forumPostFooter}>
+              <span className={styles.forumPostDate}>
+                {new Date(post.date).toLocaleDateString()} - {new Date(post.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className={styles.commentsSection}>
-        <h3>Comentários</h3>
+      {/* Formulário separado */}
+      <div className={styles.commentFormContainer}>
         <form className={styles.commentForm} onSubmit={handleSubmit}>
           <textarea
             className={styles.input}
@@ -90,23 +123,31 @@ const Comments = () => {
           />
           <button type="submit" className={styles.button}>Comentar</button>
         </form>
-        <div className={styles.commentsList}>
-          {comments.length === 0 && <div className={styles.noComments}>Nenhum comentário ainda.</div>}
-         {comments.map((comment, idx) => (
-  <div key={idx} className={styles.commentCard}>
-    <div className={styles.commentHeader}>
-      <span className={styles.commentAuthor}>@{comment.author.name}</span>
-      <span className={styles.commentDate}>
-        {new Date(comment.date).toLocaleDateString()} {' '}
-        {new Date(comment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-      </span>
-    </div>
-    <div className={styles.commentText}>{comment.text}</div>        
-  </div>
-))}
-
-        </div>
       </div>
+
+      {/* Lista de comentários */}
+      <div className={styles.commentsListContainer}>
+        {comments.length === 0 && <div className={styles.noComments}>Nenhum comentário ainda.</div>}
+        {comments.slice().reverse().map((comment, idx) => ( 
+          <div key={idx} className={styles.commentPost}>
+            <div className={styles.forumPostHeader}>
+              <img
+                className={styles.profilePicSmall}
+                src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"
+                alt="Perfil"
+              />
+              <span className={styles.forumPostUser}>@{comment.author.name}</span>
+            </div>
+            <div className={styles.forumPostBody}>{comment.text}</div>
+            <div className={styles.forumPostFooter}>
+              <span className={styles.forumPostDate}>
+                {new Date(comment.date).toLocaleDateString()} - {new Date(comment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Homebar />
     </div>
   );
 };
