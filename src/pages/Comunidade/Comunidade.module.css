@@ -1,0 +1,155 @@
+.pageBackground {
+  background-image: url('../../assets/fundo_tela.svg'); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center; 
+  
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: 100vh; 
+  padding-bottom: 80px; /* ajuste conforme a altura da Homebar */
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  width: 100%;
+}
+
+.header h2 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .header h2 {
+    font-size: 1.4rem;
+  }
+}
+
+.profilePic {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.topicSection {
+  background: #fff;
+  border-radius: 35px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 20px 10px;
+  margin: 25px auto 0 auto;
+  align-items: center;
+  width: 100%;
+  min-width: 320px;
+  max-width: 500px;
+}
+
+@media (max-width: 700px) {
+  .topicSection {
+    width: 90%;
+    min-width: unset;
+    max-width: unset;
+    padding: 16px 4vw;
+    margin: 16px auto 0 auto;
+    border-radius: 18px;
+  }
+}
+
+.topicTitle {
+  color: #23457a;
+  font-size: 22px;
+  font-weight: 900;
+  text-align: center;
+  margin: 10px auto 15px 5px;
+}
+
+.topicText {
+  color: black;
+  font-size: 14px;
+  font-weight: 200;
+  text-align: center;
+  margin: auto auto 15px auto;
+}
+
+h1, h2 {
+  font-weight: bold;
+  margin: 0px;
+  color: white;
+}
+
+.cardsContainer {
+  width: 100%;
+  max-width: 350px;
+  margin: 32px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.containerContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+
+.cardPages {
+  background: url('../../assets/fundo_conquistas.svg');
+  border-radius: 30px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  position: relative;
+}
+
+.cardPages2 {
+  background: url('../../assets/fundo_forum.svg');
+  border-radius: 24px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  position: relative;
+}
+
+
+
+.containerTitle {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 1px 2px 6px rgba(0,0,0,0.18);
+  margin: auto auto auto 35px;
+  line-height: 1.2;
+
+}
+
+.introImages {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+}
+
+.introIcon {
+  width: 80px;
+  height: 80px;
+}

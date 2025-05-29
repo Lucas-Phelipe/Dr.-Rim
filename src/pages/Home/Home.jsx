@@ -80,7 +80,7 @@ function Home() {
   };
 
   return (
-    <>
+
       <div className={styles.pageBackground}>
         <header className={styles.header}>
           <h2>Início</h2>
@@ -136,12 +136,8 @@ function Home() {
             <span className={styles.cardArrow}>&#8250;</span>
           </div>
         </div>
-
-
-
+        <Homebar />
       </div>
-      <Homebar />
-    </>
   );
 }
 

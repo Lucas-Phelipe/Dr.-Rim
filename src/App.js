@@ -3,15 +3,21 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './pages/Register/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Doubts from "./components/Doubts/Doubts";
+import DoubtsComp from "./components/Doubts/Doubts";
 import FaqPage from "./pages/FaqPage/FaqPage";
 import SignUp from "./pages/Cadastro/Cadastro";
 import Home from "./pages/Home/Home";
-import Map from "./pages/Map/Map";
+import Doubts from "./pages/Doubts/Doubts";
 
 import Quiz from './pages/Quiz/Quiz';
 import ResultQuiz from './pages/ResultQuiz/ResultQuiz';
-import Comunity from "./pages/Comunity/Community"
+import Comunity from "./pages/Comunity/Community";
+import Comunidade from "./pages/Comunidade/Comunidade"
+import Forum from "./pages/Forum/Forum"
+import Post from "./pages/Post/Post"
+import Comments from "./pages/Comments/Comments"
+
+
 import Profile from "./pages/Profile/Profile"
 import Dados from "./pages/Profile/DataUser/DataUser"
 import Certified from "./pages/Profile/Certified/Certified"
@@ -31,20 +37,28 @@ import PathFive from "./pages/Path/PathFive/PathFive"
 import PathSix from "./pages/Path/PathSix/PathSix"
 import Chat from "./pages/Chat/Chat"
 
+
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Navbar />} /> {/* Página inicial */}
-        <Route path="/doubts" element={<Doubts />} />
+        <Route path="/doubts" element={<DoubtsComp />} />
         <Route path="/register" element={<Register />} />
 
         <Route path="/cadastro" element={<SignUp />} /> 
         <Route path="/login" element={<Login />} />
         
         <Route path="/home" element={<Home />} />
-        <Route path="/mapa" element={<Map />} />
-        <Route path="/comunidade" element={<Comunity />} />
+        <Route path="/duvidas" element={<Doubts />} />
+        <Route path="/community" element={<Comunity />} />
+        <Route path="/comunidade" element={<Comunidade />} />
+        <Route path="/forum" element={<Forum />} />
+        <Route path="/posts" element={<Post />} />
+        <Route path="/posts/:postId" element={<Comments />} />
+
+
+
         <Route path="/hemocentros" element={<RouteBloodCenter />} />
         <Route path="/recomendacoes" element={<Recomendation />} />
         <Route path="/chat" element={<Chat />} />
