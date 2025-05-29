@@ -4,10 +4,10 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Homebar from "../../components/Homebar/Homebar"
 import axios from "axios";
-import styles from "./Map.module.css";
+import styles from "./Doubts.module.css";
 import { useNavigate } from "react-router-dom"; // Adicionado
 
-const Map = () => {
+const Doubts = () => {
   const navigate = useNavigate(); // Adicionado
 
   const handleGoHome = () => {
@@ -65,4 +65,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default Doubts;

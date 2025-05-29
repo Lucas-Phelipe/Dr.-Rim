@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './pages/Register/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Doubts from "./components/Doubts/Doubts";
+import DoubtsComp from "./components/Doubts/Doubts";
 import FaqPage from "./pages/FaqPage/FaqPage";
 import SignUp from "./pages/Cadastro/Cadastro";
 import Home from "./pages/Home/Home";
-import Map from "./pages/Map/Map";
+import Doubts from "./pages/Doubts/Doubts";
 
 import Quiz from './pages/Quiz/Quiz';
 import ResultQuiz from './pages/ResultQuiz/ResultQuiz';
@@ -42,14 +42,14 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Navbar />} /> {/* Página inicial */}
-        <Route path="/doubts" element={<Doubts />} />
+        <Route path="/doubts" element={<DoubtsComp />} />
         <Route path="/register" element={<Register />} />
 
         <Route path="/cadastro" element={<SignUp />} /> 
         <Route path="/login" element={<Login />} />
         
         <Route path="/home" element={<Home />} />
-        <Route path="/mapa" element={<Map />} />
+        <Route path="/duvidas" element={<Doubts />} />
         <Route path="/community" element={<Comunity />} />
         <Route path="/comunidade" element={<Comunidade />} />
         <Route path="/forum" element={<Forum />} />

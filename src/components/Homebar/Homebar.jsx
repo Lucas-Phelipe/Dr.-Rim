@@ -8,11 +8,16 @@ import { ReactComponent as MapIcon } from '../../assets/Homebar/mapIcon.svg';
 import { ReactComponent as CommunityIcon } from '../../assets/Homebar/communityIcon.svg';
 import { ReactComponent as ProfileIcon } from '../../assets/Homebar/profileIcon.svg';
 
+import { ReactComponent as DoubtIcon } from '../../assets/Homebar/doubtIcon.svg';
+
 // SVGs ativados
 import { ReactComponent as HomeIconActive } from '../../assets/Homebar/homeIcon-active.svg';
 import { ReactComponent as MapIconActive } from '../../assets/Homebar/mapIcon.svg';
 import { ReactComponent as CommunityIconActive } from '../../assets/Homebar/communityIcon-active.svg';
 import { ReactComponent as ProfileIconActive } from '../../assets/Homebar/profileIcon-active.svg';
+
+import { ReactComponent as DoubtIconActive } from '../../assets/Homebar/doubtIcon-active.svg';
+
 
 const Homebar = () => {
   const navigate = useNavigate();
@@ -21,7 +26,7 @@ const Homebar = () => {
   // Define a tab ativa com base na URL
   const getActiveTab = () => {
     if (location.pathname.startsWith('/home')) return 'Home';
-    if (location.pathname.startsWith('/mapa')) return 'Mapa';
+    if (location.pathname.startsWith('/duvidas')) return 'Dúvidas';
     if (location.pathname.startsWith('/comunidade')) return 'Comunidade';
     if (location.pathname.startsWith('/perfil')) return 'Perfil';
     return '';
@@ -44,10 +49,10 @@ const Homebar = () => {
       </div>
       <div
         className={`${styles['homebar-item']} ${activeTab === 'Mapa' ? styles['homebar-item-active'] : ''}`}
-        onClick={() => handleTabClick('Mapa', '/mapa')}
+        onClick={() => handleTabClick('Dúvidas', '/duvidas')}
       >
-        {activeTab === 'Mapa' ? <MapIconActive className={styles.icon} /> : <MapIcon className={styles.icon} />}
-        <span className={activeTab === 'Mapa' ? styles['text-active'] : ''}>Mapa</span>
+        {activeTab === 'Dúvidas' ? <DoubtIconActive className={styles.icon} /> : <DoubtIcon className={styles.icon} />}
+        <span className={activeTab === 'Dúvidas' ? styles['text-active'] : ''}>Dúvidas</span>
       </div>
       <div
         className={`${styles['homebar-item']} ${activeTab === 'Comunidade' ? styles['homebar-item-active'] : ''}`}
