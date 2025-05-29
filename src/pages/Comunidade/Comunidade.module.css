@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
 
+  min-height: 100vh; 
   padding-bottom: 80px; /* ajuste conforme a altura da Homebar */
   box-sizing: border-box;
   overflow-y: auto;
