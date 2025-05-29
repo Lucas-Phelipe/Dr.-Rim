@@ -25,21 +25,23 @@ const Comunidade = () => {
       </div>
 
       <div className={styles.cardsContainer}>
-  <div className={styles.cardPages} style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-    <div className={styles.containerContent}>
-      <span className={styles.containerTitle}>Galeria de conquistas</span>
-      <div className={styles.introImages}>
-        <img src={RimIcon} alt="Rim" className={styles.introIcon}/>
+        <div className={styles.cardPages} style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+          <div className={styles.containerContent}>
+            <span className={styles.containerTitle}>Galeria de conquistas</span>
+            <div className={styles.introImages}>
+              <img src={RimIcon} alt="Rim" className={styles.introIcon}/>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.cardPages2} style={{ cursor: 'pointer' }} onClick={() => navigate('/forum')}>
+          <div className={styles.containerContent}>
+            <span className={styles.containerTitle}>Fórum</span>
+            {/* Adicione um ícone ou imagem aqui se desejar */}
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div className={styles.cardPages2} style={{ cursor: 'pointer' }} onClick={() => navigate('/forum')}>
-    <div className={styles.containerContent}>
-      <span className={styles.containerTitle}>Fórum</span>
-      {/* Adicione um ícone ou imagem aqui se desejar */}
-    </div>
-  </div>
-</div>
+      
       <Homebar />
     </div>
   );
