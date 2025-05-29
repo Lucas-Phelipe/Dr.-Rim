@@ -127,8 +127,8 @@ function Home() {
           </div>
 
           {/* Card Remédios */}
-          <div className={styles.cardRemedio}>
-            <img src={RemedioIcon} alt="Remédios" className={styles.cardIcon} />
+          <div className={styles.cardRemedio} style={{ cursor: 'pointer' }} onClick={() => navigate('/remedios')}>
+            <img src={RemedioIcon} alt="Remédios" className={styles.cardIcon}/>
             <div>
               <span className={styles.cardTitle}>Remédios</span>
               <div className={styles.cardSubtitle}>2 comprimidos<br/>restantes</div>

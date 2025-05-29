@@ -21,6 +21,7 @@ import Enterprise from "./pages/Enterprise/Enterprise";
 import Recomendation from "./pages/Recomendation/Recomendation";
 import QuizBloodinho from "./pages/Quiz/ApresentationQuiz/ApresentationQuiz";
 import Water from "./pages/Water/Water";
+import Remedios from "./pages/Remedio/Remedios";
 
 import PathOne from "./pages/Path/PathOne/PathOne"
 import PathTwo from "./pages/Path/PathTwo/PathTwo"
@@ -49,6 +50,8 @@ function App() {
         <Route path="/chat" element={<Chat />} />
 
         <Route path="/water" element={<Water />} />
+        
+        <Route path="/remedios" element={<Remedios />} />
       </Routes>
       
       <Routes>
