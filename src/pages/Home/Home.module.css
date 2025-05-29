@@ -24,6 +24,12 @@
   width: 100%;
 }
 
+.header h2 {
+  font-size: 25px;
+  color: #fff;
+  margin: 0;
+}
+
 .profilePic {
   border-radius: 50%;
   width: 50px;
