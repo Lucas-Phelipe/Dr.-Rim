@@ -12,7 +12,8 @@ import DoctorIcon from '../../assets/medico_home.png';
 
 import FundoRim from '../../assets/fundo_rim.svg';
 import CopoIcon from '../../assets/copo_icon.svg';      
-import RemedioIcon from '../../assets/remedio_icon.svg';     
+import RemedioIcon from '../../assets/remedio_icon.svg'; 
+import ConsultaIcon from '../../assets/consulta-icon.png';    
 
 function Home() {
 
@@ -132,6 +133,17 @@ function Home() {
             <div>
               <span className={styles.cardTitle}>Remédios</span>
               <div className={styles.cardSubtitle}>2 comprimidos<br/>restantes</div>
+            </div>
+            <span className={styles.cardArrow}>&#8250;</span>
+          </div>
+
+
+          {/* Card Consultas */}
+          <div className={styles.cardConsultas} style={{ cursor: 'pointer' }} onClick={() => navigate('/consultas')}>
+            <img src={ConsultaIcon} alt="Consultas" className={styles.cardIcon}/>
+            <div>
+              <span className={styles.cardTitle}>Agendamento</span>
+              <div className={styles.cardSubtitle}>Próximo agendamento:<br/>25/06</div>
             </div>
             <span className={styles.cardArrow}>&#8250;</span>
           </div>

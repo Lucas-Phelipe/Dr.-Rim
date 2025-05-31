@@ -1,40 +1,40 @@
 import React, { useState } from 'react';
-import styles from './Remedios.module.css';
+import styles from './Agendamentos.module.css';
 import Homebar from '../../components/Homebar/Homebar';
 import { Link } from 'react-router-dom';
 
-import Img1 from '../../assets/remedio1.svg';
-import Img2 from '../../assets/remedio2.svg';
-import Img3 from '../../assets/remedio3.svg';
-import Img4 from '../../assets/remedio4.svg';
+import Img1 from '../../assets/consulta1.svg';
+import Img2 from '../../assets/consulta2.svg';
+import Img3 from '../../assets/consulta3.svg';
+import Img4 from '../../assets/consulta4.svg';
 
-const tiposMedicamento = {
-  pilula: { nome: 'Pílula', imagem: Img1 },
-  xarope: { nome: 'Xarope', imagem: Img2 },
-  vitamina: { nome: 'Vitamina', imagem: Img3 },
-  injecao: { nome: 'Injeção', imagem: Img4 }
+const tiposConsulta = {
+  clinico: { nome: 'Clínico Geral', imagem: Img1 },
+  hemodialise: { nome: 'Hemodiálise', imagem: Img2 },
+  nefrologista: { nome: 'Nefrologista', imagem: Img3 },
+  checkup: { nome: 'Check-up', imagem: Img4 }
 };
 
-function Remedios() {
-  const [medicamentos, setMedicamentos] = useState([]);
+function Agendamento() {
+  const [consultas, setConsultas] = useState([]);
   const [historico, setHistorico] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [showHistorico, setShowHistorico] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipData, setTooltipData] = useState({ 
-    nome: '', 
-    nota: '', 
+    medico: '', 
+    observacao: '', 
     data: '', 
     horario: '', 
     tipo: '',
     position: { x: 0, y: 0 } 
   });
 
-  const [nome, setNome] = useState('');
-  const [nota, setNota] = useState('');
+  const [medico, setMedico] = useState('');
+  const [observacao, setObservacao] = useState('');
   const [tipoSelecionado, setTipoSelecionado] = useState('');
-  const [dataMedicamento, setDataMedicamento] = useState('');
-  const [horarioMedicamento, setHorarioMedicamento] = useState('');
+  const [dataConsulta, setDataConsulta] = useState('');
+  const [horarioConsulta, setHorarioConsulta] = useState('');
 
   // Função para formatar data para exibição
   const formatarData = (dataString) => {
@@ -55,41 +55,41 @@ function Remedios() {
     return hoje.toISOString().split('T')[0];
   };
 
-  const handleAddMedicamento = () => {
-    if (!nome || !tipoSelecionado || !dataMedicamento || !horarioMedicamento) {
+  const handleAddConsulta = () => {
+    if (!medico || !tipoSelecionado || !dataConsulta || !horarioConsulta) {
       alert('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
 
-    const novo = {
+    const nova = {
       id: Date.now(),
-      nome,
-      nota,
+      medico,
+      observacao,
       tipo: tipoSelecionado,
-      data: dataMedicamento,
-      horario: horarioMedicamento,
-      imagem: tiposMedicamento[tipoSelecionado].imagem,
+      data: dataConsulta,
+      horario: horarioConsulta,
+      imagem: tiposConsulta[tipoSelecionado].imagem,
     };
 
-    setMedicamentos((prev) => [...prev, novo]);
+    setConsultas((prev) => [...prev, nova]);
 
-    setNome('');
-    setNota('');
+    setMedico('');
+    setObservacao('');
     setTipoSelecionado('');
-    setDataMedicamento('');
-    setHorarioMedicamento('');
+    setDataConsulta('');
+    setHorarioConsulta('');
     setShowForm(false);
   };
 
   const handleConcluir = (id) => {
-    const medicamento = medicamentos.find((m) => m.id === id);
-    setHistorico((prev) => [...prev, medicamento]);
+    const consulta = consultas.find((c) => c.id === id);
+    setHistorico((prev) => [...prev, consulta]);
 
-    const elemento = document.getElementById(`med-${id}`);
+    const elemento = document.getElementById(`cons-${id}`);
     if (elemento) {
       elemento.classList.add(styles.concluido);
       setTimeout(() => {
-        setMedicamentos((prev) => prev.filter((m) => m.id !== id));
+        setConsultas((prev) => prev.filter((c) => c.id !== id));
       }, 500);
     }
   };
@@ -98,13 +98,13 @@ function Remedios() {
     setHistorico([]);
   };
 
-  const handleShowTooltip = (medicamento, event) => {
+  const handleShowTooltip = (consulta, event) => {
     setTooltipData({
-      nome: medicamento.nome,
-      nota: medicamento.nota,
-      data: medicamento.data,
-      horario: medicamento.horario,
-      tipo: tiposMedicamento[medicamento.tipo].nome,
+      medico: consulta.medico,
+      observacao: consulta.observacao,
+      data: consulta.data,
+      horario: consulta.horario,
+      tipo: tiposConsulta[consulta.tipo].nome,
       position: { x: 0, y: 0 }
     });
     setShowTooltip(true);
@@ -127,37 +127,37 @@ function Remedios() {
           <Link to="/home">
             <i className="bi bi-arrow-left-short pointer" style={{ fontSize: '36px', cursor: 'pointer', color: 'white' }} />
           </Link>
-          <h2>Medicamentos</h2>
+          <h2>Agendamentos</h2>
         </div>
 
-        {/* Lista de Medicamentos */}
+        {/* Lista de Consultas */}
         <div className={styles.lista}>
-          {medicamentos.map((med) => (
-            <div key={med.id} className={styles.card} id={`med-${med.id}`}>
-              <img src={med.imagem} alt="Remédio" className={styles.imagem} />
+          {consultas.map((cons) => (
+            <div key={cons.id} className={styles.card} id={`cons-${cons.id}`}>
+              <img src={cons.imagem} alt="Consulta" className={styles.imagem} />
               <div 
                 className={styles.info}
-                onClick={(e) => handleShowTooltip(med, e)}
+                onClick={(e) => handleShowTooltip(cons, e)}
                 style={{ cursor: 'pointer' }}
               >
-                <h3>{truncateText(med.nome, 20)}</h3>
-                <p>{truncateText(med.nota, 25)}</p>
+                <h3>{truncateText(cons.medico, 20)}</h3>
+                <p>{truncateText(cons.observacao, 25)}</p>
                 <div className={styles.dataHorario}>
                   <span className={styles.data}>
                     <i className="bi bi-calendar3"></i>
-                    {formatarData(med.data)}
+                    {formatarData(cons.data)}
                   </span>
                   <span className={styles.horario}>
                     <i className="bi bi-clock"></i>
-                    {formatarHorario(med.horario)}
+                    {formatarHorario(cons.horario)}
                   </span>
                 </div>
               </div>
               <button
                 className={styles.botaoConcluir}
-                onClick={() => handleConcluir(med.id)}
+                onClick={() => handleConcluir(cons.id)}
               >
-                Tomado
+                Realizada
               </button>
             </div>
           ))}
@@ -175,7 +175,7 @@ function Remedios() {
           <button
             className={styles.botaoFlutuante}
             onClick={() => setShowForm(!showForm)}
-            title="Agendar Medicamento"
+            title="Agendar Consulta"
           >
             <i className="bi bi-plus" style={{ fontSize: '24px' }}></i>
           </button>
@@ -186,9 +186,9 @@ function Remedios() {
           <div className={styles.formulario}>
             <input
               type="text"
-              placeholder="Nome do medicamento *"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
+              placeholder="Nome do médico *"
+              value={medico}
+              onChange={(e) => setMedico(e.target.value)}
               maxLength={50}
               required
             />
@@ -199,8 +199,8 @@ function Remedios() {
               className={styles.selectTipo}
               required
             >
-              <option value="">Tipo de Medicamento *</option>
-              {Object.entries(tiposMedicamento).map(([key, tipo]) => (
+              <option value="">Especialidade *</option>
+              {Object.entries(tiposConsulta).map(([key, tipo]) => (
                 <option key={key} value={key}>
                   {tipo.nome}
                 </option>
@@ -209,11 +209,11 @@ function Remedios() {
 
             <div className={styles.dataHorarioContainer}>
               <div className={styles.inputGroup}>
-                <label className={styles.label}>Data para Tomar *</label>
+                <label className={styles.label}>Data da Consulta *</label>
                 <input
                   type="date"
-                  value={dataMedicamento}
-                  onChange={(e) => setDataMedicamento(e.target.value)}
+                  value={dataConsulta}
+                  onChange={(e) => setDataConsulta(e.target.value)}
                   min={getDataMinima()}
                   className={styles.inputData}
                   required
@@ -224,8 +224,8 @@ function Remedios() {
                 <label className={styles.label}>Horário *</label>
                 <input
                   type="time"
-                  value={horarioMedicamento}
-                  onChange={(e) => setHorarioMedicamento(e.target.value)}
+                  value={horarioConsulta}
+                  onChange={(e) => setHorarioConsulta(e.target.value)}
                   className={styles.inputHorario}
                   required
                 />
@@ -233,14 +233,14 @@ function Remedios() {
             </div>
 
             <textarea
-              placeholder="Nota (como tomar, dosagem)"
-              value={nota}
-              onChange={(e) => setNota(e.target.value)}
+              placeholder="Observação (motivo da consulta)"
+              value={observacao}
+              onChange={(e) => setObservacao(e.target.value)}
               maxLength={100}
             />
 
-            <button className={styles.botaoSalvar} onClick={handleAddMedicamento}>
-              Agendar Medicamento
+            <button className={styles.botaoSalvar} onClick={handleAddConsulta}>
+              Agendar Consulta
             </button>
             
             <p className={styles.obrigatorio}>* Campos obrigatórios</p>
@@ -267,7 +267,7 @@ function Remedios() {
                 
                 <div className={styles.tooltipHeader}>
                   <div className={styles.tooltipTipo}>{tooltipData.tipo}</div>
-                  <div className={styles.tooltipNome}>{tooltipData.nome}</div>
+                  <div className={styles.tooltipNome}>{tooltipData.medico}</div>
                 </div>
                 
                 <div className={styles.tooltipDivider}></div>
@@ -283,12 +283,12 @@ function Remedios() {
                   </div>
                 </div>
                 
-                {tooltipData.nota && (
+                {tooltipData.observacao && (
                   <>
                     <div className={styles.tooltipDivider}></div>
                     <div className={styles.tooltipNota}>
-                      <strong>Nota:</strong><br />
-                      {tooltipData.nota}
+                      <strong>Observação:</strong><br />
+                      {tooltipData.observacao}
                     </div>
                   </>
                 )}
@@ -301,26 +301,26 @@ function Remedios() {
         {showHistorico && (
           <div className={styles.modalOverlay}>
             <div className={styles.modal}>
-              <h3>Histórico de Medicamentos</h3>
+              <h3>Histórico de Consultas</h3>
 
               {historico.length === 0 ? (
-                <p className={styles.nenhum}>Nenhum medicamento tomado.</p>
+                <p className={styles.nenhum}>Nenhuma consulta realizada.</p>
               ) : (
                 <div className={styles.listaHistorico}>
-                  {historico.map((med) => (
-                    <div key={med.id} className={styles.cardHistorico}>
-                      <img src={med.imagem} alt="Remédio" />
+                  {historico.map((cons) => (
+                    <div key={cons.id} className={styles.cardHistorico}>
+                      <img src={cons.imagem} alt="Consulta" />
                       <div className={styles.historicoInfo}>
-                        <h3>{med.nome.length > 20 ? med.nome.slice(0, 20) + '…' : med.nome}</h3>
-                        <p>{med.nota.length > 40 ? med.nota.slice(0, 40) + '…' : med.nota}</p>
+                        <h3>{cons.medico.length > 20 ? cons.medico.slice(0, 20) + '…' : cons.medico}</h3>
+                        <p>{cons.observacao.length > 40 ? cons.observacao.slice(0, 40) + '…' : cons.observacao}</p>
                         <div className={styles.historicoDataHorario}>
                           <span>
                             <i className="bi bi-calendar3"></i>
-                            {formatarData(med.data)}
+                            {formatarData(cons.data)}
                           </span>
                           <span>
                             <i className="bi bi-clock"></i>
-                            {formatarHorario(med.horario)}
+                            {formatarHorario(cons.horario)}
                           </span>
                         </div>
                       </div>
@@ -345,4 +345,4 @@ function Remedios() {
   );
 }
 
-export default Remedios;
+export default Agendamento;

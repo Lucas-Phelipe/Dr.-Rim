@@ -121,21 +121,13 @@
   text-shadow: 1px 2px 6px rgba(0,0,0,0.18);
 }
 
-.cardAgua {
-  background: #2196F3;
-  border-radius: 24px;
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 0 24px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-  color: #fff;
-  position: relative;
+.cardQuiz:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 32px rgba(0,0,0,0.15);
 }
 
-.cardRemedio {
-  background: #E0E0E0;
+.cardAgua {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
   border-radius: 24px;
   min-height: 120px;
   display: flex;
@@ -145,11 +137,40 @@
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   color: #fff;
   position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardAgua:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 32px rgba(0,0,0,0.15);
+}
+
+
+.cardRemedio {
+  background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+  border-radius: 24px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardRemedio:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 32px rgba(0,0,0,0.15);
 }
 
 .cardIcon {
   width: 48px;
   height: 48px;
+  object-fit: contain;
 }
 
 .cardTitle {
@@ -159,19 +180,12 @@
   text-shadow: 1px 2px 6px rgba(0,0,0,0.18);
 }
 
-.cardRemedio .cardTitle {
-  color: #888;
-}
-
 .cardSubtitle {
   font-size: 1rem;
   color: #fff;
   opacity: 0.9;
   margin-top: 2px;
-}
-
-.cardRemedio .cardSubtitle {
-  color: #bdbdbd;
+  line-height: 1.2;
 }
 
 .cardArrow {
@@ -181,9 +195,6 @@
   opacity: 0.8;
 }
 
-.cardRemedio .cardArrow {
-  color: #bdbdbd;
-}
 
 
 @media (min-width: 1024px) {
@@ -290,4 +301,53 @@
   .moreTitle {
     font-size: 1.5rem;
   }
+}
+
+/* Card Consultas/Agendamento */
+.cardConsultas {
+  background: linear-gradient(135deg, #B0BEC5, #90A4AE);
+  border-radius: 24px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardConsultas:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 32px rgba(0,0,0,0.15);
+}
+
+.cardConsultas .cardIcon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.cardConsultas .cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 1px 2px 6px rgba(0,0,0,0.18);
+}
+
+.cardConsultas .cardSubtitle {
+  font-size: 1rem;
+  color: #fff;
+  opacity: 0.9;
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
+.cardConsultas .cardArrow {
+  margin-left: auto;
+  font-size: 2rem;
+  color: #fff;
+  opacity: 0.8;
 }
