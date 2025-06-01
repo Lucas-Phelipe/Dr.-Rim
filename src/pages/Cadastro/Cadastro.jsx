@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Cadastro.module.css';
-import dulpaTurmaBloodinho from "../../assets/dulpaTurmaBloodinho.svg";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
@@ -117,78 +116,79 @@ const Cadastro = () => {
     }
   }
 
-
   return (
     <motion.div
-      className={styles.container}
+      className={styles.pageWrapper}
       initial={{ opacity: 0, x: 200 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -200 }}
       transition={{ duration: 0.5 }}
     >
-      <div className={styles.header}>
-        <img src={dulpaTurmaBloodinho} alt="Motivational" className={styles.image} />
+      <div className={styles.topSection}>
+        <h1 className={styles.title}>Criar uma conta</h1>
+        <p className={styles.subtitle}>Preencha o formulário para continuar</p>
       </div>
-      <div className={styles.formContainer}>
+      <div className={styles.bottomSection}>
         <form className={styles.form} onSubmit={CadastroUser}>
+          <label className={styles.label} htmlFor="nome">Nome</label>
           <input
             type="text"
-            placeholder="Nome"
+            id="nome"
+            placeholder="Maria José"
             className={styles.input}
             value={nome}
             onChange={(event) => setNome(event.target.value)}
-            // possivelmente aqui possa dar erro, até agora não deu, mas se der, o problema é aqui.
           />
+          <label className={styles.label} htmlFor="email">E-mail</label>
           <input
             type="email"
-            placeholder="E-mail"
+            id="email"
+            placeholder="mariajose@gmail.com"
             className={styles.input}
             value={email}
             onChange={(event) => setEmail(event.target.value.trimEnd())}
           />
+          <label className={styles.label} htmlFor="telefone">Telefone</label>
           <input
             type="text"
-            placeholder="CPF"
-            className={styles.input}
-            value={cpf}
-            onChange={(event) => setCpf(event.target.value.trimEnd())}
-          />
-
-
-          <input
-            type="password"
-            placeholder="Senha"
-            className={styles.input}
-            value={senha}
-            onChange={(event) => setSenha(event.target.value.trimEnd())}
-          />
-
-
-          <input
-            type="text"
-            placeholder="Telefone"
+            id="telefone"
+            placeholder="(11) 98765-4321"
             className={styles.input}
             value={telefone}
             onChange={(event) => setTelefone(event.target.value.trimEnd())}
           />
-          {erroCpf && <div style={{ color: 'red' }}>{erroCpf}</div>}
-          {erroSenha && <div style={{ color: 'red' }}>{erroSenha}</div>}
-          {erroTelefone && <div style={{ color: 'red' }}>{erroTelefone}</div>}
-
-
+          <label className={styles.label} htmlFor="cpf">CPF</label>
+          <input
+            type="text"
+            id="cpf"
+            placeholder="123.456.789-01"
+            className={styles.input}
+            value={cpf}
+            onChange={(event) => setCpf(event.target.value.trimEnd())}
+          />
+          <label className={styles.label} htmlFor="senha">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            placeholder="******"
+            className={styles.input}
+            value={senha}
+            onChange={(event) => setSenha(event.target.value.trimEnd())}
+          />
+          {erroCpf && <div className={styles.error}>{erroCpf}</div>}
+          {erroSenha && <div className={styles.error}>{erroSenha}</div>}
+          {erroTelefone && <div className={styles.error}>{erroTelefone}</div>}
           <button type="submit" className={styles.button}>
             Criar conta
           </button>
-
-
-          <p className={styles.signupText}>
-            Já tem uma conta?{' '}
-            <a href="/login" className={styles.signupLink}>Faça login!</a>
-          </p>
+          <a href="/login" className={styles.signupLink}>
+            Já tenho uma conta
+          </a>
         </form>
       </div>
     </motion.div>
   );
+    
 };
 
 
