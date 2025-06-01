@@ -1,122 +1,121 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion'; // Biblioteca de animação
-import styles from './Login.module.css'; // CSS Module importado
-import dulpaTurmaBloodinho from "../../assets/dulpaTurmaBloodinho.svg"; // Imagem principal
+import { motion } from 'framer-motion';
+import styles from './Login.module.css';
+import logo from "../../assets/logo.png"; // ajuste o caminho se necessário
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-
 const Login = () => {
-  function setCookie(nome, valor, dias) {
-    const data = new Date();
-    data.setTime(data.getTime() + (dias * 24 * 60 * 60 * 1000)); // Define a validade do cookie
-    const expires = "expires=" + data.toUTCString();
-    document.cookie = nome + "=" + valor + ";" + expires + ";path=/"; // Define o cookie com o nome e valor
-  }
- 
   const [userEmail, setUserEmail] = useState("");
   const [userSenha, setUserSenha] = useState("");
-  const [erro, setErro] = useState("");  // Mensagem de erro
+  const [erro, setErro] = useState("");
   const navigate = useNavigate();
 
+  function setCookie(nome, valor, dias) {
+    const data = new Date();
+    data.setTime(data.getTime() + (dias * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + data.toUTCString();
+    document.cookie = nome + "=" + valor + ";" + expires + ";path=/";
+  }
 
   const handleGoingHome = () => {
     navigate('/home');
   };
 
-
-  // Validação de e-mail (considerando caracteres especiais comuns)
   const isEmailValid = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Permite letras, números e caracteres especiais como . _ % + -
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
 
-
-  // Validação de senha (considerando caracteres especiais)
   const isPasswordValid = (password) => {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/; // Mínimo 8 caracteres, letras, números e pelo menos um caractere especial
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     return passwordRegex.test(password);
   };
 
-
   async function LoginUser(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  if (!isEmailValid(userEmail)) {
-    setErro("Por favor, insira um e-mail válido.");
-    return;
-  }
-
-  if (!isPasswordValid(userSenha)) {
-    setErro("A senha deve ter pelo menos 8 caracteres, incluindo letras, números e caracteres especiais.");
-    return;
-  }
-
-  try {
-  const response = await axios.post("http://localhost:8080/users/login", {
-    email: userEmail,
-    password: userSenha
-  });
-
-  // Se chegou aqui, login OK, response.data é o UserDTO
-  setErro("");
-  setCookie("Usercookie", userEmail, 12);
-  handleGoingHome();
-
-} catch (error) {
-  if (error.response) {
-    if (error.response.status === 401) {
-      setErro("E-mail ou senha incorretos.");
-    } else {
-      setErro(error.response.data || "Erro no servidor.");
+    if (!isEmailValid(userEmail)) {
+      setErro("Por favor, insira um e-mail válido.");
+      return;
     }
-  } else {
-    setErro("Erro ao acessar o servidor. Tente novamente.");
+
+    if (!isPasswordValid(userSenha)) {
+      setErro("A senha deve ter pelo menos 8 caracteres, incluindo letras, números e caracteres especiais.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:8080/users/login", {
+        email: userEmail,
+        password: userSenha
+      });
+
+      setErro("");
+      setCookie("Usercookie", userEmail, 12);
+      handleGoingHome();
+
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 401) {
+          setErro("E-mail ou senha incorretos.");
+        } else {
+          setErro(error.response.data || "Erro no servidor.");
+        }
+      } else {
+        setErro("Erro ao acessar o servidor. Tente novamente.");
+      }
+    }
   }
-}
-
-}
-
 
   return (
     <motion.div
-      className={styles.container}
-      initial={{ opacity: 0, x: 200 }} // Animação inicial
-      animate={{ opacity: 1, x: 0 }} // Animação ao montar
-      exit={{ opacity: 0, x: -200 }} // Animação ao desmontar
-      transition={{ duration: 0.5 }} // Configuração de tempo
+      className={styles.pageWrapper}
+      initial={{ opacity: 0, x: 200 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -200 }}
+      transition={{ duration: 0.5 }}
     >
-      <div className={styles.header}>
-        <img src={dulpaTurmaBloodinho} alt="Motivational" className={styles.image} />
+      <div className={styles.topSection}>
+        <div className={styles.logoWrapper}>
+          <img src={logo} alt="Logo" className={styles.logo} />
+        </div>
       </div>
-      <div className={styles.formContainer}>
-        <form className={styles.form} onSubmit={LoginUser}>
-          <input
-            type="email"
-            placeholder="E-mail"
-            className={styles.input}
-            value={userEmail}
-            onChange={(event) => setUserEmail(event.target.value.trimEnd())}
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            className={styles.input}
-            value={userSenha}
-            onChange={(event) => setUserSenha(event.target.value.trimEnd())}
-          />
-          <button type="submit" className={styles.button}>Entrar</button>
-          {/* Exibe a mensagem de erro se necessário */}
-          {erro && <div style={{ color: 'red', marginTop: '10px' }}>{erro}</div>}
-          <p className={styles.signupText}>
-            Não tem uma conta?{' '}
-            <a href="/cadastro" className={styles.signupLink}>Faça seu cadastro!</a>
-          </p>
-        </form>
+      <div className={styles.bottomSection}>
+        <div className={styles.formCard}>
+          <h1 className={styles.title}>Conecte-se</h1>
+          <p className={styles.subtitle}>Entre para continuar</p>
+          <form className={styles.form} onSubmit={LoginUser}>
+            <label className={styles.label} htmlFor="email">E-mail</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="mariajose@gmail.com"
+              className={styles.input}
+              value={userEmail}
+              onChange={(event) => setUserEmail(event.target.value.trimEnd())}
+              autoComplete="username"
+            />
+            <label className={styles.label} htmlFor="senha">Senha</label>
+            <input
+              id="senha"
+              type="password"
+              placeholder="******"
+              className={styles.input}
+              value={userSenha}
+              onChange={(event) => setUserSenha(event.target.value.trimEnd())}
+              autoComplete="current-password"
+            />
+            {erro && <div className={styles.error}>{erro}</div>}
+            <button type="submit" className={styles.button}>Acessar</button>
+          </form>
+          <a href="/cadastro" className={styles.signupLink}>
+            Ainda não tenho uma conta
+          </a>
+        </div>
       </div>
     </motion.div>
   );
 };
-
 
 export default Login;
