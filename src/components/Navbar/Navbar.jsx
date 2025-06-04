@@ -32,7 +32,7 @@ const Navbar = () => {
     >
       {/* <img src={ScreenElements} alt="Descrição da Imagem" className={styles.backgroundImage} /> */}
       <img src={imageNavbar} alt="Descrição da Imagem" className={styles.navbarImage} />
-      <h1 className={styles.titulo}>Sangue Herói</h1>
+      <h1 className={styles.titulo}> Dr. Rim</h1>
     </div>
   );
 };
