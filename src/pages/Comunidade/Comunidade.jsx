@@ -4,6 +4,7 @@ import Homebar from "../../components/Homebar/Homebar"
 import RimIcon from '../../assets/logo_dr_rim.png';   
 import styles from "./Comunidade.module.css";
 import { useNavigate } from "react-router-dom"; // Adicionado
+import HeaderNavBar from "../../components/HeaderNavBar/HeaderNavBar";
 
 const Comunidade = () => {
   const navigate = useNavigate();
@@ -14,11 +15,7 @@ const Comunidade = () => {
 
   return (
     <div className={styles.pageBackground}>
-      <header className={styles.header}>
-        <h2>Comunidade</h2>
-        <img className={styles.profilePic} src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg" alt="Perfil" />
-      </header>
-
+      <HeaderNavBar HeaderTitle="Comunidade"/>
       <div className={styles.topicSection}>
         <h2 className={styles.topicTitle}>Comunidade</h2>
         <h2 className={styles.topicText}>Interaja com os demais usuários, compartilhando experiências, conquistas, dúvidas e muito mais!</h2>

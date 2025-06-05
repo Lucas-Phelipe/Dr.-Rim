@@ -6,6 +6,7 @@ import Homebar from "../../components/Homebar/Homebar"
 import axios from "axios";
 import styles from "./Doubts.module.css";
 import { useNavigate } from "react-router-dom"; // Adicionado
+import HeaderNavBar from "../../components/HeaderNavBar/HeaderNavBar";
 
 const Doubts = () => {
   const navigate = useNavigate(); // Adicionado
@@ -16,10 +17,7 @@ const Doubts = () => {
 
   return (
     <div className={styles.pageBackground}>
-      <header className={styles.header}>
-        <h2>Dúvidas</h2>
-        <img className={styles.profilePic} src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg" alt="Perfil" />
-      </header>
+    <HeaderNavBar HeaderTitle="Dúvidas" />  
 
       <div className={styles.topicSection}>
         <div className={styles.topicTitleRow}>

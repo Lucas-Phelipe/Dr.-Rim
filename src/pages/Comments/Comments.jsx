@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './Comments.module.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import Homebar from "../../components/Homebar/Homebar";
+import HeaderNavBar from "../../components/HeaderNavBar/HeaderNavBar";
 import Comment from "../../components/CommentCard/CommentCard";
 import { getUserByEmail, getPostById, addCommentToPost } from '../../services/api';
 
@@ -70,23 +71,7 @@ const Comments = () => {
 
   return (
     <div className={styles.pageBackground}>
-      <header className={styles.header}>
-        <button
-          className={styles.backButton}
-          onClick={() => navigate(-1)}
-          aria-label="Voltar"
-        >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-            <path d="M15 19l-7-7 7-7" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-        <h2 className={styles.headerTitle}>Comentários</h2>
-        <img
-          className={styles.profilePic}
-          src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"
-          alt="Perfil"
-        />
-      </header>
+      <HeaderNavBar HeaderTitle="Comentários" isBackButton={true}/>
       <div className={styles.cardsContainer}>
         <div className={styles.forumPosts}>
           <div className={styles.forumPost}>

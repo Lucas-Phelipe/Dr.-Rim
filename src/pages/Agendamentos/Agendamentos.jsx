@@ -7,6 +7,7 @@ import Img1 from '../../assets/consulta1.svg';
 import Img2 from '../../assets/consulta2.svg';
 import Img3 from '../../assets/consulta3.svg';
 import Img4 from '../../assets/consulta4.svg';
+import HeaderNavBar from '../../components/HeaderNavBar/HeaderNavBar';
 
 const tiposConsulta = {
   clinico: { nome: 'Clínico Geral', imagem: Img1 },
@@ -122,13 +123,7 @@ function Agendamento() {
   return (
     <>
       <div className={styles.pageBackground}>
-
-        <div className={styles.header}>
-          <Link to="/home">
-            <i className="bi bi-arrow-left-short pointer" style={{ fontSize: '36px', cursor: 'pointer', color: 'white' }} />
-          </Link>
-          <h2>Agendamentos</h2>
-        </div>
+      <HeaderNavBar HeaderTitle="Agendamentos" isBackButton={true} />
 
         {/* Lista de Consultas */}
         <div className={styles.lista}>

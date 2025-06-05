@@ -7,6 +7,7 @@ import Img1 from '../../assets/remedio1.svg';
 import Img2 from '../../assets/remedio2.svg';
 import Img3 from '../../assets/remedio3.svg';
 import Img4 from '../../assets/remedio4.svg';
+import HeaderNavBar from '../../components/HeaderNavBar/HeaderNavBar';
 
 const tiposMedicamento = {
   pilula: { nome: 'Pílula', imagem: Img1 },
@@ -122,13 +123,7 @@ function Remedios() {
   return (
     <>
       <div className={styles.pageBackground}>
-
-        <div className={styles.header}>
-          <Link to="/home">
-            <i className="bi bi-arrow-left-short pointer" style={{ fontSize: '36px', cursor: 'pointer', color: 'white' }} />
-          </Link>
-          <h2>Medicamentos</h2>
-        </div>
+      <HeaderNavBar HeaderTitle="Medicamentos" isBackButton={true} />
 
         {/* Lista de Medicamentos */}
         <div className={styles.lista}>

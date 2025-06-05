@@ -12,45 +12,6 @@
   padding-bottom: 80px;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  width: 100%;
-  position: relative;
-  gap: 12px;
-}
-
-.headerTitle {
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: #ffffff;
-  flex: 1;
-  text-align: left;
-}
-
-.backButton {
-  background: none;
-  border: none;
-  padding: 0 8px 0 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  margin-right: 12px;
-}
-
-.backButton svg {
-  display: block;
-}
-
-.profilePic {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  margin-left: auto;
-}
-
 .cardsContainer,
 .commentFormContainer,
 .commentsListContainer {
