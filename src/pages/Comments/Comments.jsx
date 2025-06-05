@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styles from './Comments.module.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import Homebar from "../../components/Homebar/Homebar";
+import { getUserByEmail, getPostById, addCommentToPost } from '../../services/api';
 
 const Comments = () => {
   const { postId } = useParams();
@@ -12,7 +12,6 @@ const Comments = () => {
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // Função para buscar usuário logado pelo cookie
   const getUserFromCookie = () => {
     const name = 'Usercookie=';
     const decodedCookie = decodeURIComponent(document.cookie);
@@ -29,15 +28,14 @@ const Comments = () => {
   const userEmail = getUserFromCookie();
 
   const fetchUser = async () => {
-    const res = await axios.get(`http://localhost:8080/users/email/${userEmail}`);
+    const res = await getUserByEmail(userEmail);
     return res.data;
   };
 
-  // Buscar post e comentários
   useEffect(() => {
     const fetchPost = async () => {
       setLoading(true);
-      const res = await axios.get(`http://localhost:8080/posts/${postId}`);
+      const res = await getPostById(postId);
       setPost(res.data);
       setComments(res.data.comments || []);
       setLoading(false);
@@ -45,7 +43,6 @@ const Comments = () => {
     fetchPost();
   }, [postId]);
 
-  // Enviar novo comentário
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!text) return;
@@ -59,7 +56,7 @@ const Comments = () => {
           name: user.name
         }
       };
-      const res = await axios.post(`http://localhost:8080/posts/${postId}/comments`, newComment);
+      const res = await addCommentToPost(postId, newComment);
       setComments(res.data.comments);
       setText('');
     } catch (err) {
@@ -73,22 +70,22 @@ const Comments = () => {
   return (
     <div className={styles.pageBackground}>
       <header className={styles.header}>
-  <button
-    className={styles.backButton}
-    onClick={() => navigate(-1)}
-    aria-label="Voltar"
-  >
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-      <path d="M15 19l-7-7 7-7" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  </button>
-  <h2 className={styles.headerTitle}>Comentários</h2>
-  <img
-    className={styles.profilePic}
-    src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"
-    alt="Perfil"
-  />
-</header>
+        <button
+          className={styles.backButton}
+          onClick={() => navigate(-1)}
+          aria-label="Voltar"
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+        <h2 className={styles.headerTitle}>Comentários</h2>
+        <img
+          className={styles.profilePic}
+          src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"
+          alt="Perfil"
+        />
+      </header>
       <div className={styles.cardsContainer}>
         <div className={styles.forumPosts}>
           <div className={styles.forumPost}>
@@ -111,7 +108,6 @@ const Comments = () => {
         </div>
       </div>
 
-      {/* Formulário separado */}
       <div className={styles.commentFormContainer}>
         <form className={styles.commentForm} onSubmit={handleSubmit}>
           <textarea
@@ -128,7 +124,7 @@ const Comments = () => {
       {/* Lista de comentários */}
       <div className={styles.commentsListContainer}>
         {comments.length === 0 && <div className={styles.noComments}>Nenhum comentário ainda.</div>}
-        {comments.slice().reverse().map((comment, idx) => ( 
+        {comments.slice().reverse().map((comment, idx) => (
           <div key={idx} className={styles.commentPost}>
             <div className={styles.forumPostHeader}>
               <img

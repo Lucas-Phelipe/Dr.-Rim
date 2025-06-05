@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Homebar from "../../components/Homebar/Homebar";
 import styles from './Post.module.css';
 import { useNavigate } from "react-router-dom";
+import { getUserByEmail, createPost, addPostToUser } from '../../services/api';
 
 const Post = () => {
   const [title, setTitle] = useState('');
@@ -26,7 +26,7 @@ const Post = () => {
   const userEmail = getUserFromCookie();
 
   const fetchUser = async () => {
-    const res = await axios.get(`http://localhost:8080/users/email/${userEmail}`);
+    const res = await getUserByEmail(userEmail);
     return res.data;
   };
 
@@ -47,14 +47,10 @@ const Post = () => {
         }
       };
 
-      // Salva o post e obtém o ID criado
-      const postRes = await axios.post('http://localhost:8080/posts', newPost);
+      const postRes = await createPost(newPost);
       const createdPost = postRes.data;
 
-      // Atualiza o usuário para adicionar o post ao array de posts do usuário
-      await axios.put(`http://localhost:8080/users/${user.id}/addPost`, {
-        postId: createdPost.id
-      });
+      await addPostToUser(user.id, createdPost.id);
 
       setTitle('');
       setBody('');
