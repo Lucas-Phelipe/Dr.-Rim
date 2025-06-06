@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Homebar from "../../components/Homebar/Homebar";
 import HeaderNavBar from "../../components/HeaderNavBar/HeaderNavBar";
 import Comment from "../../components/CommentCard/CommentCard";
+import { getUserFromCookie } from '../../utils/cookies';
 import { getUserByEmail, getPostById, addCommentToPost } from '../../services/api';
 
 const Comments = () => {
@@ -12,20 +13,7 @@ const Comments = () => {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [text, setText] = useState('');
-  const [loading, setLoading] = useState(true);
-
-  const getUserFromCookie = () => {
-    const name = 'Usercookie=';
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookies = decodedCookie.split(';');
-    for (let c of cookies) {
-      c = c.trim();
-      if (c.startsWith(name)) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return null;
-  };
+  const [loading, setLoading] = useState(true);  
 
   const userEmail = getUserFromCookie();
 

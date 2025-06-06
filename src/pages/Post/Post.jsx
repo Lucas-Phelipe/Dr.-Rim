@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Homebar from "../../components/Homebar/Homebar";
 import styles from './Post.module.css';
 import { useNavigate } from "react-router-dom";
+import { getUserFromCookie } from '../../utils/cookies';
 import { getUserByEmail, createPost, addPostToUser } from '../../services/api';
 import HeaderNavBar from '../../components/HeaderNavBar/HeaderNavBar';
 
@@ -10,19 +11,6 @@ const Post = () => {
   const [body, setBody] = useState('');
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
-
-  const getUserFromCookie = () => {
-    const name = 'Usercookie=';
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookies = decodedCookie.split(';');
-    for (let c of cookies) {
-      c = c.trim();
-      if (c.startsWith(name)) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return null;
-  };
 
   const userEmail = getUserFromCookie();
 
