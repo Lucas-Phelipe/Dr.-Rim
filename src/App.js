@@ -23,7 +23,7 @@ import Dados from "./pages/Profile/DataUser/DataUser"
 import Certified from "./pages/Profile/Certified/Certified"
 import Login from "./pages/Login/Login"
 import RouteBloodCenter from "./components/RouteBloodCenter/RouteBloodCenter";
-import Enterprise from "./pages/Enterprise/Enterprise";
+import Enterprise from "./pages/(Enterprise)/Enterprise";
 import Recomendation from "./pages/Recomendation/Recomendation";
 import QuizBloodinho from "./pages/Quiz/ApresentationQuiz/ApresentationQuiz";
 import Water from "./pages/Water/Water";

@@ -20,7 +20,7 @@ const Navbar = () => {
   const handleClick = () => {
     setFadeOut(true); // Inicia o efeito de fade-out
     setTimeout(() => {
-      navigate('/register'); // Navega para a página de login após a animação
+      navigate('/login'); // Navega para a página de login após a animação
     }, 1500); // Tempo de delay correspondente à duração da animação de fade-out
   };
 
