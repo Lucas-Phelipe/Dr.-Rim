@@ -10,6 +10,7 @@
   width: 100%;
   opacity: 0; /* Começa com opacidade 0 (invisível) */
   transition: opacity 1.5s ease-in; /* Define o tempo e a transição para o fade-in */
+  background-color: white;
 }
 
 .fade-in {
@@ -22,8 +23,9 @@
 }
 
 .backgroundImage {
-  width: 110%;
-  height: auto;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
   z-index: 1;
 }
 
@@ -34,6 +36,8 @@
   transform: translateX(-50%);
   width: 100%;
   height: auto;
+  filter: invert(100%);
+  z-index: 2;
 }
 
 .titulo {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Navbar.module.css'; // Importando o CSS Module
 import imageNavbar from "../../assets/navbar.png";
-// import ScreenElements from "../../assets/elements.png";
+import ScreenElements from "../../assets/screenbg.png";
 import { useNavigate } from 'react-router-dom'; // Para navegação
 
 const Navbar = () => {
@@ -20,7 +20,7 @@ const Navbar = () => {
   const handleClick = () => {
     setFadeOut(true); // Inicia o efeito de fade-out
     setTimeout(() => {
-      navigate('/login'); // Navega para a página de login após a animação
+      navigate('/onboarding'); // Navega para a página de login após a animação
     }, 1500); // Tempo de delay correspondente à duração da animação de fade-out
   };
 
@@ -30,9 +30,9 @@ const Navbar = () => {
       onClick={handleClick}
       style={{ cursor: 'pointer' }} // Define o cursor como pointer para indicar clique
     >
-      {/* <img src={ScreenElements} alt="Descrição da Imagem" className={styles.backgroundImage} /> */}
-      <img src={imageNavbar} alt="Descrição da Imagem" className={styles.navbarImage} />
-      <h1 className={styles.titulo}> Dr. Rim</h1>
+      <img src={ScreenElements} alt="Fundo" className={styles.backgroundImage} />
+      <img src={imageNavbar} alt="Icones" className={styles.navbarImage} />
+      {/* <h1 className={styles.titulo}> Dr. Rim</h1> */}
     </div>
   );
 };
