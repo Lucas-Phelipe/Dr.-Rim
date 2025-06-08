@@ -1,0 +1,60 @@
+.card {
+  flex: 0 0 100%;
+  width: 100vw;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card h2 {
+  font-size: 2rem;
+  margin: 1.5rem;
+  color: black;
+  font-weight: 600;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin: 1.5rem;
+  color: black;
+}
+
+.card p {
+  margin-bottom: 1.5rem;
+  color: black;
+}
+
+.card button {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+}
+
+.card label {
+  font-size: 1.1rem;
+  color: black;
+  letter-spacing: 1px;
+  margin: 16px 0 4px;
+}
+
+.card input {
+  width: 100%;
+  background: #f0f0f0db;
+  border: none;
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 1.05rem;
+  color: #232728;
+  outline: none;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  margin-bottom: 1rem;
+}
