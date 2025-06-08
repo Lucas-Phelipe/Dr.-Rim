@@ -1,195 +1,322 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import styles from './Cadastro.module.css';
+// src/pages/Cadastro.jsx
+import React, { useRef, useState } from "react";
+import EtapaCadastro from "../../components/StepSignup/StepSignup";
+import backgroundImage from "../../assets/cadastrobg.png";
+import styles from "./Cadastro.module.css";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-
-// Função para validar CPF
+// Validações
 function validarCPF(cpf) {
-  cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
-
-
-  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false; // Verifica se o CPF é válido (11 dígitos e não repetido)
-
-
-  let soma = 0;
-  let resto;
-
-
-  for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+  cpf = cpf.replace(/[^\d]+/g, "");
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+  let soma = 0,
+    resto;
+  for (let i = 1; i <= 9; i++)
+    soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
   resto = (soma * 10) % 11;
   if (resto === 10 || resto === 11) resto = 0;
   if (resto !== parseInt(cpf.substring(9, 10))) return false;
-
-
   soma = 0;
-  for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+  for (let i = 1; i <= 10; i++)
+    soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
   resto = (soma * 10) % 11;
   if (resto === 10 || resto === 11) resto = 0;
   if (resto !== parseInt(cpf.substring(10, 11))) return false;
-
-
   return true;
 }
 
-
-// Função para validar telefone (formato com DDD e 9 dígitos)
-function validarTelefone(telefone) {
-  const regexTelefone = /^\(?\d{2}\)?\s?9\d{4}-?\d{4}$/; // Exemplo: (11) 91234-5678
-  return regexTelefone.test(telefone);
-}
-
+// function validarTelefone(telefone) {
+//   const regexTelefone = /^\(?\d{2}\)?\s?9\d{4}-?\d{4}$/;
+//   return regexTelefone.test(telefone);
+// }
 
 const Cadastro = () => {
+  const scrollRef = useRef(null);
   const navigate = useNavigate();
+  const [etapa, setEtapa] = useState(0);
 
-
-  const handleGoingLogin = () => {
-    navigate('/login');
-  };
-
-
-  const [telefone, setTelefone] = useState("");
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
   const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [altura, setAltura] = useState("");
+  const [peso, setPeso] = useState("");
+  const [sexo, setSexo] = useState("");
   const [erroSenha, setErroSenha] = useState("");
-  const [erroCpf, setErroCpf] = useState(""); // Estado para o erro de CPF
-  const [erroTelefone, setErroTelefone] = useState(""); // Estado para o erro de telefone
+  const [erroCpf, setErroCpf] = useState("");
 
-
-  async function CadastroUser(event) {
-    event.preventDefault();
-
-
-    // Verifica se todos os campos foram preenchidos
-    if (telefone === "" || nome === "" || email === "" || cpf === "" || senha === "") {
-      console.log("Complete seus dados!");
+  const handleCadastro = async () => {
+    if (!nome || !email || !cpf || !peso || !altura || !sexo || !senha) {
+      alert("Preencha todos os campos.");
       return;
     }
-
-
-    // Valida CPF
     if (!validarCPF(cpf)) {
       setErroCpf("CPF inválido.");
       return;
     } else {
-      setErroCpf(""); // Limpa o erro de CPF se for válido
+      setErroCpf("");
     }
-
-
-    // Valida telefone
-    if (!validarTelefone(telefone)) {
-      setErroTelefone("Telefone inválido. Formato esperado: (XX) 9XXXX-XXXX");
-      return;
-    } else {
-      setErroTelefone(""); // Limpa o erro de telefone se for válido
-    }
-
-
-    // Valida a senha
-    const regexSenha = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const regexSenha =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!regexSenha.test(senha)) {
-      setErroSenha("A senha deve ter pelo menos 8 caracteres, incluindo letras, números e caracteres especiais.");
+      setErroSenha(
+        "Senha fraca: mínimo 8 caracteres, letras, números e especial."
+      );
       return;
-    } else {
-      setErroSenha(""); // Limpa o erro de senha se for válido
     }
-
-
-    const body = {
-      telephone: telefone,
-      name: nome,
-      email: email,
-      cpf: cpf,
-      password: senha,
-    };
-
+    if (senha !== confirmarSenha) {
+      setErroSenha("As senhas não coincidem.");
+      return;
+    }
+    setErroSenha("");
 
     try {
-      await axios.post("http://localhost:8080/users", body);
-      handleGoingLogin(); // Redireciona para o login após cadastro bem-sucedido
+      await axios.post("http://localhost:8080/users", {
+        name: nome,
+        email,
+        cpf,
+        password: senha,
+        birthdate: dataNascimento,
+        height: altura,
+        weight: peso,
+        gender: sexo,
+      });
+      navigate("/login");
     } catch (error) {
-      console.error("Erro ao criar o usuário:", error);
+      console.error("Erro ao cadastrar:", error);
     }
-  }
+  };
+
+  const irParaProximaEtapa = () => {
+    const next = etapa + 1;
+    if (scrollRef.current && next < etapas.length) {
+      scrollRef.current.scrollTo({
+        left: scrollRef.current.clientWidth * next,
+        behavior: "smooth",
+      });
+      setEtapa(next);
+    }
+  };
+
+  const irParaEtapaAnterior = () => {
+    const prev = etapa - 1;
+    if (scrollRef.current && prev >= 0) {
+      scrollRef.current.scrollTo({
+        left: scrollRef.current.clientWidth * prev,
+        behavior: "smooth",
+      });
+      setEtapa(prev);
+    }
+  };
+
+  const etapas = [
+    {
+      conteudo: (
+        <>
+          <div className={styles.imageContainer}></div>
+          <h2>Olá, que bom ter você por aqui! 🌟</h2>
+          <p>
+            Vamos montar um perfil rapidinho para te ajudar a cuidar da sua
+            saúde com mais leveza e apoio.
+          </p>
+          <button className={styles.btnProx} onClick={irParaProximaEtapa}>
+            Próximo
+          </button>
+        </>
+      ),
+    },
+    {
+      conteudo: (
+        <>
+          <h3>Para começar, qual é o seu nome e o seu e-mail?</h3>
+          <div className={styles.form}>
+            <label htmlFor="nome">Nome:</label>
+            <input
+              id="nome"
+              type="text"
+              placeholder="Maria José"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+            <label htmlFor="email">E-mail:</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="mariajose@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <div className={styles.btnContainer}>
+              <button
+                className={styles.btnVoltar}
+                onClick={irParaEtapaAnterior}
+              >
+                Voltar
+              </button>
+              <button className={styles.btnProx} onClick={irParaProximaEtapa}>
+                Próximo
+              </button>
+            </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      conteudo: (
+        <>
+          <h3>Pedimos seu CPF para garantir segurança no seu acesso 🔒</h3>
+          <div className={styles.form}>
+            <label htmlFor="cpf">CPF:</label>
+            <input
+              id="cpf"
+              type="text"
+              placeholder="123.456.789-00"
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+            />
+            {erroCpf && <p className={styles.erro}>{erroCpf}</p>}
+          </div>
+          <div className={styles.btnContainer}>
+            <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
+              Voltar
+            </button>
+            <button className={styles.btnProx} onClick={irParaProximaEtapa}>
+              Próximo
+            </button>
+          </div>
+        </>
+      ),
+    },
+    {
+      conteudo: (
+        <>
+          <h3>
+            Essas informações ajudam a calcular indicadores importantes para sua
+            saúde
+          </h3>
+          <div className={styles.form}>
+            <label htmlFor="dataNasc">Data de nascimento:</label>
+            <input
+              id="dataNasc"
+              type="date"
+              value={dataNascimento}
+              onChange={(e) => setDataNascimento(e.target.value)}
+            />
+            <div className={styles.inputGroup}>
+              <div>
+                <label htmlFor="altura">Altura:</label>
+                <input
+                  id="altura"
+                  type="text"
+                  value={altura}
+                  onChange={(e) => setAltura(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="peso">Peso:</label>
+                <input
+                  id="peso"
+                  type="text"
+                  value={peso}
+                  onChange={(e) => setPeso(e.target.value)}
+                />
+              </div>
+            </div>
+            <label>Sexo:</label>
+            <div className={styles.radioGroup}>
+              <input
+                name="sexo"
+                type="radio"
+                value="feminino"
+                checked={sexo === "feminino"}
+                onChange={(e) => setSexo(e.target.value)}
+              />
+              <label>Feminino</label>
+            </div>
+            <div className={styles.radioGroup}>
+              <input
+                name="sexo"
+                type="radio"
+                value="masculino"
+                checked={sexo === "masculino"}
+                onChange={(e) => setSexo(e.target.value)}
+              />
+              <label>Masculino</label>
+            </div>
+            <div className={styles.radioGroup}>
+              <input
+                name="sexo"
+                type="radio"
+                value="nao_informar"
+                checked={sexo === "nao_informar"}
+                onChange={(e) => setSexo(e.target.value)}
+              />
+              <label>Prefiro não informar</label>
+            </div>
+          </div>
+          <div className={styles.btnContainer}>
+            <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
+              Voltar
+            </button>
+            <button className={styles.btnProx} onClick={irParaProximaEtapa}>
+              Próximo
+            </button>
+          </div>
+        </>
+      ),
+    },
+    {
+      conteudo: (
+        <>
+          <h3>
+            Por último, precisamos de uma senha segura para proteger seu perfil
+          </h3>
+          <div className={styles.form}>
+            <label htmlFor="senha">Senha:</label>
+            <input
+              id="senha"
+              type="password"
+              placeholder="******"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+            />
+            <label htmlFor="senhaConfirmacao">Confirme a senha:</label>
+            <input
+              id="senhaConfirmacao"
+              type="password"
+              placeholder="******"
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
+            />
+            {erroSenha && <p className={styles.erro}>{erroSenha}</p>}
+          </div>
+          <div className={styles.btnContainer}>
+            <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
+              Voltar
+            </button>
+            <button className={styles.btnProx} onClick={handleCadastro}>
+              Cadastrar
+            </button>
+          </div>
+        </>
+      ),
+    },
+  ];
 
   return (
-    <motion.div
-      className={styles.pageWrapper}
-      initial={{ opacity: 0, x: 200 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -200 }}
-      transition={{ duration: 0.5 }}
+    <div
+      ref={scrollRef}
+      className={styles.container}
+      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className={styles.topSection}>
-        <h1 className={styles.title}>Criar uma conta</h1>
-        <p className={styles.subtitle}>Preencha o formulário para continuar</p>
-      </div>
-      <div className={styles.bottomSection}>
-        <form className={styles.form} onSubmit={CadastroUser}>
-          <label className={styles.label} htmlFor="nome">Nome</label>
-          <input
-            type="text"
-            id="nome"
-            placeholder="Maria José"
-            className={styles.input}
-            value={nome}
-            onChange={(event) => setNome(event.target.value)}
-          />
-          <label className={styles.label} htmlFor="email">E-mail</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="mariajose@gmail.com"
-            className={styles.input}
-            value={email}
-            onChange={(event) => setEmail(event.target.value.trimEnd())}
-          />
-          <label className={styles.label} htmlFor="telefone">Telefone</label>
-          <input
-            type="text"
-            id="telefone"
-            placeholder="(11) 98765-4321"
-            className={styles.input}
-            value={telefone}
-            onChange={(event) => setTelefone(event.target.value.trimEnd())}
-          />
-          <label className={styles.label} htmlFor="cpf">CPF</label>
-          <input
-            type="text"
-            id="cpf"
-            placeholder="123.456.789-01"
-            className={styles.input}
-            value={cpf}
-            onChange={(event) => setCpf(event.target.value.trimEnd())}
-          />
-          <label className={styles.label} htmlFor="senha">Senha</label>
-          <input
-            type="password"
-            id="senha"
-            placeholder="******"
-            className={styles.input}
-            value={senha}
-            onChange={(event) => setSenha(event.target.value.trimEnd())}
-          />
-          {erroCpf && <div className={styles.error}>{erroCpf}</div>}
-          {erroSenha && <div className={styles.error}>{erroSenha}</div>}
-          {erroTelefone && <div className={styles.error}>{erroTelefone}</div>}
-          <button type="submit" className={styles.button}>
-            Criar conta
-          </button>
-          <a href="/login" className={styles.signupLink}>
-            Já tenho uma conta
-          </a>
-        </form>
-      </div>
-    </motion.div>
+      {etapas.map((etapaItem, index) => (
+        <EtapaCadastro key={index}>{etapaItem.conteudo}</EtapaCadastro>
+      ))}
+    </div>
   );
-    
 };
-
 
 export default Cadastro;

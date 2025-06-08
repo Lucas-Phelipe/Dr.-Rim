@@ -1,41 +1,57 @@
-.pageWrapper {
+:root {
+  --bg-azul: #274574;
+  --cinza-texto: #888;
+  --cinza-label: #878787;
+  --cinza-input: #f0f0f0db;
+  --vermelho: #ee6f6f;
+  --vermelho-hover: #e64b4b;
+  --erro: #e53935;
+  --preto: #232728;
+}
+
+.container {
+  display: flex;
+  overflow-x: hidden;
+  width: 100%;
   min-height: 100vh;
-  background: #274574;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  scroll-behavior: smooth;
+  background-size: cover;
+  background-position: center;
 }
 
-.topSection {
+.imageContainer {
   width: 100%;
-  background: #274574;
-  padding: 48px 0 48px 0;
-  text-align: center;
+  height: 150px;
+  background-image: url("../../assets/celebration.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-top: 60px;
 }
 
-.title {
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.btnProx {
+  background: #ee6f6f;
   color: #fff;
-  font-size: 2.3rem;
-  font-weight: 700;
-  margin-bottom: 8px;
 }
 
-.subtitle {
-  color: #e0e6ed;
-  font-size: 0.9rem;
-  margin-bottom: 0;
+.btnProx:hover {
+  background: #e64b4b;
 }
 
-.bottomSection {
-  background: #fff;
-  border-top-left-radius: 64px;
-  padding: 40px 24px 24px 24px;
-  width: 100%;
-  max-width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 -2px 24px rgba(0,0,0,0.03);
+.btnVoltar {
+  background-color: #eeeeee;
+  color: #e64b4b;
+}
+
+.btnVoltar:hover {
+  background-color: #dcdcdc;
 }
 
 .form {
@@ -43,71 +59,28 @@
   max-width: 340px;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
-.label {
-  font-size: 0.85rem;
-  color: #878787;
-  letter-spacing: 1px;
-  margin-top: 16px;
-  margin-bottom: 4px;
-  font-weight: 600;
+.inputGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
-.input {
-  width: 100%;
-  background: #f0f0f0db;
-  border: none;
-  border-radius: 10px;
-  padding: 16px 18px;
-  margin-bottom: 0;
-  font-size: 1.05rem;
-  color: #232728;
-  outline: none;
-  transition: box-shadow 0.2s;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-  margin-bottom: 16px;
+.radioGroup {
+  display: flex;
+  flex-direction: row;
 }
 
-.input:focus {
-  box-shadow: 0 0 0 2px #27457433;
-}
-
-.button {
-  width: 100%;
-  background: #eb6362;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 14px 0;
-  font-weight: 700;
+.radioGroup label {
   font-size: 1.1rem;
-  margin: 32px 0 0 0;
-  cursor: pointer;
-  transition: background 0.2s;
+  color: var(--cinza-label);
+  letter-spacing: 1px;
+  margin: 16px 4px 16px;
 }
 
-.button:hover {
-  background: #e64b4b;
-}
-
-.signupLink {
-  color: #0072ed;
-  text-decoration: none;
-  font-size: 1rem;
-  margin-top: 32px;
-  display: block;
-  text-align: center;
-  font-weight: 400;
-}
-
-.signupLink:hover {
-  text-decoration: underline;
-}
-
-.error {
-  color: #e53935;
-  margin: 12px 0 0 0;
-  font-size: 0.98rem;
-  text-align: center;
+.radioGroup input {
+  margin: 16px 4px 16px;
+  width: auto;
 }
