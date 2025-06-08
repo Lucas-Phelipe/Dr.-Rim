@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './pages/Register/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../src/pages/Onboarding/Onboarding'
 
 import DoubtsComp from "./components/Doubts/Doubts";
 import FaqPage from "./pages/FaqPage/FaqPage";
@@ -37,6 +38,7 @@ import PathFour from "./pages/Path/PathFour/PathFour"
 import PathFive from "./pages/Path/PathFive/PathFive"
 import PathSix from "./pages/Path/PathSix/PathSix"
 import Chat from "./pages/Chat/Chat"
+import Onboarding from "../src/pages/Onboarding/Onboarding";
 
 
 function App() {
@@ -46,6 +48,7 @@ function App() {
         <Route path="/" element={<Navbar />} /> {/* Página inicial */}
         <Route path="/doubts" element={<DoubtsComp />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/onboarding" element={<Onboarding />} />
 
         <Route path="/cadastro" element={<SignUp />} /> 
         <Route path="/login" element={<Login />} />
