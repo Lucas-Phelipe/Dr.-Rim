@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Login.module.css';
-import logo from "../../assets/logo.png"; // ajuste o caminho se necessário
+import loginImg from "../../assets/loginimg.png"; // ajuste o caminho se necessário
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
@@ -78,7 +78,7 @@ const Login = () => {
     >
       <div className={styles.topSection}>
         <div className={styles.logoWrapper}>
-          <img src={logo} alt="Logo" className={styles.logo} />
+          <img src={loginImg} alt="Imagem" className={styles.img} />
         </div>
       </div>
       <div className={styles.bottomSection}>
