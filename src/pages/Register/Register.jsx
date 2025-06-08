@@ -18,8 +18,8 @@ const Register = () => {
       <div className={styles.imageContainer}></div> {/* Contêiner da imagem de fundo */}
 
       <div className={styles.containerText}>
-        <h1 className={styles.titulo}>Login ou cadastro</h1>
-        <p>Venha fazer parte da comunidade sanguínea que mais cresce no Brasil!</p>
+        <h1 className={styles.titulo}>Como deseja prosseguir?</h1>
+        <p>Junte-se à maior comunidade de insuficiência renal do Brasil!</p>
         
         <div className={styles.buttonContainer}>
           <motion.button
