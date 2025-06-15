@@ -1,0 +1,161 @@
+.pageBackground {
+  background-image: url('../../assets/fundo_tela.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 80px;
+}
+
+.cardsContainer,
+.commentFormContainer,
+.commentsListContainer {
+  width: 50%;
+  min-width: 320px;
+  max-width: 500px;
+  margin: 25px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+  .cardsContainer,
+  .commentFormContainer,
+  .commentsListContainer {
+    width: 90%;
+    min-width: unset;
+    max-width: unset;
+    padding: 0;
+    margin: 16px auto 0 auto;
+    border-radius: 18px;
+    gap: 16px;
+  }
+  .headerTitle {
+    font-size: 1.3rem;
+  }
+  .profilePic {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.forumPosts {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.forumPost {
+  background: #c5c5c5;
+  color: black;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.forumPostHeader {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  position: relative;
+}
+
+.profilePicSmall {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.forumPostUser {
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.forumPostTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: #2F4972;
+}
+
+.forumPostBody {
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+}
+
+.forumPostFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.forumPostDate {
+  font-size: 0.65rem;
+  opacity: 0.8;
+  margin-left: 8px;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.input {
+  border: 1px solid #23457a33;
+  border-radius: 18px;
+  padding: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+  background: #f7f7f7;
+}
+
+.button {
+  background: #ffffff35;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  padding: 8px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: #16325c;
+}
+
+.commentPost {
+  background: #fff;
+  color: black;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.noComments {
+  color: #888;
+  text-align: center;
+  margin-top: 12px;
+}

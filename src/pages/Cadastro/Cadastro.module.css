@@ -1,175 +1,86 @@
-/* Estilos principais */
-body {
-  background-color: #FFFFFF !important;
+:root {
+  --bg-azul: #274574;
+  --cinza-texto: #888;
+  --cinza-label: #878787;
+  --cinza-input: #f0f0f0db;
+  --vermelho: #ee6f6f;
+  --vermelho-hover: #e64b4b;
+  --erro: #e53935;
+  --preto: #232728;
 }
 
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  scroll-behavior: smooth;
   background-size: cover;
   background-position: center;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 150px;
+  background-image: url("../../assets/celebration.png");
   background-repeat: no-repeat;
-  background-color: #ffffff !important;
-  overflow: hidden;
-  width: 100vw;
+  background-position: center;
+  background-size: contain;
+  margin-top: 60px;
 }
 
-.bgHeader {
-  width: 100%;
-  background-color: #ffffff;
-}
-
-.header {
-  text-align: center;
-  background-color: #2F4972;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
+.btnContainer {
   display: flex;
-  border-bottom-left-radius: 100px;
-  overflow: hidden;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 1rem;
 }
 
-.image {
-  width: 30vw;
+.btnProx {
+  background: #ee6f6f;
+  color: #fff;
 }
 
-/* Caixa branca ao redor do formulário */
-.bgFormContainer {
-  background-color: #2F4972;
-  width: 100%;
+.btnProx:hover {
+  background: #e64b4b;
 }
 
-.formContainer {
-  background-color: #ffffff;
-  padding: 30px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-top-right-radius: 100px;
+.btnVoltar {
+  background-color: #eeeeee;
+  color: #e64b4b;
 }
 
-.formTitle {
-  margin-bottom: 15px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+.btnVoltar:hover {
+  background-color: #dcdcdc;
 }
 
 .form {
+  width: 100%;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 500px;
+  text-align: left;
 }
 
-.input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  font-family: 'Poppins', sans-serif;
+.inputGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
-.button {
-  width: 100%;
-  padding: 10px;
-  background-color: #ff8888;
-  color: #FFFFFF;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-family: 'Poppins', sans-serif;
+.radioGroup {
+  display: flex;
+  flex-direction: row;
 }
 
-.button:hover {
-  background-color: #ffa0a0;
+.radioGroup label {
+  font-size: 1.1rem;
+  color: var(--cinza-label);
+  letter-spacing: 1px;
+  margin: 16px 4px 16px;
 }
 
-.signupText {
-  margin-top: 20px;
-  color: #2F4972;
-  font-size: 14px;
-  text-align: center;
-}
-
-.signupLink {
-  color: #2F4972;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.signupLink:hover {
-  text-decoration: underline;
-}
-
-/* Estilos para dispositivos móveis */
-@media (max-width: 768px) {
-  .image {
-    width: auto;
-    height: 350px;
-    margin-bottom: 0px;
-  }
-
-  .formContainer {
-    padding: 20px;
-    height: 100%;
-  }
-
-  .input,
-  .button {
-    font-size: 14px;
-  }
-
-  .signupText {
-    font-size: 14px;
-  }
-}
-
-/* Estilos para Desktop */
-@media (min-width: 769px) {
-  .bgFormContainer {
-    height: 100vh;
-  }
-
-  .bgHeader {
-    height: 100vh;
-  }
-
-  .container {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-
-  .header {
-    border-bottom-left-radius: 0px;
-  }
-
-  .formContainer {
-    margin: 0;
-    height: 100vh;
-    width: 100%;
-    border-top-right-radius: 0px;
-  }
-
-  .input,
-  .button {
-    font-size: 18px;
-  }
-
-  .signupText {
-    font-size: 16px;
-  }
+.radioGroup input {
+  margin: 16px 4px 16px;
+  width: auto;
 }

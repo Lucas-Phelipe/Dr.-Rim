@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #BC2C23;
+  background-color: #bc2c23;
   justify-content: center;
   height: 100vh;
 }
@@ -23,12 +23,13 @@ body {
   flex-direction: column; /* Organiza os elementos verticalmente */
   justify-content: center; /* Centraliza verticalmente */
   align-items: center; /* Centraliza horizontalmente */
+  background-color: #fff;
 }
 
 .imageContainer {
   width: 100%;
   height: 350px;
-  background-image: url('../../assets/bloodinho.svg'); /* Caminho atualizado */
+  background-image: url("../../assets/registerimg.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -49,7 +50,6 @@ p {
   font-size: 18px;
   margin-bottom: 20px;
   font-family: "Poppins", sans-serif;
-
 }
 
 .buttonContainer {
@@ -69,16 +69,16 @@ button {
 
 button.register {
   border-radius: 5px;
-  background-color: #FE4646;
+  background-color: #2F4972;
   color: white;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
 }
 
 button.createAccount {
-  background-color: #E6E6E6;
+  background-color: #eeeeee;
   border-radius: 5px;
-  color: #BC2C23;
+  color: #2F4972;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
 }
@@ -88,7 +88,7 @@ button.moreLater {
   background: none;
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* Classe para a nova imagem que fica abaixo de tudo */
@@ -104,8 +104,6 @@ button.moreLater {
   height: auto; /* Mantém a proporção da imagem */
 }
 
-
-
 /* Estilos para mobile */
 @media (max-width: 768px) {
   .containerText {
@@ -117,7 +115,7 @@ button.moreLater {
 
   button.register {
     font-family: "Poppins", sans-serif;
-    background-color: #BC2C23;
+    background-color: #2F4972;
   }
 
   .containerText > .titulo {
@@ -127,9 +125,9 @@ button.moreLater {
   }
 
   .containerText > p {
-    color: #858494;
+    color: #807f8b;
     font-family: "Poppins", sans-serif;
-
+    margin: 20px;
     font-size: 16px;
     font-weight: 500;
   }
@@ -138,7 +136,7 @@ button.moreLater {
     color: #858494;
     font-family: "Poppins", sans-serif;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 16px;
   }
 
   p {

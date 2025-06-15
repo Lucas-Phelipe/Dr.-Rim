@@ -7,6 +7,8 @@ import axios from "axios"
 const Profile = () => { 
     const [nome, setNome] = useState('');  // Armazena o nome do usuário
     const [userEmail, setUserEmail] = useState('');  // Armazena o e-mail do usuário
+    const [inicioTratamento, setInicioTratamento] = useState('10 de Abril de 2024');
+    const [acessoVascular, setAcessoVascular] = useState('10 de Abril de 2024');
 
     // Função para obter o valor de um cookie
     function getCookie(nome) {
@@ -89,12 +91,15 @@ const Profile = () => {
       <h2 className={styles.nameUser}>{nome || 'Nome do Usuário'}</h2>
 
       <div className={styles.dataSection}>
-          <h2 className={styles.dataTitle}>Início do Tratamento</h2>
-          <div className={styles.date}><h3 className={styles.dateText}>10 de Abril de 2024</h3></div>
-          <div className={styles.line} />
-          <h2 className={styles.dataTitle}>Acesso Vascular</h2>
-          <div className={styles.date}><h3 className={styles.dateText}>10 de Abril de 2024</h3></div>
-
+        <h2 className={styles.dataTitle}>Início do Tratamento</h2>
+        <div className={styles.date}>
+          <h3 className={styles.dateText}>{inicioTratamento}</h3>
+        </div>
+        <div className={styles.line} />
+        <h2 className={styles.dataTitle}>Acesso Vascular</h2>
+        <div className={styles.date}>
+          <h3 className={styles.dateText}>{acessoVascular}</h3>
+        </div>
       </div>
 
       <div className={styles.options}>

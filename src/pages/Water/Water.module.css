@@ -1,0 +1,133 @@
+/* Container principal */
+.pageBackground {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  background: #22386b; /* Ou use background-image se quiser */
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+  gap: 10px;
+  min-height: 48px;
+  justify-content: flex-start;
+}
+
+.header h2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 700;
+  pointer-events: none; /* Permite clicar na seta mesmo com o h2 por cima */
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.profileIcon {
+  color: #fff;
+  font-size: 2.2rem;
+}
+
+.circleContainer {
+  position: relative;
+  margin: 32px 0 24px 0;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copoInfo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.copoText {
+  color: #d5d7db;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.copoIcon {
+  width: 60px;
+  margin-bottom: 0;
+}
+
+.addButton {
+  width: 80%;
+  max-width: 320px;
+  margin: 18px auto 10px auto;
+  background: #4ED1B3;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  padding: 18px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.addButton:disabled {
+  background: #b2dfd6;
+  cursor: not-allowed;
+}
+
+.resetButton {
+  width: 80%;
+  max-width: 320px;
+  margin: 0 auto 18px auto;
+  background: #e0e0e0;
+  color: #22386b;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.footerMsg {
+  color: #fff;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

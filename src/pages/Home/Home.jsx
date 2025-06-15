@@ -7,12 +7,14 @@ import QuizBloodinho from "../../assets/ContainerQuiz.svg"
 import SaibaMais from "../../assets/ContainerSaibaMais.svg"
 import { Link } from 'react-router-dom';
 
-import RimIcon from '../../assets/logo_dr_rim.png';   
+import RimIcon from '../../assets/logo_dr_rim.png';
 import DoctorIcon from '../../assets/medico_home.png';
 
 import FundoRim from '../../assets/fundo_rim.svg';
-import CopoIcon from '../../assets/copo_icon.svg';      
-import RemedioIcon from '../../assets/remedio_icon.svg';     
+import CopoIcon from '../../assets/copo_icon.svg';
+import RemedioIcon from '../../assets/remedio_icon.svg';
+import ConsultaIcon from '../../assets/consulta-icon.png';
+import HeaderNavBar from '../../components/HeaderNavBar/HeaderNavBar';
 
 function Home() {
 
@@ -48,7 +50,7 @@ function Home() {
         )
       }
     } catch (error) {
-        console.error("Erro ao fazer a requisição:", error);
+      console.error("Erro ao fazer a requisição:", error);
     }
   }
 
@@ -58,12 +60,12 @@ function Home() {
       setuserEmail(userCookie);
     }
   }, []);
-  
+
   useEffect(() => {
     if (userEmail) {
       getData();
     }
-  }, [userEmail]); 
+  }, [userEmail]);
 
   console.log(userEmail);
 
@@ -80,68 +82,72 @@ function Home() {
   };
 
   return (
-    <>
-      <div className={styles.pageBackground}>
-        <header className={styles.header}>
-          <h2>Início</h2>
-          <img className={styles.profilePic} src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"alt="Perfil"/>
-        </header>
 
-        <div className={styles.introductionSection}>
-          <h2 className={styles.introTitle}>Bem vindo!</h2>
-          <p className={styles.introText}>
-            Com o <b>Dr. Rim</b> você encontra apoio,<br />
-            informação e conexão para começar seu<br />
-            tratamento com mais confiança.
-          </p>
-          <div className={styles.introImages}>
-            <img
-              src={RimIcon}
-              alt="Rim"
-              className={styles.introIcon}
-            />
-            <img
-              src={DoctorIcon}
-              alt="Médico"
-              className={styles.introDoctor}
-            />
+    <div className={styles.pageBackground}>
+      <HeaderNavBar HeaderTitle="Início" />
+
+      <div className={styles.introductionSection}>
+        <h2 className={styles.introTitle}>Bem vindo!</h2>
+        <p className={styles.introText}>
+          Com o <b>Dr. Rim</b> você encontra apoio,<br />
+          informação e conexão para começar seu<br />
+          tratamento com mais confiança.
+        </p>
+        <div className={styles.introImages}>
+          <img
+            src={RimIcon}
+            alt="Rim"
+            className={styles.introIcon}
+          />
+          <img
+            src={DoctorIcon}
+            alt="Médico"
+            className={styles.introDoctor}
+          />
+        </div>
+      </div>
+
+      <div className={styles.cardsContainer}>
+        {/* Card Quiz */}
+        <div className={styles.cardQuiz} style={{ cursor: 'pointer' }} onClick={() => navigate('/quiz')}>
+          <div className={styles.quizContent}>
+            <span className={styles.quizTitle}>Quiz</span>
           </div>
         </div>
 
-        <div className={styles.cardsContainer}>
-          {/* Card Quiz */}
-          <div className={styles.cardQuiz}>
-            <div className={styles.quizContent}>
-              <span className={styles.quizTitle}>Quiz</span>
-            </div>
+        {/* Card Água */}
+        <div className={styles.cardAgua} style={{ cursor: 'pointer' }} onClick={() => navigate('/water')}>
+          <img src={CopoIcon} alt="Copo de água" className={styles.cardIcon} />
+          <div>
+            <span className={styles.cardTitle}>Água</span>
+            <div className={styles.cardSubtitle}>2 / 3 copos</div>
           </div>
+          <span className={styles.cardArrow}>&#8250;</span>
+        </div>
 
-          {/* Card Água */}
-          <div className={styles.cardAgua}>
-            <img src={CopoIcon} alt="Copo de água" className={styles.cardIcon} />
-            <div>
-              <span className={styles.cardTitle}>Água</span>
-              <div className={styles.cardSubtitle}>2 / 3 copos</div>
-            </div>
-            <span className={styles.cardArrow}>&#8250;</span>
+        {/* Card Remédios */}
+        <div className={styles.cardRemedio} style={{ cursor: 'pointer' }} onClick={() => navigate('/remedios')}>
+          <img src={RemedioIcon} alt="Remédios" className={styles.cardIcon} />
+          <div>
+            <span className={styles.cardTitle}>Remédios</span>
+            <div className={styles.cardSubtitle}>2 comprimidos<br />restantes</div>
           </div>
-
-          {/* Card Remédios */}
-          <div className={styles.cardRemedio}>
-            <img src={RemedioIcon} alt="Remédios" className={styles.cardIcon} />
-            <div>
-              <span className={styles.cardTitle}>Remédios</span>
-              <div className={styles.cardSubtitle}>2 comprimidos<br/>restantes</div>
-            </div>
-            <span className={styles.cardArrow}>&#8250;</span>
-          </div>
+          <span className={styles.cardArrow}>&#8250;</span>
         </div>
 
 
-
+        {/* Card Consultas */}
+        <div className={styles.cardConsultas} style={{ cursor: 'pointer' }} onClick={() => navigate('/consultas')}>
+          <img src={ConsultaIcon} alt="Consultas" className={styles.cardIcon} />
+          <div>
+            <span className={styles.cardTitle}>Agendamento</span>
+            <div className={styles.cardSubtitle}>Próximo agendamento:<br />25/06</div>
+          </div>
+          <span className={styles.cardArrow}>&#8250;</span>
+        </div>
       </div>
       <Homebar />
-    </>
+    </div>
   );
 }
 
