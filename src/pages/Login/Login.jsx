@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Login.module.css';
 import loginImg from "../../assets/loginimg.png"; // ajuste o caminho se necessário
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { login } from "../../api/apiService";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -46,26 +46,30 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/users/login", {
-        email: userEmail,
-        password: userSenha
-      });
+  const dados = {
+    email: userEmail,
+    password: userSenha
+  };
+  
+  const response = await login(dados);
+  
+  setErro("");
+  setCookie("Usercookie", userEmail, 12);
+  handleGoingHome();
 
-      setErro("");
-      setCookie("Usercookie", userEmail, 12);
-      handleGoingHome();
+} catch (error) {
+  if (!error.response) {
+    setErro("Erro ao acessar o servidor. Tente novamente.");
+    return;
+  }
 
-    } catch (error) {
-      if (error.response) {
-        if (error.response.status === 401) {
-          setErro("E-mail ou senha incorretos.");
-        } else {
-          setErro(error.response.data || "Erro no servidor.");
-        }
-      } else {
-        setErro("Erro ao acessar o servidor. Tente novamente.");
-      }
-    }
+  if (error.response.status === 401) {
+    setErro("E-mail ou senha incorretos.");
+    return;
+  }
+
+  setErro(error.response.data || "Erro no servidor.");
+}
   }
 
   return (

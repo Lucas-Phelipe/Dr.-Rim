@@ -3,8 +3,8 @@ import React, { useRef, useState } from "react";
 import EtapaCadastro from "../../components/StepSignup/StepSignup";
 import backgroundImage from "../../assets/cadastrobg.png";
 import styles from "./Cadastro.module.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { postUser } from "../../api/apiService";
 
 // Validações
 function validarCPF(cpf) {
@@ -49,46 +49,61 @@ const Cadastro = () => {
   const [erroCpf, setErroCpf] = useState("");
 
   const handleCadastro = async () => {
-    if (!nome || !email || !cpf || !peso || !altura || !sexo || !senha) {
-      alert("Preencha todos os campos.");
-      return;
-    }
-    if (!validarCPF(cpf)) {
-      setErroCpf("CPF inválido.");
-      return;
-    } else {
-      setErroCpf("");
-    }
-    const regexSenha =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!regexSenha.test(senha)) {
-      setErroSenha(
-        "Senha fraca: mínimo 8 caracteres, letras, números e especial."
-      );
-      return;
-    }
-    if (senha !== confirmarSenha) {
-      setErroSenha("As senhas não coincidem.");
-      return;
-    }
-    setErroSenha("");
+  if (!nome || !email || !cpf || !peso || !altura || !sexo || !senha) {
+    alert("Preencha todos os campos.");
+    return;
+  }
 
-    try {
-      await axios.post("http://localhost:8080/users", {
-        name: nome,
-        email,
-        cpf,
-        password: senha,
-        birthdate: dataNascimento,
-        height: altura,
-        weight: peso,
-        gender: sexo,
-      });
-      navigate("/login");
-    } catch (error) {
-      console.error("Erro ao cadastrar:", error);
-    }
+  if (!validarCPF(cpf)) {
+    setErroCpf("CPF inválido.");
+    return;
+  } else {
+    setErroCpf("");
+  }
+
+  const regexSenha =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  if (!regexSenha.test(senha)) {
+    setErroSenha(
+      "Senha fraca: mínimo 8 caracteres, letras, números e especial."
+    );
+    return;
+  }
+
+  if (senha !== confirmarSenha) {
+    setErroSenha("As senhas não coincidem.");
+    return;
+  }
+
+  setErroSenha("");
+
+  // 👇 Corpo da requisição
+  const dados = {
+    name: nome,
+    email,
+    cpf,
+    password: senha,
   };
+
+  console.log("Enviando dados:", dados);
+
+  try {
+    await postUser(dados);
+    navigate("/login");
+  } catch (error) {
+    console.error("❌ Erro ao cadastrar:", error);
+
+    if (error.response) {
+      console.error("🔴 Status:", error.response.status);
+      console.error("📨 Dados do erro:", error.response.data);
+      alert("Erro ao cadastrar: " + JSON.stringify(error.response.data));
+    } else {
+      console.error("⚠️ Erro sem resposta do servidor:", error.message);
+      alert("Erro de conexão com o servidor");
+    }
+  }
+};
+
 
   const irParaProximaEtapa = () => {
     const next = etapa + 1;
