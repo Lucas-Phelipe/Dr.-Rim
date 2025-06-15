@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import styles from './Cadastro.module.css';
-import dulpaTurmaBloodinho from "../../assets/dulpaTurmaBloodinho.svg";
+// src/pages/Cadastro.jsx
+import React, { useRef, useState } from "react";
+import EtapaCadastro from "../../components/StepSignup/StepSignup";
+import backgroundImage from "../../assets/cadastrobg.png";
+import styles from "./Cadastro.module.css";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { postUser } from "../../api/apiService";
 
-// Função para validar CPF
+// Validações
 function validarCPF(cpf) {
   cpf = cpf.replace(/[^\d]+/g, "");
   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -48,120 +50,287 @@ const Cadastro = () => {
   const [erroCpf, setErroCpf] = useState("");
 
   const handleCadastro = async () => {
-  if (!nome || !email || !cpf || !peso || !altura || !sexo || !senha) {
-    alert("Preencha todos os campos.");
-    return;
-  }
-
-  if (!validarCPF(cpf)) {
-    setErroCpf("CPF inválido.");
-    return;
-  } else {
-    setErroCpf("");
-  }
-
-  const regexSenha =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  if (!regexSenha.test(senha)) {
-    setErroSenha(
-      "Senha fraca: mínimo 8 caracteres, letras, números e especial."
-    );
-    return;
-  }
-
-    // Valida a senha
-    const regexSenha = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!regexSenha.test(senha)) {
-      setErroSenha("A senha deve ter pelo menos 8 caracteres, incluindo letras, números e caracteres especiais.");
+    if (!nome || !email || !cpf || !peso || !altura || !sexo || !senha) {
+      alert("Preencha todos os campos.");
+      return;
+    }
+  
+    if (!validarCPF(cpf)) {
+      setErroCpf("CPF inválido.");
       return;
     } else {
-      setErroSenha(""); // Limpa o erro de senha se for válido
+      setErroCpf("");
     }
-
-    const body = {
-      cidade_usuario: null,
-      endereco_usuario: null,
-      telefone_usuario: telefone,
-      nome_usuario: nome,
-      email_usuario: email,
-      cpf: cpf,
-      senha: senha,
+  
+    const regexSenha =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!regexSenha.test(senha)) {
+      setErroSenha(
+        "Senha fraca: mínimo 8 caracteres, letras, números e especial."
+      );
+      return;
+    }
+  
+    if (senha !== confirmarSenha) {
+      setErroSenha("As senhas não coincidem.");
+      return;
+    }
+  
+    setErroSenha("");
+  
+    // 👇 Corpo da requisição
+    const dados = {
+      name: nome,
+      email,
+      cpf,
+      password: senha,
     };
-
+  
+    console.log("Enviando dados:", dados);
+  
     try {
-      await axios.post("http://localhost:3333/createUser", body);
-      handleGoingLogin(); // Redireciona para o login após cadastro bem-sucedido
+      await postUser(dados);
+      navigate("/login");
     } catch (error) {
-      console.error("Erro ao criar o usuário:", error);
+      console.error("❌ Erro ao cadastrar:", error);
+    
+      if (error.response) {
+        console.error("🔴 Status:", error.response.status);
+        console.error("📨 Dados do erro:", error.response.data);
+        alert("Erro ao cadastrar: " + JSON.stringify(error.response.data));
+      } else {
+        console.error("⚠️ Erro sem resposta do servidor:", error.message);
+        alert("Erro de conexão com o servidor");
+      }
     }
-  }
+  };
+
+  const irParaProximaEtapa = () => {
+    const next = etapa + 1;
+    if (scrollRef.current && next < etapas.length) {
+      scrollRef.current.scrollTo({
+        left: scrollRef.current.clientWidth * next,
+        behavior: "smooth",
+      });
+      setEtapa(next);
+    }
+  };
+
+  const irParaEtapaAnterior = () => {
+    const prev = etapa - 1;
+    if (scrollRef.current && prev >= 0) {
+      scrollRef.current.scrollTo({
+        left: scrollRef.current.clientWidth * prev,
+        behavior: "smooth",
+      });
+      setEtapa(prev);
+    }
+  };
+
+  const etapas = [
+    {
+      conteudo: (
+        <>
+          <div className={styles.imageContainer}></div>
+          <h2>Olá, que bom ter você por aqui! 🌟</h2>
+          <p>
+            Vamos montar um perfil rapidinho para te ajudar a cuidar da sua
+            saúde com mais leveza e apoio.
+          </p>
+          <button className={styles.btnProx} onClick={irParaProximaEtapa}>
+            Próximo
+          </button>
+        </>
+      ),
+    },
+    {
+      conteudo: (
+        <>
+          <h3>Para começar, qual é o seu nome e o seu e-mail?</h3>
+          <div className={styles.form}>
+            <label htmlFor="nome">Nome:</label>
+            <input
+              id="nome"
+              type="text"
+              placeholder="Maria José"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+            <label htmlFor="email">E-mail:</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="mariajose@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <div className={styles.btnContainer}>
+              <button
+                className={styles.btnVoltar}
+                onClick={irParaEtapaAnterior}
+              >
+                Voltar
+              </button>
+              <button className={styles.btnProx} onClick={irParaProximaEtapa}>
+                Próximo
+              </button>
+            </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      conteudo: (
+        <>
+          <h3>Pedimos seu CPF para garantir segurança no seu acesso 🔒</h3>
+          <div className={styles.form}>
+            <label htmlFor="cpf">CPF:</label>
+            <input
+              id="cpf"
+              type="text"
+              placeholder="123.456.789-00"
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+            />
+            {erroCpf && <p className={styles.erro}>{erroCpf}</p>}
+          </div>
+          <div className={styles.btnContainer}>
+            <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
+              Voltar
+            </button>
+            <button className={styles.btnProx} onClick={irParaProximaEtapa}>
+              Próximo
+            </button>
+          </div>
+        </>
+      ),
+    },
+    {
+      conteudo: (
+        <>
+          <h3>
+            Essas informações ajudam a calcular indicadores importantes para sua
+            saúde
+          </h3>
+          <div className={styles.form}>
+            <label htmlFor="dataNasc">Data de nascimento:</label>
+            <input
+              id="dataNasc"
+              type="date"
+              value={dataNascimento}
+              onChange={(e) => setDataNascimento(e.target.value)}
+            />
+            <div className={styles.inputGroup}>
+              <div>
+                <label htmlFor="altura">Altura:</label>
+                <input
+                  id="altura"
+                  type="text"
+                  value={altura}
+                  onChange={(e) => setAltura(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="peso">Peso:</label>
+                <input
+                  id="peso"
+                  type="text"
+                  value={peso}
+                  onChange={(e) => setPeso(e.target.value)}
+                />
+              </div>
+            </div>
+            <label>Sexo:</label>
+            <div className={styles.radioGroup}>
+              <input
+                name="sexo"
+                type="radio"
+                value="feminino"
+                checked={sexo === "feminino"}
+                onChange={(e) => setSexo(e.target.value)}
+              />
+              <label>Feminino</label>
+            </div>
+            <div className={styles.radioGroup}>
+              <input
+                name="sexo"
+                type="radio"
+                value="masculino"
+                checked={sexo === "masculino"}
+                onChange={(e) => setSexo(e.target.value)}
+              />
+              <label>Masculino</label>
+            </div>
+            <div className={styles.radioGroup}>
+              <input
+                name="sexo"
+                type="radio"
+                value="nao_informar"
+                checked={sexo === "nao_informar"}
+                onChange={(e) => setSexo(e.target.value)}
+              />
+              <label>Prefiro não informar</label>
+            </div>
+          </div>
+          <div className={styles.btnContainer}>
+            <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
+              Voltar
+            </button>
+            <button className={styles.btnProx} onClick={irParaProximaEtapa}>
+              Próximo
+            </button>
+          </div>
+        </>
+      ),
+    },
+    {
+      conteudo: (
+        <>
+          <h3>
+            Por último, precisamos de uma senha segura para proteger seu perfil
+          </h3>
+          <div className={styles.form}>
+            <label htmlFor="senha">Senha:</label>
+            <input
+              id="senha"
+              type="password"
+              placeholder="******"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+            />
+            <label htmlFor="senhaConfirmacao">Confirme a senha:</label>
+            <input
+              id="senhaConfirmacao"
+              type="password"
+              placeholder="******"
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
+            />
+            {erroSenha && <p className={styles.erro}>{erroSenha}</p>}
+          </div>
+          <div className={styles.btnContainer}>
+            <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
+              Voltar
+            </button>
+            <button className={styles.btnProx} onClick={handleCadastro}>
+              Cadastrar
+            </button>
+          </div>
+        </>
+      ),
+    },
+  ];
 
   return (
-    <motion.div
+    <div
+      ref={scrollRef}
       className={styles.container}
-      initial={{ opacity: 0, x: 200 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -200 }}
-      transition={{ duration: 0.5 }}
+      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className={styles.header}>
-        <img src={dulpaTurmaBloodinho} alt="Motivational" className={styles.image} />
-      </div>
-      <div className={styles.formContainer}>
-        <form className={styles.form} onSubmit={CadastroUser}>
-          <input
-            type="text"
-            placeholder="Nome"
-            className={styles.input}
-            value={nome}
-            onChange={(event) => setNome(event.target.value)}
-            // possivelmente aqui possa dar erro, até agora não deu, mas se der, o problema é aqui.
-          />
-          <input
-            type="email"
-            placeholder="E-mail"
-            className={styles.input}
-            value={email}
-            onChange={(event) => setEmail(event.target.value.trimEnd())}
-          />
-          <input
-            type="text"
-            placeholder="CPF"
-            className={styles.input}
-            value={cpf}
-            onChange={(event) => setCpf(event.target.value.trimEnd())}
-          />
-
-          <input
-            type="password"
-            placeholder="Senha"
-            className={styles.input}
-            value={senha}
-            onChange={(event) => setSenha(event.target.value.trimEnd())}
-          />
-
-          <input
-            type="text"
-            placeholder="Telefone"
-            className={styles.input}
-            value={telefone}
-            onChange={(event) => setTelefone(event.target.value.trimEnd())}
-          />
-          {erroCpf && <div style={{ color: 'red' }}>{erroCpf}</div>}
-          {erroSenha && <div style={{ color: 'red' }}>{erroSenha}</div>}
-          {erroTelefone && <div style={{ color: 'red' }}>{erroTelefone}</div>}
-
-          <button type="submit" className={styles.button}>
-            Criar conta
-          </button>
-
-          <p className={styles.signupText}>
-            Já tem uma conta?{' '}
-            <a href="/login" className={styles.signupLink}>Faça login!</a>
-          </p>
-        </form>
-      </div>
-    </motion.div>
+      {etapas.map((etapaItem, index) => (
+        <EtapaCadastro key={index}>{etapaItem.conteudo}</EtapaCadastro>
+      ))}
+    </div>
   );
 };
 
