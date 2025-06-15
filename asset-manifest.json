@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Dr.-Rim/static/css/main.18852d33.css",
-    "main.js": "/Dr.-Rim/static/js/main.9c2d77fa.js",
+    "main.js": "/Dr.-Rim/static/js/main.af9661b3.js",
     "static/js/453.f3146836.chunk.js": "/Dr.-Rim/static/js/453.f3146836.chunk.js",
     "static/media/BloodinhoAssistance.svg": "/Dr.-Rim/static/media/BloodinhoAssistance.9ed21d3418e397e786f13e3b433616da.svg",
     "static/media/loginimg.png": "/Dr.-Rim/static/media/loginimg.b6959727a1106c78dc78.png",
@@ -54,11 +54,11 @@
     "static/media/communityIcon.svg": "/Dr.-Rim/static/media/communityIcon.78dc1e03d7fde3e64585e819f4a9a895.svg",
     "static/media/communityIcon-active.svg": "/Dr.-Rim/static/media/communityIcon-active.9668c85c5ed6345941dee21d8e3b348a.svg",
     "main.18852d33.css.map": "/Dr.-Rim/static/css/main.18852d33.css.map",
-    "main.9c2d77fa.js.map": "/Dr.-Rim/static/js/main.9c2d77fa.js.map",
+    "main.af9661b3.js.map": "/Dr.-Rim/static/js/main.af9661b3.js.map",
     "453.f3146836.chunk.js.map": "/Dr.-Rim/static/js/453.f3146836.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.18852d33.css",
-    "static/js/main.9c2d77fa.js"
+    "static/js/main.af9661b3.js"
   ]
 }
