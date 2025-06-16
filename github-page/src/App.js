@@ -4,8 +4,8 @@ import Register from './pages/Register/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../src/pages/Onboarding/Onboarding'
 
-import DoubtsComp from "./components/Doubts/Doubts";
-import FaqPage from "./pages/FaqPage/FaqPage";
+
+
 import SignUp from "./pages/Cadastro/Cadastro";
 import Home from "./pages/Home/Home";
 import Doubts from "./pages/Doubts/Doubts";
@@ -46,7 +46,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Navbar />} /> {/* Página inicial */}
-        <Route path="/doubts" element={<DoubtsComp />} />
+      
         <Route path="/register" element={<Register />} />
         <Route path="/onboarding" element={<Onboarding />} />
 
@@ -84,7 +84,7 @@ function App() {
           <Route path="/perfil" element={<Profile />} />
           <Route path="perfil/dados" element={<Dados />} />
           <Route path="perfil/certificados" element={<Certified />} />
-          <Route path="perfil/faq" element={<FaqPage />} />
+     
       </Routes>
 
       <Routes>

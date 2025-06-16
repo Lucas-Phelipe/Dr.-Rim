@@ -42,6 +42,21 @@
   height: 50px;
 }
 
+.doubtsContainer {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 24px 12px 24px 12px;
+  margin: 24px auto 16px auto;
+  max-width: 600px;
+  width: 95%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
 .topicSection {
   background: #fff;
   border-radius: 25px;
