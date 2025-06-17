@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Water.module.css';
-import CopoIcon from '../../assets/copo_agua.svg'; // ajuste o nome se necessário
+import CopoIcon from '../../assets/copo_agua.svg';
 import Homebar from "../../components/Homebar/Homebar";
 import { Link } from 'react-router-dom';
+import { useAppContext } from '../../context/AppContext'; 
 
 const MAX_COPOS = 3;
 
 const Water = () => {
-  const [copos, setCopos] = useState(0);
+  const { waterCount, setWaterCount } = useAppContext(); 
 
-  const handleAddCopo = () => {
-    if (copos < MAX_COPOS) setCopos(copos + 1);
-  };
-
-  const handleReset = () => setCopos(0);
-
-  const progress = copos / MAX_COPOS;
+  const progress = waterCount / MAX_COPOS;
   const circleSize = 200;
   const strokeWidth = 16;
   const radius = (circleSize - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference * (1 - progress);
+
+  const handleAddCopo = () => {
+    if (waterCount < MAX_COPOS) setWaterCount(waterCount + 1);
+  };
+
+  const handleReset = () => setWaterCount(0);
+
 
   return (
     <div className={styles.pageBackground}>
@@ -59,12 +61,12 @@ const Water = () => {
           />
         </svg>
          <div className={styles.copoInfo}>
-          <span className={styles.copoText}>{copos} / {MAX_COPOS}</span>
+          <span className={styles.copoText}>{waterCount} / {MAX_COPOS}</span>
           <img src={CopoIcon} alt="Copo de água" className={styles.copoIcon} />
         </div>
       </div>
 
-      <button className={styles.addButton} onClick={handleAddCopo} disabled={copos >= MAX_COPOS}>
+      <button className={styles.addButton} onClick={handleAddCopo} disabled={waterCount >= MAX_COPOS}>
         Adicionar copo
       </button>
       <button className={styles.resetButton} onClick={handleReset}>

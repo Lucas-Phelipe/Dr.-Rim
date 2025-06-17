@@ -6,6 +6,7 @@ import axios from "axios"
 import QuizBloodinho from "../../assets/ContainerQuiz.svg"
 import SaibaMais from "../../assets/ContainerSaibaMais.svg"
 import { Link } from 'react-router-dom';
+import { useAppContext } from '../../context/AppContext';
 
 import RimIcon from '../../assets/logo_dr_rim.png';
 import DoctorIcon from '../../assets/medico_home.png';
@@ -16,10 +17,18 @@ import RemedioIcon from '../../assets/remedio_icon.svg';
 import ConsultaIcon from '../../assets/consulta-icon.png';
 import HeaderNavBar from '../../components/HeaderNavBar/HeaderNavBar';
 
-function Home() {
+const MAX_COPOS = 3;
 
+function Home() {
+  const { waterCount, medicines, appointments } = useAppContext();
   const [nome, setNome] = useState("")
   const [userEmail, setuserEmail] = useState("")
+  
+
+  const medicamentosRestantes = medicines.filter(med => {
+    const hoje = new Date().toISOString().split('T')[0];
+    return med.data >= hoje;
+  }).length;
 
   function getCookie(nome) {
     const nomeCookie = nome + "=";
@@ -59,13 +68,13 @@ function Home() {
     if (userCookie) {
       setuserEmail(userCookie);
     }
-  }, []);
-
-  useEffect(() => {
+    
+    // Carrega dados iniciais
     if (userEmail) {
       getData();
     }
-  }, [userEmail]);
+  }, [userEmail, waterCount]);
+  
 
   console.log(userEmail);
 
@@ -120,7 +129,7 @@ function Home() {
           <img src={CopoIcon} alt="Copo de água" className={styles.cardIcon} />
           <div>
             <span className={styles.cardTitle}>Água</span>
-            <div className={styles.cardSubtitle}>2 / 3 copos</div>
+            <div className={styles.cardSubtitle}>{waterCount} / {MAX_COPOS} copos</div>
           </div>
           <span className={styles.cardArrow}>&#8250;</span>
         </div>
@@ -130,7 +139,7 @@ function Home() {
           <img src={RemedioIcon} alt="Remédios" className={styles.cardIcon} />
           <div>
             <span className={styles.cardTitle}>Remédios</span>
-            <div className={styles.cardSubtitle}>2 comprimidos<br />restantes</div>
+            <div className={styles.cardSubtitle}>{medicamentosRestantes} {medicamentosRestantes === 1 ? 'comprimido' : 'comprimidos'}<br />restantes</div>
           </div>
           <span className={styles.cardArrow}>&#8250;</span>
         </div>

@@ -31,7 +31,6 @@ const Navbar = () => {
       style={{ cursor: 'pointer' }} // Define o cursor como pointer para indicar clique
     >
       <img src={ScreenElements} alt="Fundo" className={styles.backgroundImage} />
-      <img src={imageNavbar} alt="Icones" className={styles.navbarImage} />
       {/* <h1 className={styles.titulo}> Dr. Rim</h1> */}
     </div>
   );
