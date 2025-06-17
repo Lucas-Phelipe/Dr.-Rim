@@ -107,15 +107,6 @@
   pointer-events: none;
 }
 
-.btnCadastroLoading {
-  width: 100%;
-  font-size: 1.3rem;
-  padding: 1.2rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 @keyframes shine {
   0% {
     left: -60%;

@@ -9,6 +9,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [userSenha, setUserSenha] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [erro, setErro] = useState("");
   const navigate = useNavigate();
 
@@ -108,15 +109,41 @@ const Login = () => {
               autoComplete="username"
             />
             <label className={styles.label} htmlFor="senha">Senha</label>
-            <input
-              id="senha"
-              type="password"
-              placeholder="******"
-              className={styles.input}
-              value={userSenha}
-              onChange={(event) => setUserSenha(event.target.value.trimEnd())}
-              autoComplete="current-password"
-            />
+            <div style={{ position: "relative" }}>
+              <input
+                id="senha"
+                type={showPassword ? "text" : "password"}
+                placeholder="******"
+                className={styles.input}
+                value={userSenha}
+                onChange={(event) => setUserSenha(event.target.value.trimEnd())}
+                autoComplete="current-password"
+                style={{ paddingRight: "40px" }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "#888",
+                  fontSize: "1.3rem"
+                }}
+                tabIndex={-1}
+                aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+              >
+                {showPassword ? (
+                  <i className="bi bi-eye-slash"></i>
+                ) : (
+                  <i className="bi bi-eye"></i>
+                )}
+              </button>
+            </div>
             {erro && <div className={styles.error}>{erro}</div>}
             <button
               type="submit"

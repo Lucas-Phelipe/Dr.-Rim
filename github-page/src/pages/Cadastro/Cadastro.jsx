@@ -33,10 +33,11 @@ function validarCPF(cpf) {
 // }
 
 const Cadastro = () => {
-  const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
   const navigate = useNavigate();
   const [etapa, setEtapa] = useState(0);
+
+  const [loading, setLoading] = useState(false);
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -328,16 +329,13 @@ const Cadastro = () => {
             {erroSenha && <p className={styles.erro}>{erroSenha}</p>}
           </div>
           <div className={styles.btnContainer}>
-            {!loading && (
-              <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
-                Voltar
-              </button>
-            )}
+            <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
+              Voltar
+            </button>
             <button
-              className={`${styles.btnProx} ${loading ? styles.buttonLoading : ""} ${loading ? styles.btnCadastroLoading : ""}`}
+              className={`${styles.btnProx} ${loading ? styles.buttonLoading : ""}`}
               onClick={handleCadastro}
               disabled={loading}
-              style={loading ? { flex: 1, justifyContent: "center" } : {}}
             >
               {loading ? "Cadastrando..." : "Cadastrar"}
             </button>
