@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { login } from "../../api/apiService";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [userSenha, setUserSenha] = useState("");
   const [erro, setErro] = useState("");
@@ -34,42 +35,48 @@ const Login = () => {
 
   async function LoginUser(event) {
     event.preventDefault();
+    setLoading(true);
 
     if (!isEmailValid(userEmail)) {
       setErro("Por favor, insira um e-mail válido.");
+      setLoading(false);
       return;
     }
 
     if (!isPasswordValid(userSenha)) {
       setErro("A senha deve ter pelo menos 8 caracteres, incluindo letras, números e caracteres especiais.");
+      setLoading(false);
       return;
     }
 
     try {
-  const dados = {
-    email: userEmail,
-    password: userSenha
-  };
-  
-  const response = await login(dados);
-  
-  setErro("");
-  setCookie("Usercookie", userEmail, 12);
-  handleGoingHome();
+      const dados = {
+        email: userEmail,
+        password: userSenha
+      };
 
-} catch (error) {
-  if (!error.response) {
-    setErro("Erro ao acessar o servidor. Tente novamente.");
-    return;
-  }
+      const response = await login(dados);
 
-  if (error.response.status === 401) {
-    setErro("E-mail ou senha incorretos.");
-    return;
-  }
+      setErro("");
+      setCookie("Usercookie", userEmail, 12);
+      handleGoingHome();
+    } catch (error) {
+      if (!error.response) {
+        setErro("Erro ao acessar o servidor. Tente novamente.");
+        setLoading(false);
+        return;
+      }
 
-  setErro(error.response.data || "Erro no servidor.");
-}
+      if (error.response.status === 401) {
+        setErro("E-mail ou senha incorretos.");
+        setLoading(false);
+        return;
+      }
+
+      setErro(error.response.data || "Erro no servidor.");
+      setLoading(false);
+    }
+    setLoading(false);
   }
 
   return (
@@ -111,9 +118,15 @@ const Login = () => {
               autoComplete="current-password"
             />
             {erro && <div className={styles.error}>{erro}</div>}
-            <button type="submit" className={styles.button}>Acessar</button>
+            <button
+              type="submit"
+              className={`${styles.button} ${loading ? styles.buttonLoading : ""}`}
+              disabled={loading}
+            >
+              {loading ? "Carregando..." : "Acessar"}
+            </button>
           </form>
-          <a href="/cadastro" className={styles.signupLink}>
+          <a href="/cadastro#/cadastro" className={styles.signupLink}>
             Ainda não tenho uma conta
           </a>
         </div>

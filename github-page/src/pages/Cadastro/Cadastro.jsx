@@ -33,6 +33,7 @@ function validarCPF(cpf) {
 // }
 
 const Cadastro = () => {
+  const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
   const navigate = useNavigate();
   const [etapa, setEtapa] = useState(0);
@@ -50,35 +51,39 @@ const Cadastro = () => {
   const [erroCpf, setErroCpf] = useState("");
 
   const handleCadastro = async () => {
+    setLoading(true);
     if (!nome || !email || !cpf || !peso || !altura || !sexo || !senha) {
       alert("Preencha todos os campos.");
+      setLoading(false);
       return;
     }
-  
+
     if (!validarCPF(cpf)) {
       setErroCpf("CPF inválido.");
+      setLoading(false);
       return;
     } else {
       setErroCpf("");
     }
-  
+
     const regexSenha =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!regexSenha.test(senha)) {
       setErroSenha(
         "Senha fraca: mínimo 8 caracteres, letras, números e especial."
       );
+      setLoading(false);
       return;
     }
-  
+
     if (senha !== confirmarSenha) {
       setErroSenha("As senhas não coincidem.");
+      setLoading(false);
       return;
     }
-  
+
     setErroSenha("");
-  
-    // 👇 Corpo da requisição
+
     const dadosCadastro = {
       name: nome,
       email,
@@ -87,18 +92,16 @@ const Cadastro = () => {
     };
 
     const dados = {
-     name: nome,
-     email,
-     cpf,
-     password: senha,
-     dataNascimento,
-     altura,
-     peso,
-     sexo
+      name: nome,
+      email,
+      cpf,
+      password: senha,
+      dataNascimento,
+      altura,
+      peso,
+      sexo
     };
 
-    console.log("Enviando dados:", dados);
-  
     try {
       localStorage.setItem('userData', JSON.stringify({
         nome,
@@ -112,17 +115,13 @@ const Cadastro = () => {
       await postUser(dadosCadastro);
       navigate("/login");
     } catch (error) {
-      console.error("❌ Erro ao cadastrar:", error);
-    
       if (error.response) {
-        console.error("🔴 Status:", error.response.status);
-        console.error("📨 Dados do erro:", error.response.data);
         alert("Erro ao cadastrar: " + JSON.stringify(error.response.data));
       } else {
-        console.error("⚠️ Erro sem resposta do servidor:", error.message);
         alert("Erro de conexão com o servidor");
       }
     }
+    setLoading(false);
   };
 
   const irParaProximaEtapa = () => {
@@ -329,11 +328,18 @@ const Cadastro = () => {
             {erroSenha && <p className={styles.erro}>{erroSenha}</p>}
           </div>
           <div className={styles.btnContainer}>
-            <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
-              Voltar
-            </button>
-            <button className={styles.btnProx} onClick={handleCadastro}>
-              Cadastrar
+            {!loading && (
+              <button className={styles.btnVoltar} onClick={irParaEtapaAnterior}>
+                Voltar
+              </button>
+            )}
+            <button
+              className={`${styles.btnProx} ${loading ? styles.buttonLoading : ""} ${loading ? styles.btnCadastroLoading : ""}`}
+              onClick={handleCadastro}
+              disabled={loading}
+              style={loading ? { flex: 1, justifyContent: "center" } : {}}
+            >
+              {loading ? "Cadastrando..." : "Cadastrar"}
             </button>
           </div>
         </>
