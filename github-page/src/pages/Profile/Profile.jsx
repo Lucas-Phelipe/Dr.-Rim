@@ -7,8 +7,8 @@ import axios from "axios"
 const Profile = () => { 
     const [nome, setNome] = useState('');  // Armazena o nome do usuário
     const [userEmail, setUserEmail] = useState('');  // Armazena o e-mail do usuário
-    const [inicioTratamento, setInicioTratamento] = useState('10 de Abril de 2024');
-    const [acessoVascular, setAcessoVascular] = useState('10 de Abril de 2024');
+    const [inicioTratamento, setInicioTratamento] = useState('');
+    const [acessoVascular, setAcessoVascular] = useState('');
 
     // Função para obter o valor de um cookie
     function getCookie(nome) {

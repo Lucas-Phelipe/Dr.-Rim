@@ -7,6 +7,25 @@ import axios from "axios";
 const UserDataScreen = () => {
   const [nome, setNome] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [dataNascimento, setDataNascimento] = useState('');
+  const [altura, setAltura] = useState('');
+  const [peso, setPeso] = useState('');
+  const [sexo, setSexo] = useState('');
+
+  const loadUserDataFromLocalStorage = () => {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      setNome(parsedData.nome || '');
+      setUserEmail(parsedData.email || '');
+      setCpf(parsedData.cpf || '');
+      setDataNascimento(parsedData.dataNascimento || '');
+      setAltura(parsedData.altura || '');
+      setPeso(parsedData.peso || '');
+      setSexo(parsedData.sexo || '');
+    }
+  };
 
   // Função para obter o valor de um cookie
   function getCookie(nome) {
@@ -24,6 +43,25 @@ const UserDataScreen = () => {
     }
     return "";
   }
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('pt-BR');
+  };
+
+  const formatCPF = (cpf) => {
+    if (!cpf) return '';
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  };
+
+  useEffect(() => {
+    loadUserDataFromLocalStorage();
+    const userCookie = getCookie("Usercookie");
+    if (userCookie) {
+      setUserEmail(userCookie);
+    }
+  }, []);
 
   // Função para obter dados do usuário via API
   async function getData() {
@@ -75,47 +113,50 @@ const UserDataScreen = () => {
         <img src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg" alt="Foto de Perfil" />
       </div>
 
-      <h2 className={styles.TextUser}>{nome || 'Nome do Usuário'}</h2>  {/* Mostra o nome dinâmico ou um texto padrão */}
+      <h2 className={styles.TextUser}>{nome || 'Nome do Usuário'}</h2>
 
-        <div className={styles.userInfo}>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>Nome:</span>
-            <span className={styles.value}>{nome || 'Maria da Silva'}</span>
-          </div>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>Data Nascimento:</span>
-            <span className={styles.value}>13/12/2005</span>
-          </div>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>CPF:</span>
-            <span className={styles.value}>xxx.xxx.xxx-21</span>
-          </div>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>Cidade:</span>
-            <span className={styles.value}>São Paulo</span>
-          </div>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>Peso:</span>
-            <span className={styles.value}>54kg</span>
-          </div>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>Tipo sanguíneo:</span>
-            <span className={styles.value}>O+</span>
-          </div>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>Sexo:</span>
-            <span className={styles.value}>Feminino</span>
-          </div>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>Celular:</span>
-            <span className={styles.value}>(11) 94173-2215</span>
-          </div>
-          <div className={styles.infoItem}>
-            <span className={styles.label}>E-mail:</span>
-            <span className={styles.value}>{userEmail || 'rayssabuarque@silva.com'}</span>
-          </div>
+      <div className={styles.userInfo}>
+        <div className={styles.infoItem}>
+          <span className={styles.label}>Nome:</span>
+          <span className={styles.value}>{nome }</span>
         </div>
+        <div className={styles.infoItem}>
+          <span className={styles.label}>Data Nascimento:</span>
+          <span className={styles.value}>
+            {formatDate(dataNascimento)}
+          </span>
+        </div>
+        <div className={styles.infoItem}>
+          <span className={styles.label}>CPF:</span>
+          <span className={styles.value}>
+            {formatCPF(cpf)}
+          </span>
+        </div>
+        <div className={styles.infoItem}>
+          <span className={styles.label}>Cidade:</span>
+          <span className={styles.value}>São Paulo</span>
+        </div>
+        <div className={styles.infoItem}>
+          <span className={styles.label}>Peso:</span>
+          <span className={styles.value}>
+            {peso ? `${peso}kg` : ''}
+          </span>
+        </div>
+        <div className={styles.infoItem}>
+          <span className={styles.label}>Sexo:</span>
+          <span className={styles.value}>
+            {sexo === 'feminino' ? 'Feminino' : 
+             sexo === 'masculino' ? 'Masculino' : 
+             sexo === 'nao_informar' ? 'Prefiro não informar' : 'Feminino'}
+          </span>
+        </div>
+        <div className={styles.infoItem}>
+          <span className={styles.label}>E-mail:</span>
+          <span className={styles.value}>{userEmail}</span>
+        </div>
+      </div>
       <Homebar />
+
     </div>
   );
 };

@@ -79,17 +79,37 @@ const Cadastro = () => {
     setErroSenha("");
   
     // 👇 Corpo da requisição
-    const dados = {
+    const dadosCadastro = {
       name: nome,
       email,
       cpf,
       password: senha,
     };
-  
+
+    const dados = {
+     name: nome,
+     email,
+     cpf,
+     password: senha,
+     dataNascimento,
+     altura,
+     peso,
+     sexo
+    };
+
     console.log("Enviando dados:", dados);
   
     try {
-      await postUser(dados);
+      localStorage.setItem('userData', JSON.stringify({
+        nome,
+        email,
+        cpf,
+        dataNascimento,
+        altura,
+        peso,
+        sexo
+      }));
+      await postUser(dadosCadastro);
       navigate("/login");
     } catch (error) {
       console.error("❌ Erro ao cadastrar:", error);
