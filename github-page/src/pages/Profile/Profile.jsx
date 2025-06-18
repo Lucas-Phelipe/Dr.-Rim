@@ -5,6 +5,7 @@ import Homebar from "../../components/Homebar/Homebar";
 import axios from "axios";
 
 const Profile = () => { 
+    const user = localStorage.getItem("user");
     const [nome, setNome] = useState('');  // Armazena o nome do usuário
     const [userEmail, setUserEmail] = useState('');  // Armazena o e-mail do usuário
     const [inicioTratamento, setInicioTratamento] = useState('');
@@ -101,9 +102,6 @@ const Profile = () => {
             alt="Foto de Perfil" 
           />
         </div>
-
-        {/* Exibição do nome do usuário */}
-        <h2 className={styles.nameUser}>{nome || 'Usuário'}</h2>
 
         <div className={styles.dataSection}>
           <h2 className={styles.dataTitle}>Início do Tratamento</h2>

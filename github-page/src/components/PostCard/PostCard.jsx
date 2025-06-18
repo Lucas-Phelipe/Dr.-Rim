@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./PostCard.module.css";
 
-const PostCard = ({ post, onCommentClick }) => {
+const PostCard = ({ post }) => {
+  const [showComments, setShowComments] = useState(false);
+
   if (!post) return null;
 
   return (
     <div className={styles.forumPost}>
+      {/* Cabeçalho (autor, foto) */}
       <div className={styles.forumPostHeader}>
         <img
           className={styles.profilePicSmall}
           src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg"
           alt="Perfil"
         />
-        <span className={styles.forumPostUser}>@{post.author?.name}</span>
+        <span className={styles.forumPostUser}>@{post.author?.name || "Usuário"}</span>
       </div>
+
+      {/* Título e conteúdo do post */}
       <div className={styles.forumPostTitle}>{post.title}</div>
       <div className={styles.forumPostBody}>{post.body}</div>
+
+      {/* Rodapé (data + botão de comentários) */}
       <div className={styles.forumPostFooter}>
-        <span
-          className={styles.commentIcon}
-          onClick={onCommentClick}
-          style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
+        <button
+          className={styles.commentButton}
+          onClick={() => setShowComments(!showComments)}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path
@@ -31,10 +37,10 @@ const PostCard = ({ post, onCommentClick }) => {
               strokeLinejoin="round"
             />
           </svg>
-          <span style={{ marginLeft: 4, fontSize: "0.9em" }}>
+          <span style={{ marginLeft: 4 }}>
             {post.comments ? post.comments.length : 0}
           </span>
-        </span>
+        </button>
         <span className={styles.forumPostDate}>
           {new Date(post.date).toLocaleDateString()} -{" "}
           {new Date(post.date).toLocaleTimeString([], {
@@ -43,6 +49,21 @@ const PostCard = ({ post, onCommentClick }) => {
           })}
         </span>
       </div>
+
+      {showComments && (
+        <div className={styles.commentsSection}>
+          <h4>Comentários ({post.comments?.length || 0})</h4>
+          {post.comments?.length > 0 ? (
+            post.comments.map((comment, index) => (
+              <div key={index} className={styles.comment}>
+                <strong>@{comment.author}:</strong> {comment.text}
+              </div>
+            ))
+          ) : (
+            <p>Nenhum comentário ainda.</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

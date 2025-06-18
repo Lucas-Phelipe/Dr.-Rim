@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';  // Importando useState e useEffect
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './DataUser.module.css';
 import Homebar from "../../../components/Homebar/Homebar";
 import axios from "axios";
 
 const UserDataScreen = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const [nome, setNome] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [cpf, setCpf] = useState('');
@@ -13,36 +14,7 @@ const UserDataScreen = () => {
   const [peso, setPeso] = useState('');
   const [sexo, setSexo] = useState('');
 
-  const loadUserDataFromLocalStorage = () => {
-    const userData = localStorage.getItem('userData');
-    if (userData) {
-      const parsedData = JSON.parse(userData);
-      setNome(parsedData.nome || '');
-      setUserEmail(parsedData.email || '');
-      setCpf(parsedData.cpf || '');
-      setDataNascimento(parsedData.dataNascimento || '');
-      setAltura(parsedData.altura || '');
-      setPeso(parsedData.peso || '');
-      setSexo(parsedData.sexo || '');
-    }
-  };
-
-  // Função para obter o valor de um cookie
-  function getCookie(nome) {
-    const nomeCookie = nome + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(nomeCookie) === 0) {
-        return c.substring(nomeCookie.length, c.length);
-      }
-    }
-    return "";
-  }
+  const navigate = useNavigate();
 
   const formatDate = (dateString) => {
     if (!dateString) return '';
@@ -55,46 +27,42 @@ const UserDataScreen = () => {
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   };
 
+  // Carrega dados do localStorage ao iniciar
   useEffect(() => {
-    loadUserDataFromLocalStorage();
-    const userCookie = getCookie("Usercookie");
-    if (userCookie) {
-      setUserEmail(userCookie);
+    const user = localStorage.getItem("user");
+    if (user) {
+      const data = JSON.parse(user);
+      setNome(data.nome_usuario || '');
+      setUserEmail(data.email || '');
+      setCpf(data.cpf || '');
+      setDataNascimento(data.data_nascimento || '');
+      setAltura(data.altura || '');
+      setPeso(data.peso || '');
+      setSexo(data.sexo || '');
     }
   }, []);
 
-  // Função para obter dados do usuário via API
-  async function getData() {
-    try {
-      const res = await axios.get(`http://localhost:3333/user/${userEmail}`);
-      if (res.data != null) {
-        setNome(res.data.nome_usuario);  // Atualiza o nome do usuário com os dados da API
-      } else {
-        console.log("Ou o userEmail não foi cadastrado ou deu algo errado!");
+  // Atualiza nome se for necessário buscar da API
+  useEffect(() => {
+    async function fetchFromAPI() {
+      try {
+        const res = await axios.get(`http://localhost:3333/user/${userEmail}`);
+        if (res.data) {
+          setNome(res.data.nome_usuario);
+          // você pode atualizar outros campos aqui se quiser
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados do usuário:", error);
       }
-    } catch (error) {
-      console.error("Erro ao fazer a requisição:", error);
     }
-  }
 
-  // useEffect para pegar o cookie do usuário
-  useEffect(() => {
-    const userCookie = getCookie("Usercookie");
-    if (userCookie) {
-      setUserEmail(userCookie);  // Atualiza o estado com o valor do cookie
-    }
-  }, []);
-
-  useEffect(() => {
     if (userEmail) {
-      getData();  // Chama a função para buscar os dados do usuário
+      fetchFromAPI();
     }
   }, [userEmail]);
 
-  const navigate = useNavigate();
-
   const handleBackClick = () => {
-    navigate(-1);  // Navega para a tela anterior
+    navigate(-1);
   };
 
   return (
@@ -113,41 +81,31 @@ const UserDataScreen = () => {
         <img src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg" alt="Foto de Perfil" />
       </div>
 
-      <h2 className={styles.TextUser}>{nome || 'Nome do Usuário'}</h2>
+      <h2 className={styles.TextUser}>{user.name|| 'Nome do Usuário'}</h2>
 
       <div className={styles.userInfo}>
         <div className={styles.infoItem}>
           <span className={styles.label}>Nome:</span>
-          <span className={styles.value}>{nome }</span>
+          <span className={styles.value}>{user.name}</span>
         </div>
         <div className={styles.infoItem}>
           <span className={styles.label}>Data Nascimento:</span>
-          <span className={styles.value}>
-            {formatDate(dataNascimento)}
-          </span>
+          <span className={styles.value}>{formatDate(dataNascimento)}</span>
         </div>
         <div className={styles.infoItem}>
           <span className={styles.label}>CPF:</span>
-          <span className={styles.value}>
-            {formatCPF(cpf)}
-          </span>
-        </div>
-        <div className={styles.infoItem}>
-          <span className={styles.label}>Cidade:</span>
-          <span className={styles.value}>São Paulo</span>
+          <span className={styles.value}>{formatCPF(cpf)}</span>
         </div>
         <div className={styles.infoItem}>
           <span className={styles.label}>Peso:</span>
-          <span className={styles.value}>
-            {peso ? `${peso}kg` : ''}
-          </span>
+          <span className={styles.value}>{peso ? `${peso}kg` : ''}</span>
         </div>
         <div className={styles.infoItem}>
           <span className={styles.label}>Sexo:</span>
           <span className={styles.value}>
-            {sexo === 'feminino' ? 'Feminino' : 
-             sexo === 'masculino' ? 'Masculino' : 
-             sexo === 'nao_informar' ? 'Prefiro não informar' : 'Feminino'}
+            {sexo === 'feminino' ? 'Feminino' :
+             sexo === 'masculino' ? 'Masculino' :
+             sexo === 'nao_informar' ? 'Prefiro não informar' : 'Não informado'}
           </span>
         </div>
         <div className={styles.infoItem}>
@@ -155,8 +113,8 @@ const UserDataScreen = () => {
           <span className={styles.value}>{userEmail}</span>
         </div>
       </div>
-      <Homebar />
 
+      <Homebar />
     </div>
   );
 };

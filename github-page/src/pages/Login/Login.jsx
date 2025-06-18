@@ -59,6 +59,7 @@ const Login = () => {
       const response = await login(dados);
 
       setErro("");
+      localStorage.setItem("user", JSON.stringify(response.data));
       setCookie("Usercookie", userEmail, 12);
       handleGoingHome();
     } catch (error) {
