@@ -22,7 +22,7 @@ const Comunidade = () => {
       </div>
 
       <div className={styles.cardsContainer}>
-        <div className={styles.cardPages} style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+        <div className={styles.cardPages} style={{ cursor: 'pointer' }} onClick={() => navigate('/forum')}>
           <div className={styles.containerContent}>
             <span className={styles.containerTitle}>Galeria de conquistas</span>
             <div className={styles.introImages}>

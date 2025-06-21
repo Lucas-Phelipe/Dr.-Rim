@@ -10,6 +10,7 @@ const Forum = () => {
   const [posts, setPosts] = useState([]);
   const [expandedPostId, setExpandedPostId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPostsLoading, setIsPostsLoading] = useState(true);
   const [newPost, setNewPost] = useState({
     title: '',
     body: '',
@@ -18,11 +19,14 @@ const Forum = () => {
 
   // Busca os posts da API
   const fetchPosts = async () => {
+    setIsPostsLoading(true);
     try {
       const response = await getPosts();
       setPosts(response.data);
     } catch (error) {
       console.error("Erro ao buscar posts:", error.response?.data || error.message);
+    } finally {
+      setIsPostsLoading(false);
     }
   };
 
@@ -67,14 +71,20 @@ const Forum = () => {
       
       <div className={styles.cardsContainer}>
         <div className={styles.forumPosts}>
-          {posts.slice().reverse().map((post) => (
-            <PostCard
-              key={post._id} // ou post.id, depende do backend
-              post={post}
-              isExpanded={expandedPostId === post._id}
-              onCommentClick={() => handleCommentClick(post._id)}
-            />
-          ))}
+          {isPostsLoading ? (
+            <div className={styles.loaderContainer}>
+              <div className={styles.loader}></div>
+            </div>
+          ) : (
+            posts.slice().reverse().map((post) => (
+              <PostCard
+                key={post._id}
+                post={post}
+                isExpanded={expandedPostId === post._id}
+                onCommentClick={() => handleCommentClick(post._id)}
+              />
+            ))
+          )}
         </div>
       </div>
 

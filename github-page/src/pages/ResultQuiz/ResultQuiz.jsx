@@ -32,11 +32,6 @@ const ResultScreen = () => {
         <p>Respostas erradas → <span className={styles.highlight}>{wrongAnswers}</span></p>
         <p className={styles.totalPoints}>Total de pontos → <span className={styles.highlight}>{points}</span></p>
       </div>
-      <img
-        src={Bloodinho}  
-        alt="Mascote Booal"
-        className={styles.mascotImage}
-      />
 
       <div className={styles.buttonsContainer}>
         <button className={styles.retryButton} onClick={handleTryAgain}>
