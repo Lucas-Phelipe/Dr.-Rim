@@ -148,86 +148,88 @@ const Quiz = () => {
   };
 
   return (
-    <div className={styles.container}>
-      {/* Barra de Progresso */}
-      <div className={styles.header}>
-        <Link to="/home">
-          <i className="bi bi-arrow-left-short pointer" style={{ fontSize: '36px', cursor: 'pointer', color: 'white' }} />
-        </Link>
+    <div className={styles.pageBackground}>
+      <div className={styles.container}>
+        {/* Barra de Progresso */}
+        <div className={styles.header}>
+          <Link to="/home">
+            <i className="bi bi-arrow-left-short pointer" style={{ fontSize: '36px', cursor: 'pointer', color: 'white' }} />
+          </Link>
 
-        <h2>Quiz</h2>
-      </div>
-
-      
-
-      {/* Círculo com o número da questão */}
-      
-
-      {/* Pergunta */}
-      <div className={styles.content}>
-        <div className={styles.progress} style={{ margin: "20px 0" }}>
-          <div
-            className={styles.progressBar}
-            style={{
-              width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%`,
-            }}
-          ></div>
-        </div>
-        <div className={styles.question}>
-          <span>Questão {currentQuestionIndex + 1} de {totalQuestions}</span>
-          <h2>{currentQuestion.question}</h2>
+          <h2>Quiz</h2>
         </div>
 
-        {/* Opções */}
-        <div className={styles.options}>
-          {currentQuestion.options.map((option) => (
-            <button
-              key={option}
-              className={`${styles.option} ${selectedOption === option ? styles.selected : ''}`}
-              onClick={() => handleOptionClick(option)}
-              disabled={isCorrect !== null}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
+        
 
-        {/* Feedback e Botão "Verificar" */}
-        <div className={styles.footer}>
-          {isCorrect === null && (
-            <button
-              className={`${styles.verifyButton} ${selectedOption ? styles.active : ''}`}
-              onClick={handleVerify}
-              disabled={!selectedOption}
-            >
-              Verificar
-            </button>
-          )}
+        {/* Círculo com o número da questão */}
+        
 
-          {isCorrect && (
-            <div className={`${styles.feedback} ${styles.correct}`}>
-              <div className={styles.containerValidation}>
-                <IoIosCheckmarkCircle size={28} style={{ color: 'white', marginRight: "5px"}}  />
-                <p className={styles.correctMessage}>Resposta correta!</p>
-              </div>
-              {/*<img src={BloodComemoration} alt="Bloodinho" />*/}
-              <button className={styles.verifyButton} onClick={handleContinue}>
-                Continuar
+        {/* Pergunta */}
+        <div className={styles.content}>
+          <div className={styles.progress} style={{ margin: "20px 0" }}>
+            <div
+              className={styles.progressBar}
+              style={{
+                width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%`,
+              }}
+            ></div>
+          </div>
+          <div className={styles.question}>
+            <span>Questão {currentQuestionIndex + 1} de {totalQuestions}</span>
+            <h2>{currentQuestion.question}</h2>
+          </div>
+
+          {/* Opções */}
+          <div className={styles.options}>
+            {currentQuestion.options.map((option) => (
+              <button
+                key={option}
+                className={`${styles.option} ${selectedOption === option ? styles.selected : ''}`}
+                onClick={() => handleOptionClick(option)}
+                disabled={isCorrect !== null}
+              >
+                {option}
               </button>
-            </div>
-          )}
+            ))}
+          </div>
 
-          {isCorrect === false && (
-            <div className={styles.feedback}>
-              <div className={styles.containerValidation}>
-                <BiSolidXCircle size={28} style={{ color: 'white', marginRight: "5px"}} />
-                <p className={styles.wrongMessage}>Resposta errada!</p>
-              </div>
-              <button className={styles.verifyButton} onClick={handleContinue}>
-                Continuar
+          {/* Feedback e Botão "Verificar" */}
+          <div className={styles.footer}>
+            {isCorrect === null && (
+              <button
+                className={`${styles.verifyButton} ${selectedOption ? styles.active : ''}`}
+                onClick={handleVerify}
+                disabled={!selectedOption}
+              >
+                Verificar
               </button>
-            </div>
-          )}
+            )}
+
+            {isCorrect && (
+              <div className={`${styles.feedback} ${styles.correct}`}>
+                <div className={styles.containerValidation}>
+                  <IoIosCheckmarkCircle size={28} style={{ color: 'white', marginRight: "5px"}}  />
+                  <p className={styles.correctMessage}>Resposta correta!</p>
+                </div>
+                {/*<img src={BloodComemoration} alt="Bloodinho" />*/}
+                <button className={styles.verifyButton} onClick={handleContinue}>
+                  Continuar
+                </button>
+              </div>
+            )}
+
+            {isCorrect === false && (
+              <div className={styles.feedback}>
+                <div className={styles.containerValidation}>
+                  <BiSolidXCircle size={28} style={{ color: 'white', marginRight: "5px"}} />
+                  <p className={styles.wrongMessage}>Resposta errada!</p>
+                </div>
+                <button className={styles.verifyButton} onClick={handleContinue}>
+                  Continuar
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
