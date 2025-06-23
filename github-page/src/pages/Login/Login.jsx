@@ -34,6 +34,8 @@ const Login = () => {
     return passwordRegex.test(password);
   };
 
+  const Navigate = useNavigate();
+
   async function LoginUser(event) {
     event.preventDefault();
     setLoading(true);
@@ -154,9 +156,9 @@ const Login = () => {
               {loading ? "Carregando..." : "Acessar"}
             </button>
           </form>
-          <a href="/cadastro#/cadastro" className={styles.signupLink}>
+          <button className={styles.signupLink} onClick={() => Navigate("/cadastro")}>
             Ainda não tenho uma conta
-          </a>
+          </button>
         </div>
       </div>
     </motion.div>

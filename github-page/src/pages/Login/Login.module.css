@@ -140,6 +140,7 @@
   display: block;
   text-align: center;
   font-weight: 400;
+  background: none;
 }
 
 .signupLink:hover {
