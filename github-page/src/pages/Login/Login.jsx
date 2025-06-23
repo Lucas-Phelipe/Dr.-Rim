@@ -62,6 +62,7 @@ const Login = () => {
 
       setErro("");
       localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("userId", response.data.id); // <-- Adicione esta linha
       setCookie("Usercookie", userEmail, 12);
       handleGoingHome();
     } catch (error) {

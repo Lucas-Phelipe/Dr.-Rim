@@ -34,6 +34,10 @@
 
 .profilePicture {
   margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .profilePicture img {
@@ -133,8 +137,19 @@ h1, h2 {
   color: white;
 }
 
-.nameUser{
-  font-size: 20px;
+.logoutButton {
+  background-color: #e53935 !important; /* vermelho */
+  color: #fff !important;
+}
+
+.logoutButton:hover {
+  background-color: #b71c1c !important;
+}
+
+.nameUser {
+  font-weight: bold;
+  margin: 0px;
+  color: white;
 }
 
 /* Responsividade para mobile: mantém largura total */

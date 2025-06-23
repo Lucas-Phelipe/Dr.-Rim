@@ -5,70 +5,31 @@ import Homebar from "../../components/Homebar/Homebar";
 import axios from "axios";
 
 const Profile = () => { 
-    const user = localStorage.getItem("user");
-    const [nome, setNome] = useState('');  // Armazena o nome do usuário
-    const [userEmail, setUserEmail] = useState('');  // Armazena o e-mail do usuário
+    const [nome, setNome] = useState('');
     const [inicioTratamento, setInicioTratamento] = useState('');
     const [acessoVascular, setAcessoVascular] = useState('');
 
-    // Função para obter o valor de um cookie
-    function getCookie(nome) {
-      const nomeCookie = nome + "=";
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const ca = decodedCookie.split(';');
-      for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') {
-          c = c.substring(1);
-        }
-        if (c.indexOf(nomeCookie) === 0) {
-          return c.substring(nomeCookie.length, c.length);
-        }
-      }
-      return "";
-    }
-
-    // Função para obter dados do usuário via API
-    async function getData() {
+    async function getData(userId) {
       try {
-        const res = await axios.get(`http://localhost:3333/user/${userEmail}`);
+        const res = await axios.get(`https://dr-rim-backend.fly.dev/users/${userId}`);
         if (res.data != null) {
-          setNome(res.data.nome_usuario);  // Atualiza o nome do usuário com os dados da API
+          setNome(res.data.name); 
         } else {
-          console.log("Usuário não encontrado na API, verificando localStorage...");
-          loadUserDataFromLocalStorage();
+          setNome('Usuário');
         }
       } catch (error) {
-        console.error("Erro ao fazer a requisição:", error);
-        // Se a API falhar, tenta carregar do localStorage
-        loadUserDataFromLocalStorage();
+        setNome('Usuário');
       }
     }
 
-    // Função para carregar dados do localStorage
-    const loadUserDataFromLocalStorage = () => {
-      const userData = localStorage.getItem('userData');
-      if (userData) {
-        const parsedData = JSON.parse(userData);
-        setNome(parsedData.nome || 'Usuário');
-      }
-    };
-
-    // useEffect para pegar o cookie do usuário
     useEffect(() => {
-      const userCookie = getCookie("Usercookie");
-      if (userCookie) {
-        setUserEmail(userCookie);  // Atualiza o estado com o valor do cookie
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        getData(userId);
+      } else {
+        setNome('Usuário');
       }
-      // Carrega dados do localStorage imediatamente
-      loadUserDataFromLocalStorage();
     }, []);
-
-    useEffect(() => {
-      if (userEmail) {
-        getData();  // Chama a função para buscar os dados do usuário
-      }
-    }, [userEmail]);
 
     const navigate = useNavigate();
   
@@ -76,12 +37,10 @@ const Profile = () => {
       navigate('/perfil/dados');
     };
 
-    const handleCertifiedClick = () => {
-      navigate('/perfil/certificados');
-    };
-
-    const handleFaq = () => {
-      navigate('/perfil/faq');
+    const handleLogout = () => {
+      localStorage.clear();
+      document.cookie = "Usercookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      navigate('/register');
     };
 
     return (
@@ -101,6 +60,7 @@ const Profile = () => {
             src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg" 
             alt="Foto de Perfil" 
           />
+          <div className={styles.nameUser}>{nome || 'Usuário'}</div>
         </div>
 
         <div className={styles.dataSection}>
@@ -121,9 +81,9 @@ const Profile = () => {
             <span>Dados</span>
           </button>
 
-          <button className={styles.option} onClick={handleFaq}>
-            <i className="fas fa-life-ring"></i>
-            <span>Suporte</span>
+          <button className={`${styles.option} ${styles.logoutButton}`} onClick={handleLogout}>
+            <i className="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
           </button>
         </div>
         <Homebar/>
