@@ -123,9 +123,6 @@ const Gallery = () => {
                   <span className={styles.forumPostDate}>
                     {new Date(post.date).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}
                   </span>
-                  <span className={styles.commentIcon}>
-                    <i className="fas fa-comment"></i> Comentários
-                  </span>
                 </div>
               </div>
             ))
