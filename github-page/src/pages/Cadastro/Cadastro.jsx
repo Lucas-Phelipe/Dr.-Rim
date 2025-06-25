@@ -225,7 +225,7 @@ const Cadastro = () => {
         </>
       ),
     },
-    {
+    /*{
       conteudo: (
         <>
           <h3>
@@ -302,7 +302,7 @@ const Cadastro = () => {
           </div>
         </>
       ),
-    },
+    },*/
     {
       conteudo: (
         <>
