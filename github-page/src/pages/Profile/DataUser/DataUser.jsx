@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './DataUser.module.css';
 import Homebar from "../../../components/Homebar/Homebar";
 import axios from "axios";
+import HeaderNavBar from "../../../components/HeaderNavBar/HeaderNavBar"; // ADICIONADO
 
 const UserDataScreen = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -61,53 +62,42 @@ const UserDataScreen = () => {
     }
   }, [userEmail]);
 
-  const handleBackClick = () => {
-    navigate(-1);
-  };
-
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <button className={styles.backButton} onClick={handleBackClick}>
-          <i className="fas fa-arrow-left"></i>
-        </button>
-        <h1>Perfil</h1>
-        <button className={styles.menuButton}>
-          <i className="fas fa-bars"></i>
-        </button>
-      </div>
+      {/* Botão de voltar no estilo do HeaderNavBar */}
+      <HeaderNavBar HeaderTitle="Perfil" isBackButton={true} />
 
       <div className={styles.profilePicture}>
         <img src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg" alt="Foto de Perfil" />
       </div>
 
-      <h2 className={styles.TextUser}>{user.name|| 'Nome do Usuário'}</h2>
+      <h2 className={styles.TextUser}>{user.name || 'Nome do Usuário'}</h2>
 
       <div className={styles.userInfo}>
         <div className={styles.infoItem}>
           <span className={styles.label}>Nome:</span>
           <span className={styles.value}>{user.name}</span>
         </div>
-        <div className={styles.infoItem}>
+        {/*<div className={styles.infoItem}>
           <span className={styles.label}>Data Nascimento:</span>
           <span className={styles.value}>{formatDate(dataNascimento)}</span>
-        </div>
+        </div>*/}
         <div className={styles.infoItem}>
           <span className={styles.label}>CPF:</span>
           <span className={styles.value}>{formatCPF(cpf)}</span>
         </div>
-        <div className={styles.infoItem}>
+        {/*<div className={styles.infoItem}>
           <span className={styles.label}>Peso:</span>
           <span className={styles.value}>{peso ? `${peso}kg` : ''}</span>
-        </div>
-        <div className={styles.infoItem}>
+        </div>*/}
+        {/*<div className={styles.infoItem}>
           <span className={styles.label}>Sexo:</span>
           <span className={styles.value}>
             {sexo === 'feminino' ? 'Feminino' :
              sexo === 'masculino' ? 'Masculino' :
              sexo === 'nao_informar' ? 'Prefiro não informar' : 'Não informado'}
           </span>
-        </div>
+        </div>*/}
         <div className={styles.infoItem}>
           <span className={styles.label}>E-mail:</span>
           <span className={styles.value}>{userEmail}</span>
