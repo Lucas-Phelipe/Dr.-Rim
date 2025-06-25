@@ -38,13 +38,13 @@ const Register = () => {
             Cadastro
           </motion.button>
 
-          <motion.button
+          {/*<motion.button
             className={styles.moreLater}
             whileHover={{ scale: 1.1 }}
             onClick={() => navigate('/home')}
           >
             Mais tarde
-          </motion.button>
+          </motion.button>*/}
         </div>
         <div class="linha"></div>
       </div>
