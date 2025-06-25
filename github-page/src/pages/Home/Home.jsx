@@ -17,13 +17,16 @@ import RemedioIcon from '../../assets/remedio_icon.svg';
 import ConsultaIcon from '../../assets/consulta-icon.png';
 import HeaderNavBar from '../../components/HeaderNavBar/HeaderNavBar';
 
+import { getMedication } from '../../api/apiService'; // ADICIONADO
+
 const MAX_COPOS = 3;
 
 function Home() {
   const { waterCount, medicines, appointments } = useAppContext();
   const [nome, setNome] = useState("")
   const [userEmail, setuserEmail] = useState("")
-  
+  const [medicamentosCount, setMedicamentosCount] = useState(0); // ALTERADO
+  const [user, setUser] = useState(null);
 
   const medicamentosRestantes = medicines.filter(med => {
     const hoje = new Date().toISOString().split('T')[0];
@@ -63,6 +66,18 @@ function Home() {
     }
   }
 
+  // NOVO: Buscar quantidade de medicamentos cadastrados no backend
+  useEffect(() => {
+    const userObj = JSON.parse(localStorage.getItem('user'));
+    setUser(userObj);
+
+    if (userObj?.id) {
+      getMedication(userObj.id).then((meds) => {
+        setMedicamentosCount(Array.isArray(meds) ? meds.length : 0);
+      });
+    }
+  }, []);
+
   useEffect(() => {
     const userCookie = getCookie("Usercookie");
     if (userCookie) {
@@ -75,8 +90,6 @@ function Home() {
     }
   }, [userEmail, waterCount]);
   
-
-  console.log(userEmail);
 
   const [showRewards, setShowRewards] = useState(false);
 
@@ -139,11 +152,12 @@ function Home() {
           <img src={RemedioIcon} alt="Remédios" className={styles.cardIcon} />
           <div>
             <span className={styles.cardTitle}>Remédios</span>
-            <div className={styles.cardSubtitle}>{medicamentosRestantes} {medicamentosRestantes === 1 ? 'comprimido' : 'comprimidos'}<br />restantes</div>
+            <div className={styles.cardSubtitle}>
+              {medicamentosCount} {medicamentosCount === 1 ? 'cadastrado' : 'cadastrados'}
+            </div>
           </div>
           <span className={styles.cardArrow}>&#8250;</span>
         </div>
-
 
         {/* Card Consultas */}
         <div className={styles.cardConsultas} style={{ cursor: 'pointer' }} onClick={() => navigate('/consultas')}>

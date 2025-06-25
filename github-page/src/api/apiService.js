@@ -25,7 +25,7 @@ export const getScheduling = (userId) => api.post(`/users/${userId}/scheduling`)
 
 
 export const deleteScheduling = (userId, schedulingId) =>api.delete();
-export const deleteMedication = (userId, medicationId) =>api.delete();
+export const deleteMedication = (userId, medicationId) => api.delete(`/users/${userId}/medication/${medicationId}`);
 
 export const createPostGallery = (body) => api.post('/gallery', body);
 export const getGallery = () => api.get('/gallery');

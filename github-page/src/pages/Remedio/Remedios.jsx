@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Remedios.module.css';
 import Homebar from '../../components/Homebar/Homebar';
 import { Link } from 'react-router-dom';
-
+import HeaderNavBar from '../../components/HeaderNavBar/HeaderNavBar';
 import Img1 from '../../assets/remedio1.svg';
 import Img2 from '../../assets/remedio2.svg';
 import Img3 from '../../assets/remedio3.svg';
 import Img4 from '../../assets/remedio4.svg';
-import HeaderNavBar from '../../components/HeaderNavBar/HeaderNavBar';
+
+import { postMedication, getMedication, deleteMedication } from '../../api/apiService'; // import deleteMedication
 
 const tiposMedicamento = {
   pilula: { nome: 'Pílula', imagem: Img1 },
@@ -17,18 +18,19 @@ const tiposMedicamento = {
 };
 
 function Remedios() {
+  const user = JSON.parse(localStorage.getItem('user'));
   const [medicamentos, setMedicamentos] = useState([]);
   const [historico, setHistorico] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [showHistorico, setShowHistorico] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
-  const [tooltipData, setTooltipData] = useState({ 
-    nome: '', 
-    nota: '', 
-    data: '', 
-    horario: '', 
+  const [tooltipData, setTooltipData] = useState({
+    nome: '',
+    nota: '',
+    data: '',
+    horario: '',
     tipo: '',
-    position: { x: 0, y: 0 } 
+    position: { x: 0, y: 0 }
   });
 
   const [nome, setNome] = useState('');
@@ -37,61 +39,83 @@ function Remedios() {
   const [dataMedicamento, setDataMedicamento] = useState('');
   const [horarioMedicamento, setHorarioMedicamento] = useState('');
 
-  // Função para formatar data para exibição
   const formatarData = (dataString) => {
     if (!dataString) return '';
-    const data = new Date(dataString + 'T00:00:00');
+    const data = new Date(dataString);
     return data.toLocaleDateString('pt-BR');
   };
 
-  // Função para formatar horário para exibição
   const formatarHorario = (horarioString) => {
     if (!horarioString) return '';
-    return horarioString;
+    return horarioString.length > 5 ? horarioString.slice(0, 5) : horarioString;
   };
 
-  // Função para obter data mínima (hoje)
   const getDataMinima = () => {
     const hoje = new Date();
     return hoje.toISOString().split('T')[0];
   };
 
-  const handleAddMedicamento = () => {
+  useEffect(() => {
+    if (user?.id) {
+      fetchMedicamentos();
+    }
+    // eslint-disable-next-line
+  }, [user]);
+
+  const fetchMedicamentos = async () => {
+    try {
+      const lista = await getMedication(user.id);
+      setMedicamentos(lista);
+    } catch (error) {
+      alert('Erro ao buscar medicamentos!');
+    }
+  };
+
+  const handleAddMedicamento = async () => {
     if (!nome || !tipoSelecionado || !dataMedicamento || !horarioMedicamento) {
       alert('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
 
     const novo = {
-      id: Date.now(),
-      nome,
-      nota,
-      tipo: tipoSelecionado,
-      data: dataMedicamento,
-      horario: horarioMedicamento,
-      imagem: tiposMedicamento[tipoSelecionado].imagem,
+      name: nome,
+      note: nota,
+      type: tipoSelecionado.toUpperCase(),
+      date: dataMedicamento + "T00:00:00",
+      time: horarioMedicamento + ":00",
     };
 
-    setMedicamentos((prev) => [...prev, novo]);
-
-    setNome('');
-    setNota('');
-    setTipoSelecionado('');
-    setDataMedicamento('');
-    setHorarioMedicamento('');
-    setShowForm(false);
+    try {
+      await postMedication(novo, user.id);
+      setNome('');
+      setNota('');
+      setTipoSelecionado('');
+      setDataMedicamento('');
+      setHorarioMedicamento('');
+      setShowForm(false);
+      fetchMedicamentos();
+    } catch (error) {
+      alert('Erro ao cadastrar medicamento!');
+    }
   };
 
-  const handleConcluir = (id) => {
+  // ALTERADO: agora deleta do backend ao concluir
+  const handleConcluir = async (id) => {
     const medicamento = medicamentos.find((m) => m.id === id);
     setHistorico((prev) => [...prev, medicamento]);
 
     const elemento = document.getElementById(`med-${id}`);
     if (elemento) {
       elemento.classList.add(styles.concluido);
+    }
+
+    try {
+      await deleteMedication(user.id, id);
       setTimeout(() => {
         setMedicamentos((prev) => prev.filter((m) => m.id !== id));
       }, 500);
+    } catch (error) {
+      alert('Erro ao remover medicamento!');
     }
   };
 
@@ -101,11 +125,11 @@ function Remedios() {
 
   const handleShowTooltip = (medicamento, event) => {
     setTooltipData({
-      nome: medicamento.nome,
-      nota: medicamento.nota,
-      data: medicamento.data,
-      horario: medicamento.horario,
-      tipo: tiposMedicamento[medicamento.tipo].nome,
+      nome: medicamento.name,
+      nota: medicamento.note,
+      data: medicamento.date,
+      horario: medicamento.time,
+      tipo: tiposMedicamento[medicamento.type?.toLowerCase()]?.nome || medicamento.type,
       position: { x: 0, y: 0 }
     });
     setShowTooltip(true);
@@ -116,6 +140,7 @@ function Remedios() {
   };
 
   const truncateText = (text, maxLength) => {
+    if (!text) return '';
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
   };
@@ -123,28 +148,28 @@ function Remedios() {
   return (
     <>
       <div className={styles.pageBackground}>
-      <HeaderNavBar HeaderTitle="Medicamentos" isBackButton={true} />
+        <HeaderNavBar HeaderTitle="Medicamentos" isBackButton={true} />
 
         {/* Lista de Medicamentos */}
         <div className={styles.lista}>
           {medicamentos.map((med) => (
             <div key={med.id} className={styles.card} id={`med-${med.id}`}>
-              <img src={med.imagem} alt="Remédio" className={styles.imagem} />
-              <div 
+              <img src={tiposMedicamento[med.type?.toLowerCase()]?.imagem} alt="Remédio" className={styles.imagem} />
+              <div
                 className={styles.info}
                 onClick={(e) => handleShowTooltip(med, e)}
                 style={{ cursor: 'pointer' }}
               >
-                <h3>{truncateText(med.nome, 20)}</h3>
-                <p>{truncateText(med.nota, 25)}</p>
+                <h3>{truncateText(med.name, 20)}</h3>
+                <p>{truncateText(med.note, 40)}</p>
                 <div className={styles.dataHorario}>
                   <span className={styles.data}>
                     <i className="bi bi-calendar3"></i>
-                    {formatarData(med.data)}
+                    {formatarData(med.date)}
                   </span>
                   <span className={styles.horario}>
                     <i className="bi bi-clock"></i>
-                    {formatarHorario(med.horario)}
+                    {formatarHorario(med.time)}
                   </span>
                 </div>
               </div>
@@ -187,7 +212,7 @@ function Remedios() {
               maxLength={50}
               required
             />
-            
+
             <select
               value={tipoSelecionado}
               onChange={(e) => setTipoSelecionado(e.target.value)}
@@ -214,7 +239,7 @@ function Remedios() {
                   required
                 />
               </div>
-              
+
               <div className={styles.inputGroup}>
                 <label className={styles.label}>Horário *</label>
                 <input
@@ -237,36 +262,36 @@ function Remedios() {
             <button className={styles.botaoSalvar} onClick={handleAddMedicamento}>
               Agendar Medicamento
             </button>
-            
+
             <p className={styles.obrigatorio}>* Campos obrigatórios</p>
           </div>
         )}
 
         {/* Tooltip Flutuante */}
         {showTooltip && (
-          <div 
+          <div
             className={styles.tooltipOverlay}
             onClick={handleHideTooltip}
           >
-            <div 
+            <div
               className={styles.tooltip}
               onClick={(e) => e.stopPropagation()}
             >
               <div className={styles.tooltipContent}>
-                <button 
+                <button
                   className={styles.tooltipClose}
                   onClick={handleHideTooltip}
                 >
                   ×
                 </button>
-                
+
                 <div className={styles.tooltipHeader}>
                   <div className={styles.tooltipTipo}>{tooltipData.tipo}</div>
                   <div className={styles.tooltipNome}>{tooltipData.nome}</div>
                 </div>
-                
+
                 <div className={styles.tooltipDivider}></div>
-                
+
                 <div className={styles.tooltipDataHorario}>
                   <div className={styles.tooltipInfoItem}>
                     <i className="bi bi-calendar3"></i>
@@ -277,7 +302,7 @@ function Remedios() {
                     <span>{formatarHorario(tooltipData.horario)}</span>
                   </div>
                 </div>
-                
+
                 {tooltipData.nota && (
                   <>
                     <div className={styles.tooltipDivider}></div>
@@ -304,18 +329,18 @@ function Remedios() {
                 <div className={styles.listaHistorico}>
                   {historico.map((med) => (
                     <div key={med.id} className={styles.cardHistorico}>
-                      <img src={med.imagem} alt="Remédio" />
+                      <img src={tiposMedicamento[med.type?.toLowerCase()]?.imagem} alt="Remédio" />
                       <div className={styles.historicoInfo}>
-                        <h3>{med.nome.length > 20 ? med.nome.slice(0, 20) + '…' : med.nome}</h3>
-                        <p>{med.nota.length > 40 ? med.nota.slice(0, 40) + '…' : med.nota}</p>
+                        <h3>{truncateText(med.name, 20)}</h3>
+                        <p>{truncateText(med.note, 40)}</p>
                         <div className={styles.historicoDataHorario}>
                           <span>
                             <i className="bi bi-calendar3"></i>
-                            {formatarData(med.data)}
+                            {formatarData(med.date)}
                           </span>
                           <span>
                             <i className="bi bi-clock"></i>
-                            {formatarHorario(med.horario)}
+                            {formatarHorario(med.time)}
                           </span>
                         </div>
                       </div>
