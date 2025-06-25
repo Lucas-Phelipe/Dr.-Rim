@@ -98,10 +98,6 @@ const Cadastro = () => {
       email,
       cpf,
       password: senha,
-      dataNascimento,
-      altura,
-      peso,
-      sexo
     };
 
     try {

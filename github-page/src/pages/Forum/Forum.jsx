@@ -7,13 +7,7 @@ import { createPost, getPosts, addCommentToPost } from '../../api/apiService';
 
 // Função utilitária para data no formato aceito pelo backend
 function getBackendDateString() {
-  const d = new Date();
-  return d.getFullYear() + '-' +
-    String(d.getMonth() + 1).padStart(2, '0') + '-' +
-    String(d.getDate()).padStart(2, '0') + 'T' +
-    String(d.getHours()).padStart(2, '0') + ':' +
-    String(d.getMinutes()).padStart(2, '0') + ':' +
-    String(d.getSeconds()).padStart(2, '0');
+  return new Date().toISOString(); // Exemplo: "2025-06-25T17:57:57.123Z"
 }
 
 const Forum = () => {
