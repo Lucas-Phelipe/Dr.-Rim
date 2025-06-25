@@ -29,3 +29,6 @@ export const deleteMedication = (userId, medicationId) =>api.delete();
 
 export const createPostGallery = (body) => api.post('/gallery', body);
 export const getGallery = () => api.get('/gallery');
+
+export const addCommentToPost = (postId, comment) =>
+  api.post(`/posts/${postId}/comments`, comment);

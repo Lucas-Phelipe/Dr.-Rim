@@ -166,6 +166,8 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  position: relative;
+  z-index: 2;
 }
 
 .input, .textarea {
@@ -310,3 +312,96 @@
   0% { transform: rotate(0deg);}
   100% { transform: rotate(360deg);}
 }
+
+.commentsSection {
+  background: rgba(230,230,230,0.7); /* mais transparente */
+  border-radius: 0 0 14px 14px;
+  box-shadow: none;
+  padding: 12px 16px 10px 16px;
+  margin-top: -10px; /* gruda no post acima */
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid #c5c5c5;
+}
+
+.commentsSection h3 {
+  margin: 10px 0 8px 0;
+  font-size: 1rem;
+  color: #2F4972;
+  font-weight: 700;
+}
+
+.commentsList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.commentItem {
+  background: #fff;
+  border-radius: 15px;
+  padding: 15px 15px;
+  font-size: 0.92rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.commentItem strong {
+  color: #050505;
+  font-size: 0.85em;
+}
+
+.commentDate {
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 2px;
+  align-self: flex-end;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.commentForm input[type="text"],
+.commentForm button {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.commentForm input[type="text"] {
+  border: 1px solid #23457a33;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 0.95rem;
+  background: #fff;
+  margin-bottom: 0;
+}
+
+.commentForm button {
+  background: #23457a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0;
+}
+
+.commentForm button:disabled {
+  background: #b0b0b0;
+  cursor: not-allowed;
+}
+

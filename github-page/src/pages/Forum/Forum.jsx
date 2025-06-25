@@ -3,7 +3,18 @@ import Homebar from "../../components/Homebar/Homebar";
 import PostCard from "../../components/PostCard/PostCard";
 import styles from './Forum.module.css';
 import HeaderNavBar from '../../components/HeaderNavBar/HeaderNavBar';
-import { createPost, getPosts } from '../../api/apiService';
+import { createPost, getPosts, addCommentToPost } from '../../api/apiService';
+
+// Função utilitária para data no formato aceito pelo backend
+function getBackendDateString() {
+  const d = new Date();
+  return d.getFullYear() + '-' +
+    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+    String(d.getDate()).padStart(2, '0') + 'T' +
+    String(d.getHours()).padStart(2, '0') + ':' +
+    String(d.getMinutes()).padStart(2, '0') + ':' +
+    String(d.getSeconds()).padStart(2, '0');
+}
 
 const Forum = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -16,6 +27,10 @@ const Forum = () => {
     body: '',
   });
   const [isLoading, setIsLoading] = useState(false);
+
+  // Comentários: um campo para cada post
+  const [commentTexts, setCommentTexts] = useState({});
+  const [commentLoading, setCommentLoading] = useState(false);
 
   // Busca os posts da API
   const fetchPosts = async () => {
@@ -37,7 +52,7 @@ const Forum = () => {
       const postPayload = {
         title: newPost.title,
         body: newPost.body,
-        date: new Date().toISOString(),
+        date: getBackendDateString(),
         author: {
           id: user.id,
           name: user.name,
@@ -58,7 +73,32 @@ const Forum = () => {
   // Alterna exibição dos comentários
   const handleCommentClick = (postId) => {
     setExpandedPostId(expandedPostId === postId ? null : postId);
+    setCommentTexts((prev) => ({ ...prev, [postId]: "" }));
   };
+
+  // Adiciona comentário ao post
+  const handleAddComment = async (postId) => {
+  const text = commentTexts[postId];
+  if (!text || !text.trim()) return;
+  setCommentLoading(true);
+  try {
+    await addCommentToPost(postId, {
+      text,
+      date: getBackendDateString(),
+      author: {
+        id: user.id,
+        name: user.name
+      }
+    });
+    setCommentTexts((prev) => ({ ...prev, [postId]: "" }));
+    await fetchPosts();
+  } catch (err) {
+    console.error('Erro ao enviar comentário:', err.response?.data || err.message || err);
+    alert('Erro ao enviar comentário');
+  } finally {
+    setCommentLoading(false);
+  }
+};
 
   // Carrega os posts ao montar
   useEffect(() => {
@@ -77,12 +117,50 @@ const Forum = () => {
             </div>
           ) : (
             posts.slice().reverse().map((post) => (
-              <PostCard
-                key={post._id}
-                post={post}
-                isExpanded={expandedPostId === post._id}
-                onCommentClick={() => handleCommentClick(post._id)}
-              />
+              <div key={post.id}>
+                <PostCard
+                  post={post}
+                  isExpanded={expandedPostId === post.id}
+                  onCommentClick={() => handleCommentClick(post.id)}
+                />
+                {expandedPostId === post.id && (
+                  <div className={styles.commentsSection}>
+                    <h3>Comentários</h3>
+                    <ul className={styles.commentsList}>
+                      {post.comments && post.comments.length > 0 ? post.comments.map((c, idx) => (
+                        <li key={idx} className={styles.commentItem}>
+                          <strong>{c.author?.name || 'Anônimo'}:</strong> {c.text}
+                          <span className={styles.commentDate}>
+                            {c.date && new Date(c.date).toLocaleString('pt-BR')}
+                          </span>
+                        </li>
+                      )) : <li>Nenhum comentário ainda.</li>}
+                    </ul>
+                    <form
+                      className={styles.commentForm}
+                      onSubmit={e => {
+                        e.preventDefault();
+                        handleAddComment(post.id);
+                      }}
+                    >
+                      <input
+                        type="text"
+                        placeholder="Adicione um comentário..."
+                        value={commentTexts[post.id] || ""}
+                        onChange={e => setCommentTexts({ ...commentTexts, [post.id]: e.target.value })}
+                        disabled={commentLoading}
+                        required
+                      />
+                      <button
+                        type="submit"
+                        disabled={commentLoading || !(commentTexts[post.id] && commentTexts[post.id].trim())}
+                      >
+                        {commentLoading ? 'Enviando...' : 'Adicionar comentário'}
+                      </button>
+                    </form>
+                  </div>
+                )}
+              </div>
             ))
           )}
         </div>

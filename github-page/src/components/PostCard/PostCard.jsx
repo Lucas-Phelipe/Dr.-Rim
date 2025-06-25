@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./PostCard.module.css";
 
-const PostCard = ({ post }) => {
-  const [showComments, setShowComments] = useState(false);
-
+const PostCard = ({ post, onCommentClick, isExpanded }) => {
   if (!post) return null;
 
   return (
@@ -26,7 +24,7 @@ const PostCard = ({ post }) => {
       <div className={styles.forumPostFooter}>
         <button
           className={styles.commentButton}
-          onClick={() => setShowComments(!showComments)}
+          onClick={onCommentClick}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path
@@ -49,21 +47,6 @@ const PostCard = ({ post }) => {
           })}
         </span>
       </div>
-
-      {showComments && (
-        <div className={styles.commentsSection}>
-          <h4>Comentários ({post.comments?.length || 0})</h4>
-          {post.comments?.length > 0 ? (
-            post.comments.map((comment, index) => (
-              <div key={index} className={styles.comment}>
-                <strong>@{comment.author}:</strong> {comment.text}
-              </div>
-            ))
-          ) : (
-            <p>Nenhum comentário ainda.</p>
-          )}
-        </div>
-      )}
     </div>
   );
 };
