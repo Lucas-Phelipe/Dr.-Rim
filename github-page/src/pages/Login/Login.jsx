@@ -4,6 +4,7 @@ import styles from './Login.module.css';
 import loginImg from "../../assets/loginimg.png"; // ajuste o caminho se necessário
 import { useNavigate } from 'react-router-dom';
 import { login } from "../../api/apiService";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -92,6 +93,9 @@ const Login = () => {
       exit={{ opacity: 0, x: -200 }}
       transition={{ duration: 0.5 }}
     >
+      <Link to="/register">
+        <i className="bi bi-arrow-left-short pointer" style={{ fontSize: '36px', cursor: 'pointer', color: 'white', position: "absolute", marginInline: 3 }} />
+      </Link>
       <div className={styles.topSection}>
         <div className={styles.logoWrapper}>
           <img src={loginImg} alt="Imagem" className={styles.img} />

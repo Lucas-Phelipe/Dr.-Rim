@@ -6,6 +6,7 @@ import styles from "./Cadastro.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { postUser } from "../../api/apiService";
+import { Link } from 'react-router-dom';
 
 // Validações
 function validarCPF(cpf) {
@@ -53,7 +54,7 @@ const Cadastro = () => {
 
   const handleCadastro = async () => {
     setLoading(true);
-    if (!nome || !email || !cpf || !peso || !altura || !sexo || !senha) {
+    if (!nome || !email || !cpf || !senha) {
       alert("Preencha todos os campos.");
       setLoading(false);
       return;
@@ -351,6 +352,9 @@ const Cadastro = () => {
       className={styles.container}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
+      <Link to="/register">
+        <i className="bi bi-arrow-left-short pointer" style={{ fontSize: '36px', cursor: 'pointer', color: 'black', position: "absolute", marginInline: 3 }} />
+      </Link>
       {etapas.map((etapaItem, index) => (
         <EtapaCadastro key={index}>{etapaItem.conteudo}</EtapaCadastro>
       ))}
